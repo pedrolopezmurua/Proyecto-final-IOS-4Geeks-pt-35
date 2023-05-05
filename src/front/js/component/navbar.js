@@ -8,11 +8,14 @@ export const Navbar = () => {
 				<Link className="link-no-underline" to='/'>Logo here...</Link>
 				<div className="container d-flex justify-content-start mx-2" >
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						<li className="nav-item">
-							<a className="nav-link active" aria-current="page" href="#">Inicio</a>
+						<li className="nav-item mx-3">
+							<Link className="link-no-underline" to='/'>Inicio</Link>
 						</li>
-						<li className="nav-item">
-							<a className="nav-link" href="#">Link</a>
+						<li className="nav-item mx-3">
+							<Link className="link-no-underline" to='/'>Servicios</Link>
+						</li>
+						<li className="nav-item mx-3">
+							<Link className="link-no-underline" to='/'>Soporte</Link>
 						</li>
 					</ul>
 				</div>
@@ -24,24 +27,3 @@ export const Navbar = () => {
 		</nav>
 	);
 };
-
-		// <nav className="navbar navbar-dark bg-dark">
-		// 	<div className="">
-		// 		<Link to="/">
-		// 			<span className="navbar-brand mb-0 h1">Logo</span>
-		// 		</Link>
-		// 		<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-		// 			<li className="nav-item">
-		// 				<Link className="link-no-underline" to="/">
-		// 					Inicio
-		// 				</Link>
-		// 			</li>
-		// 			<li className="nav-item">
-		// 				<Link className="link-no-underline" to="/servicios">
-		// 					Servicios
-		// 				</Link>
-		// 			</li>
-
-		// 		</ul>
-		// 	</div>
-		// </nav>
