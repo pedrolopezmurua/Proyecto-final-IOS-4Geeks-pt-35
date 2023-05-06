@@ -8,7 +8,6 @@ import { Ventas } from "./pages/ventas";
 import { ServicioTecnico } from "./pages/serviciotecnico";
 import { Detalles } from "./pages/detalle";
 import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import { RegistroServicio } from "./pages/registro_servicio";
 import injectContext from "./store/appContext";
 
@@ -34,7 +33,6 @@ const Layout = () => {
                         <Route element={<Ventas />} path="/ventas" />
                         <Route element={<ServicioTecnico />} path="/serviciotecnico" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<RegistroServicio />} path="/registro_servicio" />
                         <Route element={<Detalles />} path="/detalle/:theid" />
                         <Route element={<h1>Not found!</h1>} />

@@ -69,21 +69,22 @@ export const RegistroServicio = () => {
     }]
   }
 
-  const Formulario = () => {
-    const [region, setRegion] = useState("");
-    const [comuna, setComuna] = useState("");
+  const [region, setRegion] = useState("");
+  const [comuna, setComuna] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
 
-    const handleRegionChange = (e) => {
-      const selectedRegion = e.target.value;
-      setRegion(selectedRegion);
-      setComuna("");
-    };
+  const handleRegionChange = (e) => {
+    const selectedRegion = e.target.value;
+    setRegion(selectedRegion);
+    setComuna("");
+    setSelectedRegion(selectedRegion);
+  };
 
-    const handleComunaChange = (e) => {
-      const selectedComuna = e.target.value;
-      setComuna(selectedComuna);
-    };
-  }
+  const handleComunaChange = (e) => {
+    const selectedComuna = e.target.value;
+    setComuna(selectedComuna);
+  };
+
 
   return (
     <div className="container my-3">
@@ -121,7 +122,9 @@ export const RegistroServicio = () => {
             </div>
           </div>
         </div>
+
         <hr className="mx-5" />
+
         <div id="2 crear-servicio">
           <div className="row">
             <div className="col-4 d-flex justify-content-center">
@@ -167,7 +170,7 @@ export const RegistroServicio = () => {
                     <select id="comunas" class="form-select" value={comuna} onChange={handleComunaChange}>
                       <option value="">Seleccione comuna</option>
                       {RegionesYcomunas.regiones.map((region) => {
-                        if (region.NombreRegion === region) {
+                        if (region.NombreRegion === selectedRegion) {
                           return region.comunas.map((comuna, index) => (
                             <option key={index} value={comuna}>{comuna}</option>
                           ));
@@ -184,12 +187,35 @@ export const RegistroServicio = () => {
           </div>
         </div>
 
+        <hr className="mx-5" />
 
+        <div className="container my-3" id="3-fotos-servicio">
+          <div className="row">
+            <div className="col-4 d-flex justify-content-center">
+              <div class="col-6 alert alert-info text-center">
+                <i class="fas fa-paperclip"></i>
+                <p>Adjunte fotos</p>
+              </div>
+            </div>
+            <div className="col-8">
 
-        <div id="part3" disabled>
-          <h2>Parte 3</h2>
+              <form>
+                <div className="form-group my-3">
+                  <label for="categoría" class="form-label">Categoría</label>
+                  <select class="form-select" id="categoria" aria-label="Default select example">
 
+                    <option selected>Seleccionar</option>
+                    <option value="1">Venta</option>
+                    <option value="2">Reparaciones</option>
+                  </select>
+                </div>
+
+              </form>
+            </div>
+          </div>
         </div>
+
+
       </div>
 
     </div>
