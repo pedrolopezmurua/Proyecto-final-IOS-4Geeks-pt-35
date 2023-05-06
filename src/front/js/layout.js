@@ -9,11 +9,13 @@ import { ServicioTecnico } from "./pages/serviciotecnico";
 import { Detalles } from "./pages/detalle";
 import { Demo } from "./pages/demo";
 import { RegistroServicio } from "./pages/registro_servicio";
+
 import injectContext from "./store/appContext";
 
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { SubiendoImagenes } from "./component/subirImagenes";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +37,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<RegistroServicio />} path="/registro_servicio" />
                         <Route element={<Detalles />} path="/detalle/:theid" />
+                        <Route element={<SubiendoImagenes />} path="/prueba" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
