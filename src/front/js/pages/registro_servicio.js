@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
+import { SubiendoImagenes } from "../component/subirImagenes";
 
 export const RegistroServicio = () => {
   const { store, actions } = useContext(Context);
@@ -100,8 +101,8 @@ export const RegistroServicio = () => {
         <div className="container my-3" id="1 seleccion-categoria">
           <div className="row">
             <div className="col-4 d-flex justify-content-center">
-              <div class="col-6 alert alert-info text-center">
-                <i class="fas fa-hand-pointer"></i>
+              <div className="col-6 alert alert-info text-center">
+                <i className="fas fa-hand-pointer"></i>
                 <p>Seleccione categoría</p>
               </div>
             </div>
@@ -109,12 +110,12 @@ export const RegistroServicio = () => {
 
               <form>
                 <div className="form-group my-3">
-                  <label for="categoría" class="form-label">Categoría</label>
-                  <select class="form-select" id="categoria" aria-label="Default select example">
+                  <label htmlFor="categoría" className="form-label">Categoría</label>
+                  <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
 
-                    <option selected>Seleccionar</option>
+                    <option value="0">Seleccionar</option>
                     <option value="1">Venta</option>
-                    <option value="2">Reparaciones</option>
+                    <option value="2">Servicio técnico</option>
                   </select>
                 </div>
 
@@ -128,46 +129,46 @@ export const RegistroServicio = () => {
         <div id="2 crear-servicio">
           <div className="row">
             <div className="col-4 d-flex justify-content-center">
-              <div class="col-6 alert alert-info text-center">
-                <i class="fas fa-file-alt"></i>
+              <div className="col-6 alert alert-info text-center">
+                <i className="fas fa-file-alt"></i>
                 <p>Crear Servicio</p>
               </div>
             </div>
             <div className="col-8">
               <form>
-                <div class="mb-3">
-                  <label for="nombre-servicio" class="form-label">Nombre del Servicio</label>
-                  <input type="email" class="form-control" id="nombre-servicio" placeholder="Ej. reparación de pantallas iPhone" />
+                <div className="mb-3">
+                  <label htmlFor="nombre-servicio" className="form-label">Nombre del Servicio</label>
+                  <input type="email" className="form-control" id="nombre-servicio" placeholder="Ej. reparación de pantallas iPhone" />
                 </div>
-                <div class="mb-3">
-                  <label for="descripcion" class="form-label">Descripción detallada del Servicio</label>
-                  <textarea class="form-control" id="descripcion" rows="3"></textarea>
+                <div className="mb-3">
+                  <label htmlFor="descripcion" className="form-label">Descripción detallada del Servicio</label>
+                  <textarea className="form-control" id="descripcion" rows="3"></textarea>
                 </div>
                 <div className="form-group my-3">
-                  <label for="categoría" class="form-label">Tipo de servicio de nuevo??</label>
-                  <select class="form-select" id="categoria" aria-label="Default select example">
-                    <option selected>??</option>
+                  <label htmlFor="categoría" className="form-label">Tipo de servicio de nuevo??</label>
+                  <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
+                    <option value="0">Seleccionar</option>
                     <option value="1">??</option>
                     <option value="2">??</option>
                   </select>
                 </div>
                 <div className="row">
-                  <div class="col">
-                    <label for="valor" class="form-label" >Valor</label>
-                    <input type="text" class="form-control" id="valor" placeholder="$40.000.-" />
+                  <div className="col">
+                    <label htmlFor="valor" className="form-label" >Valor</label>
+                    <input type="text" className="form-control" id="valor" placeholder="$40.000.-" />
                   </div>
-                  <div class="col">
-                    <label for="regiones" class="form-label">Región</label>
-                    <select id="regiones" class="form-select" value={region} onChange={handleRegionChange}>
+                  <div className="col">
+                    <label htmlFor="regiones" className="form-label">Región</label>
+                    <select id="regiones" className="form-select" value={region} onChange={handleRegionChange}>
                       <option value="">Seleccione región</option>
                       {RegionesYcomunas.regiones.map((region, index) => (
                         <option key={index} value={region.NombreRegion}>{region.NombreRegion}</option>
                       ))}
                     </select>
                   </div>
-                  <div class="col">
-                    <label for="comunas" class="form-label" >Comuna</label>
-                    <select id="comunas" class="form-select" value={comuna} onChange={handleComunaChange}>
+                  <div className="col">
+                    <label htmlFor="comunas" className="form-label" >Comuna</label>
+                    <select id="comunas" className="form-select" value={comuna} onChange={handleComunaChange}>
                       <option value="">Seleccione comuna</option>
                       {RegionesYcomunas.regiones.map((region) => {
                         if (region.NombreRegion === selectedRegion) {
@@ -192,25 +193,21 @@ export const RegistroServicio = () => {
         <div className="container my-3" id="3-fotos-servicio">
           <div className="row">
             <div className="col-4 d-flex justify-content-center">
-              <div class="col-6 alert alert-info text-center">
-                <i class="fas fa-paperclip"></i>
+              <div className="col-6 alert alert-info text-center">
+                <i className="fas fa-paperclip"></i>
                 <p>Adjunte fotos</p>
               </div>
             </div>
             <div className="col-8">
-
-              <form>
-                <div className="form-group my-3">
-                  <label for="categoría" class="form-label">Categoría</label>
-                  <select class="form-select" id="categoria" aria-label="Default select example">
-
-                    <option selected>Seleccionar</option>
-                    <option value="1">Venta</option>
-                    <option value="2">Reparaciones</option>
-                  </select>
+              <div className="row">
+                <div className="col-6">
+                  <SubiendoImagenes />
                 </div>
+                <div className="col-6">
+                  <SubiendoImagenes />
+                </div>
+              </div>
 
-              </form>
             </div>
           </div>
         </div>
@@ -218,7 +215,7 @@ export const RegistroServicio = () => {
 
       </div>
 
-    </div>
+    </div >
   );
 
 };
