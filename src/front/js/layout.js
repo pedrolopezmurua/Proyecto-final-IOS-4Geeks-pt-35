@@ -8,8 +8,10 @@ import { Ventas } from "./pages/ventas";
 import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesVentas } from "./pages/detalleVenta";
 import { Demo } from "./pages/demo";
+import Login from "./pages/login";
+import RecuperaPassword from "./pages/recuperapassword";
+import CrearProveedor from './pages/crearproveedor';
 import injectContext from "./store/appContext";
-
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -29,6 +31,9 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<RecuperaPassword />} path="/recuperapassword" />
+                        <Route element={<CrearProveedor />} path="/crearproveedor" />
                         <Route element={<Ventas />} path="/ventas" />
                         <Route element={<ServicioTecnico />} path="/serviciotecnico" />
                         <Route element={<Demo />} path="/demo" />
