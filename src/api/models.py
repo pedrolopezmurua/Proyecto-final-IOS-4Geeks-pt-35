@@ -9,18 +9,19 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class Proveedor(db.Model):
     __tablename__ = 'proveedor'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     rut = db.Column(db.String(20), nullable=False)
-    nombre = db.Column(db.String(30), nullable=False)
-    apellido = db.Column(db.String(50), nullable=False)
-    ciudad = db.Column(db.String(100), nullable=False)
+    nombre = db.Column(db.String(50), nullable=False)
+    apellido = db.Column(db.String(100), nullable=False)
+    region = db.Column(db.String(100), nullable=False)
     comuna = db.Column(db.String(100), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     correo = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
-    red_social = db.Column(db.String(40), nullable=True)
+    red_social = db.Column(db.String(100), nullable=True)
     contraseña = db.Column(db.String(8), nullable=False)
 
     def serialize(self):
@@ -29,13 +30,14 @@ class Proveedor(db.Model):
             'rut': self.rut,
             'nombre': self.nombre,
             'apellido': self.apellido,
-            'ciudad': self.ciudad,
+            'region': self.region,
             'comuna': self.comuna,
             'direccion': self.direccion,
             'correo': self.correo,
             'telefono': self.telefono,
             'red_social': self.red_social
         }
+
 
 class Categoria(db.Model):
     __tablename__ = 'categoria'
@@ -48,16 +50,21 @@ class Categoria(db.Model):
             'nombre': self.nombre
         }
 
+
 class Servicio(db.Model):
     __tablename__ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     titulo = db.Column(db.String(50))
     detalle = db.Column(db.String(500))
     precio = db.Column(db.Integer, nullable=False)
-    proveedor_id = db.Column(db.Integer, ForeignKey('proveedor.id'), nullable=False)
+    proveedor_id = db.Column(db.Integer, ForeignKey(
+        'proveedor.id'), nullable=False)
+    categoria_id = db.Column(db.Integer, ForeignKey(
+        'categoria.id'), nullable=False)
     cobertura_servicio = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
+    categoria = db.relationship('Categoria', backref='servicios')
 
     def serialize(self):
         return {
@@ -71,16 +78,18 @@ class Servicio(db.Model):
             'proveedor': self.proveedor.serialize()
         }
 
+
 class ImagenServicio(db.Model):
     __tablename__ = 'imagen_servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    ruta = db.Column(db.String(400), nullable=False)
-    servicio_id = db.Column(db.Integer, ForeignKey('servicio.id'), nullable=False)
+    secure_url = db.Column(db.String(400), nullable=False)
+    servicio_id = db.Column(db.Integer, ForeignKey(
+        'servicio.id'), nullable=False)
     servicio = db.relationship('Servicio', backref='imagenes_servicio')
 
     def serialize(self):
         return {
             'id': self.id,
-            'ruta': self.ruta,
+            'secure_url': self.secure_url,
             'servicio_id': self.servicio_id
         }

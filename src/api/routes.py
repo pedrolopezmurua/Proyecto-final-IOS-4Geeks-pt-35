@@ -39,7 +39,7 @@ def update_proveedor(id):
     proveedor.rut = data.get("rut", proveedor.rut)
     proveedor.nombre = data.get("nombre", proveedor.nombre)
     proveedor.apellido = data.get("apellido", proveedor.apellido)
-    proveedor.ciudad = data.get("ciudad", proveedor.ciudad)
+    proveedor.region = data.get("ciudad", proveedor.region)
     proveedor.comuna = data.get("comuna", proveedor.comuna)
     proveedor.direccion = data.get("direccion", proveedor.direccion)
     proveedor.correo = data.get("correo", proveedor.correo)
