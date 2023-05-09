@@ -114,7 +114,7 @@ export const RegistroServicio = () => {
                   <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
 
                     <option value="0">Seleccionar</option>
-                    <option value="1">Venta</option>
+                    <option value="1">Productos</option>
                     <option value="2">Servicio técnico</option>
                   </select>
                 </div>
@@ -143,14 +143,6 @@ export const RegistroServicio = () => {
                 <div className="mb-3">
                   <label htmlFor="descripcion" className="form-label">Descripción detallada del Servicio</label>
                   <textarea className="form-control" id="descripcion" rows="3"></textarea>
-                </div>
-                <div className="form-group my-3">
-                  <label htmlFor="categoría" className="form-label">Tipo de servicio de nuevo??</label>
-                  <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
-                    <option value="0">Seleccionar</option>
-                    <option value="1">??</option>
-                    <option value="2">??</option>
-                  </select>
                 </div>
                 <div className="row">
                   <div className="col">
