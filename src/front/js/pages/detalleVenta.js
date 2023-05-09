@@ -18,32 +18,9 @@ export const DetallesVentas = props => {
         {/* Izquierda */}
         <div className="mx-5 row">
             <div className="col p-5" >
-                <h3>Pantalla</h3>
-                <ul style={{ listStylePosition: "outside" }} >
-                    <li>Pantalla: 13.3" / 2560 x 1600 (WQXGA) / Sin BFR/PVC, sin mercurio, sin berilio, sin arsénico, pantalla Retina, amplia gama de colores P3, tecnología True Tone</li>
-                </ul>
-                <h3>Procesador</h3>
-                <ul style={{ listStylePosition: "outside" }} >
-                    <li>Chip Apple M1 con CPU de 8 núcleos y GPU de núcleos</li>
-                </ul>
-                <h3>Sonido</h3>
-                <ul style={{ listStylePosition: "outside" }} >
-                    <li>Altavoces estéreo, tres micrófonos</li>
-                    <li>Bluetooth 5.0, 802.11a/b/g/n/ac/ax</li>
-                </ul>
-                <h3>Conexión</h3>
-                <ul style={{ listStylePosition: "outside" }} >
-                    <li>2 x USB-C 3.1 Gen 2 (compatible con Thunderbolt 3, DisplayPort Alt Mode) (Suministro de energía)Salida de auriculares2 x USB-C 3.1 Gen 2 (compatible con Thunderbolt 3, DisplayPort Alt Mode) (Suministro de energía)Salida de auriculares</li>
-                    <li>Conectividad: Wi-Fi Conexión inalámbrica Wi-Fi 6 802.11ax/Compatible con IEEE 802.11a/b/g/n/ac/ Bluetooth /Tecnología inalámbrica Bluetooth 5.0</li>
-                </ul>
-                <h3>Peso</h3>
-                <ul style={{ listStylePosition: "outside" }} >
-                    <li>1.4 kilogramos</li>
-                </ul>
+                <h3>Descripción</h3>
+                <p>blablabla</p>
             </div>
-
-
-
             {/* Derecha */}
             <div className="col">
                 <div className="text-center mt-5">
