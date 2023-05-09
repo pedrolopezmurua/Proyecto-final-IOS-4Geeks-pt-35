@@ -61,7 +61,7 @@ export const CardServiciosTecnicos = () => {
             <div className="card-body">
                 <p className="fs-5 m-0">Valor</p>
                 <p className="fs-5 m-0">50.000</p>
-                <Link to="/serviciotecnico">
+                <Link to="/detservicio">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Detalles</button>
                 </Link>
             </div>
