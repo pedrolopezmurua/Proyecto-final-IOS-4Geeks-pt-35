@@ -12,6 +12,7 @@ import { RegistroServicio } from "./pages/registro_servicio";
 
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
+import CrearProveedor from './pages/crearproveedor';
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -35,6 +36,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<RecuperaPassword />} path="/recuperapassword" />
+                        <Route element={<CrearProveedor />} path="/crearproveedor" />
                         <Route element={<Ventas />} path="/ventas" />
                         <Route element={<ServicioTecnico />} path="/serviciotecnico" />
                         <Route element={<Demo />} path="/demo" />
