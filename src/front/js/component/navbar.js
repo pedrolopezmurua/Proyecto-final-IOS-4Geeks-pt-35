@@ -22,7 +22,7 @@ export const Navbar = () => {
 			</div>
 			<div className="container d-flex justify-content-end mx-2">
 				<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-				<button className="btn btn-outline-info" type="button">Registro proveedor</button>
+				<Link className="btn btn-outline-info" to="/crearproveedor">Registro proveedor</Link>
 			</div>
 		</nav>
 	);
