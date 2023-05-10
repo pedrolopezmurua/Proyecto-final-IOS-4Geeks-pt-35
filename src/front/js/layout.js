@@ -4,12 +4,11 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Ventas } from "./pages/ventas";
+import { Productos } from "./pages/productos";
 import { ServicioTecnico } from "./pages/serviciotecnico";
-import { Detalles } from "./pages/detalle";
+import { DetallesProducto } from "./pages/detalleProducto";
+import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { Demo } from "./pages/demo";
-import { RegistroServicio } from "./pages/registro_servicio";
-
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import CrearProveedor from './pages/crearproveedor';
@@ -37,11 +36,11 @@ const Layout = () => {
                         <Route element={<Login />} path="/login" />
                         <Route element={<RecuperaPassword />} path="/recuperapassword" />
                         <Route element={<CrearProveedor />} path="/crearproveedor" />
-                        <Route element={<Ventas />} path="/ventas" />
+                        <Route element={<Productos />} path="/productos" />
                         <Route element={<ServicioTecnico />} path="/serviciotecnico" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<RegistroServicio />} path="/registro_servicio" />
-                        <Route element={<Detalles />} path="/detalle/:theid" />
+                        <Route element={<DetallesProducto />} path="/productos/detalle/:theid" />
+                        <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
                         <Route element={<SubiendoImagenes />} path="/prueba" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

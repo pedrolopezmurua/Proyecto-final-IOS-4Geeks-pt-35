@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
-import { CardProductosVenta } from "../component/cards";
+import { CardProductos } from "../component/cards";
 
-export const Ventas = () => {
+export const Productos = () => {
     const { store, actions } = useContext(Context);
 
     return (
@@ -14,10 +14,8 @@ export const Ventas = () => {
             </p>
             <h1>Ventas</h1>
             <div className="justify-content-center d-flex">
-                <CardProductosVenta />
-                <CardProductosVenta />
-                <CardProductosVenta />
-                <CardProductosVenta />
+                <CardProductos />
+
             </div>
         </div>
     );
