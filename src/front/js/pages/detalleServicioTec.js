@@ -18,7 +18,7 @@ export const DetallesServicioTec = props => {
         <div className="mx-5 row">
             <div className="col p-5" >
                 <h3>Descripción</h3>
-                <p>blablabla</p>
+                <p>blablablabla</p>
             </div>
             {/* Derecha */}
             <div className="col">
