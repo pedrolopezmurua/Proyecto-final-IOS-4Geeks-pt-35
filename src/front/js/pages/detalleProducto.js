@@ -4,14 +4,13 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import detalleVentas from "../../img/detalleVentas.png"
 
-export const DetallesVentas = props => {
+export const DetallesProducto = props => {
     const { store, actions } = useContext(Context);
     const params = useParams();
 
     return (<div>
         {/* Arriba */}
         <div className="text-center mt-5">
-            <h1>Macbook Pro m1 13"</h1>
             <h2>Apple Macbook Pro 13" "M1" Gris 8GB RAM 512 GB SSD (2021) Gris Espacial </h2>
             <h3>Valor: $1.250.000-.</h3>
         </div>
@@ -35,6 +34,7 @@ export const DetallesVentas = props => {
                             <li>Nombre: Pedro Pascal</li>
                             <li>Correo: pedro@pascal.com</li>
                             <li>Telefono: +56 9 7799 4555</li>
+                            <li>Región: Metropolitana</li>
                             <li>Cobertura: Providencia</li>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@ export const DetallesVentas = props => {
         </div>
         {/* Abajo */}
         <div className="mx-5">
-            <Link to="/ventas">
+            <Link to="/productos">
                 <button type="button" className="btn btn-outline-dark mx-5" >Atrás</button>
             </Link>
         </div>
@@ -51,6 +51,6 @@ export const DetallesVentas = props => {
     );
 };
 
-DetallesVentas.propTypes = {
+DetallesProducto.propTypes = {
     match: PropTypes.object
 };

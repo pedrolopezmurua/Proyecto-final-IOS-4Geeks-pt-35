@@ -1,17 +1,11 @@
-import os
-import sys
-from sqlalchemy.orm import relationship, declarative_base
-from eralchemy2 import render_er
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 
 class Proveedor(db.Model):
-    __tablename__ = 'proveedor'
+    _tablename_ = 'proveedor'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     rut = db.Column(db.String(20), nullable=False)
     nombre = db.Column(db.String(50), nullable=False)
@@ -40,7 +34,7 @@ class Proveedor(db.Model):
 
 
 class Categoria(db.Model):
-    __tablename__ = 'categoria'
+    _tablename_ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
 
@@ -52,15 +46,16 @@ class Categoria(db.Model):
 
 
 class Servicio(db.Model):
-    __tablename__ = 'servicio'
+    _tablename_ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    titulo = db.Column(db.String(50))
+    titulo = db.Column(db.String(100))
     detalle = db.Column(db.String(500))
     precio = db.Column(db.Integer, nullable=False)
     proveedor_id = db.Column(db.Integer, ForeignKey(
         'proveedor.id'), nullable=False)
     categoria_id = db.Column(db.Integer, ForeignKey(
         'categoria.id'), nullable=False)
+    region = db.Column(db.String(50))
     cobertura_servicio = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
@@ -73,6 +68,7 @@ class Servicio(db.Model):
             'detalle': self.detalle,
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
+            'region': self.region,
             'cobertura_servicio': self.cobertura_servicio,
             'estado': self.estado,
             'proveedor': self.proveedor.serialize()
@@ -80,7 +76,7 @@ class Servicio(db.Model):
 
 
 class ImagenServicio(db.Model):
-    __tablename__ = 'imagen_servicio'
+    _tablename_ = 'imagen_servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     secure_url = db.Column(db.String(400), nullable=False)
     servicio_id = db.Column(db.Integer, ForeignKey(
@@ -92,4 +88,21 @@ class ImagenServicio(db.Model):
             'id': self.id,
             'secure_url': self.secure_url,
             'servicio_id': self.servicio_id
+        }
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+
+    def repr(self):
+        return f'<User {self.email}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            # do not serialize the password, its a security breach
         }

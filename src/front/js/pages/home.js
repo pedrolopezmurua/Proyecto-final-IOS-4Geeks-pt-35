@@ -4,7 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
 import { CardCategoriaSTec } from "../component/cards";
-import { CardCategoriaVentas } from "../component/cards";
+import { CardCategoriaProductos } from "../component/cards";
 
 
 export const Home = () => {
@@ -17,7 +17,7 @@ export const Home = () => {
 			</p>
 			<h1>Categorías</h1>
 			<div className="justify-content-center d-flex">
-				<CardCategoriaVentas />
+				<CardCategoriaProductos />
 				<CardCategoriaSTec />
 			</div>
 		</div>
