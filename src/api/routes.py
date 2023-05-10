@@ -2,11 +2,11 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Proveedor, Servicio, ImagenServicio, Categoria
 from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
 
-api = Blueprint('api', __name__)
+api = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -29,6 +29,29 @@ def get_proveedores():
 def get_proveedor(id):
     proveedor = Proveedor.query.get_or_404(id)
     return jsonify(proveedor.serialize())
+
+
+@api.route('/proveedor', methods=['POST'])
+def create_proveedor():
+    data = request.get_json()
+
+    new_proveedor = Proveedor(
+        rut=data['rut'],
+        nombre=data['nombre'],
+        apellido=data['apellido'],
+        region=data['region'],
+        comuna=data['comuna'],
+        direccion=data['direccion'],
+        correo=data['correo'],
+        telefono=data['telefono'],
+        red_social=data['red_social'],
+        contraseña=data['contraseña']
+    )
+
+    db.session.add(new_proveedor)
+    db.session.commit()
+
+    return jsonify(new_proveedor.serialize()), 201
 
 
 @api.route("/proveedores/<int:id>", methods=["PUT"])

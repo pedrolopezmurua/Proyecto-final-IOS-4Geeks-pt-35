@@ -1,10 +1,4 @@
-import os
-import sys
-from sqlalchemy.orm import relationship, declarative_base
-from eralchemy2 import render_er
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -92,4 +86,21 @@ class ImagenServicio(db.Model):
             'id': self.id,
             'secure_url': self.secure_url,
             'servicio_id': self.servicio_id
+        }
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(80), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+
+    def _repr_(self):
+        return f'<User {self.email}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            # do not serialize the password, its a security breach
         }
