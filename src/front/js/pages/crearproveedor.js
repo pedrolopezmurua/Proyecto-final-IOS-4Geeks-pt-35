@@ -1,4 +1,5 @@
 import React from 'react';
+import { SeleccionRegionComuna } from '../component/seleccionRegionComuna';
 
 const CrearProveedor = () => {
     return (
@@ -32,14 +33,7 @@ const CrearProveedor = () => {
             <div className="card">
                 <div className="card-header bg-primary text-white">Datos de Dirección</div>
                 <div className="card-body">
-                    <div className="form-group">
-                        <label htmlFor="ciudad">Ciudad:</label>
-                        <input type="text" className="form-control" id="ciudad" maxLength={20} style={{ width: '300px' }} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="comuna">Comuna:</label>
-                        <input type="text" className="form-control" id="comuna" maxLength={20} style={{ width: '300px' }} />
-                    </div>
+                    {<SeleccionRegionComuna />}
                     <div className="form-group">
                         <label htmlFor="direccion">Dirección:</label>
                         <input type="text" className="form-control" id="direccion" maxLength={20} style={{ width: '300px' }} />
