@@ -19,13 +19,13 @@ export const CardCategoriaSTec = () => {
     );
 };
 
-export const CardCategoriaVentas = () => {
+export const CardCategoriaProductos = () => {
     return (
         <div className="card m-5" style={{ width: "18rem" }}>
             <img src={ventas} className="card-img-top" alt="..." style={{ height: "192px" }} />
             <div className="card-body">
                 <h5 className="card-title">Ventas</h5>
-                <Link to="/ventas">
+                <Link to="/productos">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Entrar</button>
                 </Link>
             </div>
@@ -33,17 +33,17 @@ export const CardCategoriaVentas = () => {
     );
 };
 
-export const CardProductosVenta = () => {
+export const CardProductos = () => {
     return (
         <div className="card m-5" style={{ width: "18rem" }}>
-            <h5 className="card-title m-3">Macbook M1 13"</h5>
+            <h5 className="card-title m-3">Apple Macbook Pro 13" "M1" Gris 8GB RAM 512 GB SSD (2021) Gris Espacial</h5>
             <div style={{ objectFit: "cover" }}>
                 <img src={producto} className="card-img-top" alt="..." style={{ height: "192px" }} />
             </div>
             <div className="card-body">
                 <p className="fs-5 m-0">Valor</p>
                 <p className="fs-5 m-0">1.250.000</p>
-                <Link to="/ventas">
+                <Link to="/productos/detalle/:id">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Detalles</button>
                 </Link>
             </div>
@@ -61,7 +61,7 @@ export const CardServiciosTecnicos = () => {
             <div className="card-body">
                 <p className="fs-5 m-0">Valor</p>
                 <p className="fs-5 m-0">50.000</p>
-                <Link to="/detservicio">
+                <Link to="/serviciotecnico/detalle/:id">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Detalles</button>
                 </Link>
             </div>
