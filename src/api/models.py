@@ -1,4 +1,5 @@
 from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_migrate import Migrate
@@ -7,7 +8,7 @@ db = SQLAlchemy()
 
 
 class Proveedor(db.Model):
-    __tablename__ = 'proveedor'
+    _tablename_ = 'proveedor'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     rut = db.Column(db.String(20), nullable=False)
     nombre = db.Column(db.String(50), nullable=False)
@@ -36,7 +37,7 @@ class Proveedor(db.Model):
 
 
 class Categoria(db.Model):
-    __tablename__ = 'categoria'
+    _tablename_ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
 
@@ -48,14 +49,16 @@ class Categoria(db.Model):
 
 
 class Servicio(db.Model):
-    __tablename__ = 'servicio'
+    _tablename_ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     titulo = db.Column(db.String(100))
     detalle = db.Column(db.String(500))
     precio = db.Column(db.Integer, nullable=False)
-    proveedor_id = db.Column(db.Integer, ForeignKey('proveedor.id'), nullable=False)
-    categoria_id = db.Column(db.Integer, ForeignKey('categoria.id'), nullable=False)
-    region = db.Column(db.String(100), nullable=False)
+    proveedor_id = db.Column(db.Integer, ForeignKey(
+        'proveedor.id'), nullable=False)
+    categoria_id = db.Column(db.Integer, ForeignKey(
+        'categoria.id'), nullable=False)
+    region = db.Column(db.String(50))
     cobertura_servicio = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
@@ -68,7 +71,8 @@ class Servicio(db.Model):
             'detalle': self.detalle,
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
-            'region':self.region,
+            'categoria_id': self.categoria_id,
+            'region': self.region,
             'cobertura_servicio': self.cobertura_servicio,
             'estado': self.estado,
             'proveedor': self.proveedor.serialize()
@@ -76,7 +80,7 @@ class Servicio(db.Model):
 
 
 class ImagenServicio(db.Model):
-    __tablename__ = 'imagen_servicio'
+    _tablename_ = 'imagen_servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     secure_url = db.Column(db.String(400), nullable=False)
     servicio_id = db.Column(db.Integer, ForeignKey(

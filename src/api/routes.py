@@ -67,6 +67,7 @@ def create_servicio():
         detalle=data["detalle"],
         precio=data["precio"],
         proveedor_id=data["proveedor_id"],
+        categoria_id=data["categoria_id"],
         region=data["region"],
         cobertura_servicio=data["cobertura_servicio"],
         estado=data["estado"],
@@ -93,9 +94,9 @@ def update_servicio(id):
     servicio.detalle = data.get("detalle", servicio.detalle)
     servicio.precio = data.get("precio", servicio.precio)
     servicio.proveedor_id = data.get("proveedor_id", servicio.proveedor_id)
-    servicio.region=data.get("region", servicio.region)
-    servicio.cobertura_servicio = data.get(
-        "cobertura_servicio", servicio.cobertura_servicio)
+    servicio.categoria_id = data.get("categoria_id", servicio.categoria_id)
+    servicio.region = data.get("region", servicio.region)
+    servicio.cobertura_servicio = data.get("cobertura_servicio", servicio.cobertura_servicio)
     servicio.estado = data.get("estado", servicio.estado)
 
     db.session.commit()
