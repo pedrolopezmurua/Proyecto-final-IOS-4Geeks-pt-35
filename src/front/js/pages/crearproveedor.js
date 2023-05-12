@@ -60,13 +60,30 @@ const CrearProveedor = () => {
             </div>
 
             <div className="card">
-                <div className="card-header bg-primary text-white">Datos de Contacto</div>
+                <div className="card-header bg-primary text-white">Datos de Dirección</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
-                            <label htmlFor="email">Email:</label>
-                            <input type="email" className="form-control" id="email" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                            <label htmlFor="region">Region:</label>
+                            <input type="text" className="form-control" id="region" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
+                        <div className="col">
+                            <label htmlFor="comuna">Comuna:</label>
+                            <input type="text" className="form-control" id="comuna" maxLength={50} style={{ width: '300px' }} onChange={handleChange} />
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="direccion">Dirección:</label>
+                        <input type="text" className="form-control" id="direccion" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />
+                    </div>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="card-header bg-primary text-white">Datos de Contacto</div>
+                <div className="card-body">
+                    <div className="form-group row mx-0">
                         <div className="col">
                             <label htmlFor="telefono">Teléfono:</label>
                             <input type="tel" className="form-control" id="telefono" maxLength={50} style={{ width: '300px' }} onChange={handleChange} />
@@ -74,8 +91,8 @@ const CrearProveedor = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="red-social">Red Social:</label>
-                        <input type="text" className="form-control" id="red-social" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />
+                        <label htmlFor="red_social">Red Social:</label>
+                        <input type="text" className="form-control" id="red_social" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />
                     </div>
                 </div>
             </div>
@@ -85,8 +102,8 @@ const CrearProveedor = () => {
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
-                            <label htmlFor="usuario">Nombre Usuario:</label>
-                            <input type="text" className="form-control" id="usuario" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                            <label htmlFor="correo">Email:</label>
+                            <input type="email" className="form-control" id="correo" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="password">Ingrese Contraseña:</label>

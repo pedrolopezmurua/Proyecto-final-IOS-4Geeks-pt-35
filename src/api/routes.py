@@ -2,11 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-<<<<<<< HEAD
-from api.models import db, User, Proveedor, Servicio, ImagenServicio, Categoria
-=======
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
->>>>>>> main
 from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
 
@@ -66,7 +62,7 @@ def update_proveedor(id):
     proveedor.rut = data.get("rut", proveedor.rut)
     proveedor.nombre = data.get("nombre", proveedor.nombre)
     proveedor.apellido = data.get("apellido", proveedor.apellido)
-    proveedor.region = data.get("ciudad", proveedor.region)
+    proveedor.region = data.get("region", proveedor.region)
     proveedor.comuna = data.get("comuna", proveedor.comuna)
     proveedor.direccion = data.get("direccion", proveedor.direccion)
     proveedor.correo = data.get("correo", proveedor.correo)
@@ -123,7 +119,8 @@ def update_servicio(id):
     servicio.proveedor_id = data.get("proveedor_id", servicio.proveedor_id)
     servicio.categoria_id = data.get("categoria_id", servicio.categoria_id)
     servicio.region = data.get("region", servicio.region)
-    servicio.cobertura_servicio = data.get("cobertura_servicio", servicio.cobertura_servicio)
+    servicio.cobertura_servicio = data.get(
+        "cobertura_servicio", servicio.cobertura_servicio)
     servicio.estado = data.get("estado", servicio.estado)
 
     db.session.commit()

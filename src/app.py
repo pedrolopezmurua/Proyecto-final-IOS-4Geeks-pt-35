@@ -1,4 +1,5 @@
 """
+# app.py
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
@@ -39,8 +40,6 @@ CORS(app)
 # add the admin
 setup_admin(app)
 
-# add the admin
-setup_commands(app)
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
