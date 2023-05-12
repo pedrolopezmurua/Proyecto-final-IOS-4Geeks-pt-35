@@ -34,6 +34,11 @@ def get_proveedor(id):
 @api.route('/proveedor', methods=['POST'])
 def create_proveedor():
     data = request.get_json()
+    print(data)
+
+    missing_fields = [field for field in required_fields if field not in data]
+    if missing_fields:
+        return jsonify({'error': 'Missing fields in request body', 'missing_fields': missing_fields}), 400
 
     new_proveedor = Proveedor(
         rut=data['rut'],

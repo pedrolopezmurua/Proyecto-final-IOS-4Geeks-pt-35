@@ -69,7 +69,7 @@ const CrearProveedor = () => {
                         </div>
                         <div className="col">
                             <label htmlFor="comuna">Comuna:</label>
-                            <input type="text" className="form-control" id="comuna" maxLength={50} style={{ width: '300px' }} onChange={handleChange} />
+                            <input type="text" className="form-control" id="comuna" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                     </div>
 
@@ -106,8 +106,8 @@ const CrearProveedor = () => {
                             <input type="email" className="form-control" id="correo" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
-                            <label htmlFor="password">Ingrese Contraseña:</label>
-                            <input type="password" className="form-control" id="password" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
+                            <label htmlFor="contraseña">Ingrese Contraseña:</label>
+                            <input type="password" className="form-control" id="contraseña" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="confirm-password">Confirmación de Contraseña:</label>

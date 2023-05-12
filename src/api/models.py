@@ -16,7 +16,7 @@ class Proveedor(db.Model):
     correo = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
-    contraseña = db.Column(db.String(8), nullable=False)
+    contrasena = db.Column(db.String(8), nullable=False)
 
     def repr(self):
         return f'<Proveedor {self.id}>'
