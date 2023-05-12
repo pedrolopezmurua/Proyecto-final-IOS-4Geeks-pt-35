@@ -77,6 +77,7 @@ class Servicio(db.Model):
             'detalle': self.detalle,
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
+            'categoria_id': self.categoria_id,
             'region': self.region,
             'cobertura_servicio': self.cobertura_servicio,
             'estado': self.estado,
