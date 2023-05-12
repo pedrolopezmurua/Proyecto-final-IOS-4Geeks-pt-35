@@ -1,8 +1,5 @@
 from sqlalchemy import ForeignKey
-from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-from flask_migrate import Migrate
 
 db = SQLAlchemy()
 
@@ -17,9 +14,12 @@ class Proveedor(db.Model):
     comuna = db.Column(db.String(100), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     correo = db.Column(db.String(100), nullable=False)
-    telefono = db.Column(db.String, nullable=False)
+    telefono = db.Column(db.Integer, nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
     contraseña = db.Column(db.String(8), nullable=False)
+
+    def repr(self):
+        return f'<Proveedor {self.id}>'
 
     def serialize(self):
         return {
@@ -40,6 +40,9 @@ class Categoria(db.Model):
     _tablename_ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
+
+    def repr(self):
+        return f'<Categoria {self.id}>'
 
     def serialize(self):
         return {
@@ -64,6 +67,9 @@ class Servicio(db.Model):
     proveedor = db.relationship('Proveedor', backref='servicios')
     categoria = db.relationship('Categoria', backref='servicios')
 
+    def repr(self):
+        return f'<Servicio {self.id}>'
+
     def serialize(self):
         return {
             'id': self.id,
@@ -71,7 +77,6 @@ class Servicio(db.Model):
             'detalle': self.detalle,
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
-            'categoria_id': self.categoria_id,
             'region': self.region,
             'cobertura_servicio': self.cobertura_servicio,
             'estado': self.estado,
@@ -87,6 +92,9 @@ class ImagenServicio(db.Model):
         'servicio.id'), nullable=False)
     servicio = db.relationship('Servicio', backref='imagenes_servicio')
 
+    def repr(self):
+        return f'<ImagenServicio {self.id}>'
+
     def serialize(self):
         return {
             'id': self.id,
@@ -101,7 +109,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
-    def __repr__(self):
+    def repr(self):
         return f'<User {self.email}>'
 
     def serialize(self):

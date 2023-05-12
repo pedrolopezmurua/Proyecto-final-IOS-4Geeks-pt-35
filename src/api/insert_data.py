@@ -1,4 +1,4 @@
-from api.models import db, Proveedor, Categoria, Servicio, ImagenServicio
+from models import db, Proveedor, Categoria, Servicio, ImagenServicio
 
 # Crea 4 proveedores utilizando bulk_save_objects
 def insert_proveedor():
@@ -41,8 +41,8 @@ def setup_commands(app):
             titulo='Servicio 1',
             detalle='Detalle del servicio 1',
             precio=10000,
-            proveedor=prov1,
-            categoria=servicio,
+            proveedor_id=prov1.id,
+            categoria_id=servicio.id,
             region='metropolitana',
             cobertura_servicio='independencia'
         )
@@ -51,8 +51,8 @@ def setup_commands(app):
             titulo='Servicio 2',
             detalle='Detalle del servicio 2',
             precio=20000,
-            proveedor=prov2,
-            categoria=servicio,
+            proveedor_id=prov2.id,
+            categoria_id=servicio.id,
             region='metropolitana',
             cobertura_servicio='Stgo centro'
         )
@@ -61,8 +61,8 @@ def setup_commands(app):
             titulo='Servicio 3',
             detalle='Detalle del servicio 3',
             precio=30000,
-            proveedor=prov1,
-            categoria=servicio,
+            proveedor_id=prov1.id,
+            categoria_id=servicio.id,
             region='metropolitana',
             cobertura_servicio='colina'
         )
@@ -71,8 +71,8 @@ def setup_commands(app):
             titulo='Servicio 4',
             detalle='Detalle del servicio 4',
             precio=40000,
-            proveedor=prov2,
-            categoria=ventas,
+            proveedor_id=prov2.id,
+            categoria_id=ventas.id,
             region='metropolitana',
             cobertura_servicio='vitacura'
         )
@@ -81,8 +81,8 @@ def setup_commands(app):
             titulo='Servicio 5',
             detalle='Detalle del servicio 5',
             precio=50000,
-            proveedor=prov1,
-            categoria=ventas,
+            proveedor_id=prov1.id,
+            categoria_id=ventas.id,
             region='metropolitana',
             cobertura_servicio='nunoa'
         )
@@ -100,5 +100,3 @@ def setup_commands(app):
         db.session.commit()
 
         print('Base de datos inicializada con éxito')
-
-
