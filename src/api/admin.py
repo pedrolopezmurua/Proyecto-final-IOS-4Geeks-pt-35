@@ -1,4 +1,4 @@
-  
+  #admin.py
 import os
 from flask_admin import Admin
 from .models import db, User, Proveedor, Categoria, Servicio, ImagenServicio

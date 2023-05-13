@@ -1,3 +1,4 @@
+#models.py
 from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
@@ -5,7 +6,7 @@ db = SQLAlchemy()
 
 
 class Proveedor(db.Model):
-    _tablename_ = 'proveedor'
+    __tablename__ = 'proveedor'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     rut = db.Column(db.String(20), nullable=False)
     nombre = db.Column(db.String(50), nullable=False)
@@ -14,11 +15,11 @@ class Proveedor(db.Model):
     comuna = db.Column(db.String(100), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     correo = db.Column(db.String(100), nullable=False)
-    telefono = db.Column(db.Integer, nullable=False)
+    telefono = db.Column(db.String(15), nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
-    contraseña = db.Column(db.String(8), nullable=False)
+    contrasena = db.Column(db.String(8), nullable=False)
 
-    def repr(self):
+    def __repr__(self):
         return f'<Proveedor {self.id}>'
 
     def serialize(self):
@@ -37,11 +38,11 @@ class Proveedor(db.Model):
 
 
 class Categoria(db.Model):
-    _tablename_ = 'categoria'
+    __tablename__ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
 
-    def repr(self):
+    def __repr__(self):
         return f'<Categoria {self.id}>'
 
     def serialize(self):
@@ -52,22 +53,20 @@ class Categoria(db.Model):
 
 
 class Servicio(db.Model):
-    _tablename_ = 'servicio'
+    __tablename__ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     titulo = db.Column(db.String(100))
     detalle = db.Column(db.String(500))
     precio = db.Column(db.Integer, nullable=False)
-    proveedor_id = db.Column(db.Integer, ForeignKey(
-        'proveedor.id'), nullable=False)
-    categoria_id = db.Column(db.Integer, ForeignKey(
-        'categoria.id'), nullable=False)
+    proveedor_id = db.Column(db.Integer, ForeignKey('proveedor.id'), nullable=False)
+    categoria_id = db.Column(db.Integer, ForeignKey('categoria.id'), nullable=False)
     region = db.Column(db.String(50))
     cobertura_servicio = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
     categoria = db.relationship('Categoria', backref='servicios')
 
-    def repr(self):
+    def __repr__(self):
         return f'<Servicio {self.id}>'
 
     def serialize(self):
@@ -85,14 +84,14 @@ class Servicio(db.Model):
 
 
 class ImagenServicio(db.Model):
-    _tablename_ = 'imagen_servicio'
+    __tablename__ = 'imagen_servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     secure_url = db.Column(db.String(400), nullable=False)
     servicio_id = db.Column(db.Integer, ForeignKey(
         'servicio.id'), nullable=False)
     servicio = db.relationship('Servicio', backref='imagenes_servicio')
 
-    def repr(self):
+    def __repr__(self):
         return f'<ImagenServicio {self.id}>'
 
     def serialize(self):
@@ -109,7 +108,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
-    def repr(self):
+    def __repr__(self):
         return f'<User {self.email}>'
 
     def serialize(self):
