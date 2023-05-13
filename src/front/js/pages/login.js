@@ -1,9 +1,12 @@
-// ./pages/loginscreen.js
+// ./pages/login.js
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../store/authContext'
 
 function Login() {
+    const { logIn } = useContext(AuthContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -37,13 +40,17 @@ function Login() {
         // Maneja la respuesta
         if (response.ok) {
             const responseData = await response.json();
+
+            // Almacena el token en el localStorage
+            localStorage.setItem('userEmail', username);
+            localStorage.setItem('authToken', responseData.token);
+            logIn(username);
             console.log('Inicio de sesión exitoso:', responseData);
             navigate('/');
 
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
             alert('Error: ' + response.statusText);
-
         }
     };
 
