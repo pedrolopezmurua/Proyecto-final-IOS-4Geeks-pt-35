@@ -61,7 +61,7 @@ class Servicio(db.Model):
     proveedor_id = db.Column(db.Integer, ForeignKey('proveedor.id'), nullable=False)
     categoria_id = db.Column(db.Integer, ForeignKey('categoria.id'), nullable=False)
     region = db.Column(db.String(50))
-    cobertura_servicio = db.Column(b.String(200))
+    cobertura_servicio = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
     categoria = db.relationship('Categoria', backref='servicios')
