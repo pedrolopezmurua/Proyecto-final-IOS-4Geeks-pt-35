@@ -6,11 +6,29 @@ function RecuperaPassword() {
     const [email, setEmail] = useState('');
 
     const handleEmailChange = (event) => setEmail(event.target.value);
+    const sendPasswordResetEmail = async () => {
+        try {
+            const response = await fetch('http:localhost:3001/sendPasswordResetEmail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                setMessage('Correo electrónico de recuperación de contraseña enviado');
+            } else {
+                setMessage('Hubo un error al enviar el correo electrónico de recuperación de contraseña');
+            }
+        } catch (error) {
+            setMessage('Hubo un error al enviar el correo electrónico de recuperación de contraseña');
+        }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Aquí iría la lógica para enviar un correo electrónico con un enlace para restablecer la contraseña
-        console.log(`Solicitando restablecimiento de contraseña para correo electrónico ${email}`);
+        sendPasswordResetEmail();
     };
 
     return (

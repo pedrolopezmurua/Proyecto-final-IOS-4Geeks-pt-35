@@ -14,10 +14,11 @@ class Proveedor(db.Model):
     region = db.Column(db.String(100), nullable=False)
     comuna = db.Column(db.String(100), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
-    correo = db.Column(db.String(100), nullable=False)
-    telefono = db.Column(db.String(15), nullable=False)
+    correo = db.Column(db.String(100), unique=True, nullable=False)
+    telefono = db.Column(db.String(50), nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
-    contrasena = db.Column(db.String(8), nullable=False)
+    contrasena = db.Column(db.String(20), nullable=False)
+
 
     def __repr__(self):
         return f'<Proveedor {self.id}>'
@@ -40,7 +41,10 @@ class Proveedor(db.Model):
 class Categoria(db.Model):
     __tablename__ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(50), nullable=False)
+    nombre = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Categoria {self.id}>'
 
     def __repr__(self):
         return f'<Categoria {self.id}>'
@@ -55,13 +59,14 @@ class Categoria(db.Model):
 class Servicio(db.Model):
     __tablename__ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    titulo = db.Column(db.String(100))
-    detalle = db.Column(db.String(500))
+    titulo = db.Column(db.String(200))
+    detalle = db.Column(db.String(1000))
     precio = db.Column(db.Integer, nullable=False)
-    proveedor_id = db.Column(db.Integer, ForeignKey('proveedor.id'), nullable=False)
-    categoria_id = db.Column(db.Integer, ForeignKey('categoria.id'), nullable=False)
-    region = db.Column(db.String(50))
-    cobertura_servicio = db.Column(db.String(200))
+    proveedor_id = db.Column(db.Integer, ForeignKey(
+        'proveedor.id'), nullable=False)
+    categoria_id = db.Column(db.Integer, ForeignKey(
+        'categoria.id'), nullable=False)
+    cobertura = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
     categoria = db.relationship('Categoria', backref='servicios')
@@ -76,8 +81,8 @@ class Servicio(db.Model):
             'detalle': self.detalle,
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
-            'region': self.region,
-            'cobertura_servicio': self.cobertura_servicio,
+            'categoria_id': self.categoria_id,
+            'cobertura': self.cobertura,
             'estado': self.estado,
             'proveedor': self.proveedor.serialize()
         }
@@ -103,6 +108,7 @@ class ImagenServicio(db.Model):
 
 
 class User(db.Model):
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)

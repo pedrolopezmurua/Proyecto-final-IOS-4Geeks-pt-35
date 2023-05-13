@@ -1,6 +1,7 @@
-#commands.py
+
 import click
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
+
 
 def setup_commands(app):
     @app.cli.command("insert-test-proveedores")  # name of our command
