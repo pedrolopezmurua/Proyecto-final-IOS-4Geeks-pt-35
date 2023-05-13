@@ -6,7 +6,6 @@ import "../../styles/home.css";
 import { CardCategoriaSTec } from "../component/cards";
 import { CardCategoriaProductos } from "../component/cards";
 
-
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 

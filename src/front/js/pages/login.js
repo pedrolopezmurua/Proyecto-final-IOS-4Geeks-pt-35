@@ -44,7 +44,7 @@ function Login() {
             // Almacena el token en el localStorage
             localStorage.setItem('userEmail', username);
             localStorage.setItem('authToken', responseData.token);
-            logIn(username);
+            logIn(username, responseData.data.id);
             console.log('Inicio de sesión exitoso:', responseData);
             navigate('/');
 

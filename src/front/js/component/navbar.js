@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { AuthContext } from '../store/authContext'
 
 export const Navbar = () => {
-	const { user, logOut } = useContext(AuthContext);
+	const { userName, userId, logOut } = useContext(AuthContext);
 
 	// Comprueba si el usuario está autenticado
-	const isAuthenticated = Boolean(user);
+	const isAuthenticated = Boolean(userName);
 
 	const handleLogout = () => {
 		// Elimina el token y el correo del usuario del almacenamiento local
@@ -42,7 +42,7 @@ export const Navbar = () => {
 				{isAuthenticated ? (
 					// Si el usuario está autenticado, muestra estos enlaces
 					<>
-						<span className="navbar-text mr-3">Bienvenido, {user}</span>
+						<span className="navbar-text mr-3">Bienvenido, {userName} - {userId} </span>
 						<Link className="btn btn-outline-info mx-2" to="/profile">Perfil</Link>
 						<button className="btn btn-outline-info" onClick={handleLogout}>Cerrar sesión</button>
 					</>
