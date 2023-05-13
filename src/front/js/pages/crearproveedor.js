@@ -95,7 +95,6 @@ const CrearProveedor = () => {
                             <input type="text" className="form-control" id="comuna" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="direccion">Dirección:</label>
                         <input type="text" className="form-control" id="direccion" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />

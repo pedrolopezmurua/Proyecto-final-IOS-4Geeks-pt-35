@@ -54,8 +54,8 @@ class Categoria(db.Model):
 class Servicio(db.Model):
     __tablename__ = 'servicio'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    titulo = db.Column(db.String(100))
-    detalle = db.Column(db.String(500))
+    titulo = db.Column(db.String(200))
+    detalle = db.Column(db.String(1000))
     precio = db.Column(db.Integer, nullable=False)
     proveedor_id = db.Column(db.Integer, ForeignKey(
         'proveedor.id'), nullable=False)
