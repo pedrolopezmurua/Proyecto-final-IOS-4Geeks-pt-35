@@ -33,10 +33,13 @@ def get_proveedor(id):
 
 @api.route('/proveedor', methods=['POST'])
 def create_proveedor():
+    required_fields = ["rut", "nombre", "apellido", "region", "comuna",
+                       "direccion", "telefono", "red_social", "correo", "contrasena"]
+
     data = request.get_json()
     print(data)
-
     missing_fields = [field for field in required_fields if field not in data]
+
     if missing_fields:
         return jsonify({'error': 'Missing fields in request body', 'missing_fields': missing_fields}), 400
 
@@ -50,7 +53,7 @@ def create_proveedor():
         correo=data['correo'],
         telefono=data['telefono'],
         red_social=data['red_social'],
-        contraseña=data['contraseña']
+        contrasena=data['contrasena']
     )
 
     db.session.add(new_proveedor)
@@ -226,3 +229,44 @@ def update_categoria(id):
     db.session.commit()
 
     return jsonify(categoria.serialize())
+
+
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    correo = data.get('correo')
+    contrasena = data.get('contrasena')
+
+    print(correo)
+    print(contrasena)
+
+    if not correo or not contrasena:
+        return jsonify({'message': 'Correo y contraseña requeridos'}), 400
+
+    proveedor = Proveedor.query.filter_by(correo=correo).first()
+
+    if not proveedor:
+        return jsonify({'message': 'Proveedor no encontrado'}), 404
+
+    if proveedor.contrasena != contrasena:  # Compara la contraseña ingresada con la almacenada en la base de datos
+        return jsonify({'message': 'Contraseña incorrecta'}), 401
+
+    return jsonify({'message': 'Inicio de sesión exitoso'}), 200
+
+
+@api.route('/sendPasswordResetEmail', methods=['POST'])
+def send_password_reset_email():
+    email = request.json['email']
+
+    # Aquí deberías agregar la lógica para generar un token de recuperación de contraseña y guardarlo en tu base de datos
+
+    msg = Message('Recuperación de contraseña',
+                  sender='tu_correo@gmail.com', recipients=[email])
+    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: https://www.example.com/reset-password?token=tu_token'
+
+    try:
+        mail.send(msg)
+        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify(message='Error al enviar el correo electrónico de recuperación de contraseña'), 500

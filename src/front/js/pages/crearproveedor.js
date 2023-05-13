@@ -1,9 +1,24 @@
 // ./pages/crearproveedor.js
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CrearProveedor = () => {
-    const [formValues, setFormValues] = useState({});
+
+    let navigate = useNavigate();
+
+    const [formValues, setFormValues] = useState({
+        rut: '',
+        nombre: '',
+        apellido: '',
+        region: '',
+        comuna: '',
+        direccion: '',
+        telefono: '',
+        red_social: '',
+        correo: '',
+        contrasena: '',
+    });
 
     const handleChange = (e) => {
         setFormValues({
@@ -14,6 +29,12 @@ const CrearProveedor = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Validar que las contraseñas sean iguales
+        if (formValues.contrasena !== formValues['confirm-password']) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
 
         try {
             const response = await fetch('http://localhost:3001/api/proveedor', {
@@ -26,6 +47,8 @@ const CrearProveedor = () => {
 
             if (response.ok) {
                 console.log('Datos enviados correctamente');
+                alert('Éxito en crear el proveedor');
+                navigate('/');  // Redirige a la página de inicio
             } else {
                 console.error('Error al enviar los datos:', response.statusText);
             }
@@ -106,8 +129,8 @@ const CrearProveedor = () => {
                             <input type="email" className="form-control" id="correo" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
-                            <label htmlFor="contraseña">Ingrese Contraseña:</label>
-                            <input type="password" className="form-control" id="contraseña" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
+                            <label htmlFor="contrasena">Ingrese Contraseña:</label>
+                            <input type="password" className="form-control" id="contrasena" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="confirm-password">Confirmación de Contraseña:</label>

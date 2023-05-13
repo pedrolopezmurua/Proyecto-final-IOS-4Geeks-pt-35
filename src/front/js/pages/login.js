@@ -1,19 +1,50 @@
 // ./pages/loginscreen.js
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleUsernameChange = (event) => setUsername(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
-    const handleLogin = () => {
-        // Aquí iría la lógica para enviar la información de login al servidor
-        <Link to="/recuperapassword">recuperarla</Link>
-        console.log(`Ingresando con usuario ${username} y contraseña ${password}`);
+    const handleLogin = async () => {
+        // Validación simple: usuario y contraseña no deben estar vacíos
+        if (!username.trim() || !password.trim()) {
+            alert('Ambos campos, usuario y contraseña, son obligatorios.');
+            return;
+        }
+
+        // Construye los datos del formulario
+        const loginData = {
+            "correo": username,
+            "contrasena": password
+        };
+
+        // Envía una solicitud HTTP al servidor
+        const response = await fetch('http://localhost:3001/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        // Maneja la respuesta
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Inicio de sesión exitoso:', responseData);
+            navigate('/');
+
+        } else {
+            console.error('Error al iniciar sesión:', response.statusText);
+            alert('Erro: ' + response.statusText);
+
+        }
     };
 
     const handleCancel = () => {
