@@ -42,7 +42,7 @@ function Login() {
 
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
-            alert('Erro: ' + response.statusText);
+            alert('Error: ' + response.statusText);
 
         }
     };

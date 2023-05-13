@@ -8,13 +8,13 @@ class Proveedor(db.Model):
     __tablename__ = 'proveedor'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     rut = db.Column(db.String(20), nullable=False)
-    nombre = db.Column(db.String(50), nullable=False)
+    nombre = db.Column(db.String(100), nullable=False)
     apellido = db.Column(db.String(100), nullable=False)
     region = db.Column(db.String(100), nullable=False)
     comuna = db.Column(db.String(100), nullable=False)
     direccion = db.Column(db.String(200), nullable=False)
     correo = db.Column(db.String(100), unique=True, nullable=False)
-    telefono = db.Column(db.String(50), nullable=True)
+    telefono = db.Column(db.String(50), nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
     contrasena = db.Column(db.String(20), nullable=False)
 
@@ -61,8 +61,7 @@ class Servicio(db.Model):
         'proveedor.id'), nullable=False)
     categoria_id = db.Column(db.Integer, ForeignKey(
         'categoria.id'), nullable=False)
-    region = db.Column(db.String(50))
-    cobertura_servicio = db.Column(db.String(200))
+    cobertura = db.Column(db.String(200))
     estado = db.Column(db.Boolean, default=True)
     proveedor = db.relationship('Proveedor', backref='servicios')
     categoria = db.relationship('Categoria', backref='servicios')
@@ -78,8 +77,7 @@ class Servicio(db.Model):
             'precio': self.precio,
             'proveedor_id': self.proveedor_id,
             'categoria_id': self.categoria_id,
-            'region': self.region,
-            'cobertura_servicio': self.cobertura_servicio,
+            'cobertura': self.cobertura,
             'estado': self.estado,
             'proveedor': self.proveedor.serialize()
         }
