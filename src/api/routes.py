@@ -6,7 +6,7 @@ from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
 from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
 
-api = Blueprint('api', __name__)
+api = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -31,6 +31,37 @@ def get_proveedor(id):
     return jsonify(proveedor.serialize())
 
 
+@api.route('/proveedor', methods=['POST'])
+def create_proveedor():
+    required_fields = ["rut", "nombre", "apellido", "region", "comuna",
+                       "direccion", "telefono", "red_social", "correo", "contrasena"]
+
+    data = request.get_json()
+    print(data)
+    missing_fields = [field for field in required_fields if field not in data]
+
+    if missing_fields:
+        return jsonify({'error': 'Missing fields in request body', 'missing_fields': missing_fields}), 400
+
+    new_proveedor = Proveedor(
+        rut=data['rut'],
+        nombre=data['nombre'],
+        apellido=data['apellido'],
+        region=data['region'],
+        comuna=data['comuna'],
+        direccion=data['direccion'],
+        correo=data['correo'],
+        telefono=data['telefono'],
+        red_social=data['red_social'],
+        contrasena=data['contrasena']
+    )
+
+    db.session.add(new_proveedor)
+    db.session.commit()
+
+    return jsonify(new_proveedor.serialize()), 201
+
+
 @api.route("/proveedores/<int:id>", methods=["PUT"])
 def update_proveedor(id):
     proveedor = Proveedor.query.get_or_404(id)
@@ -39,13 +70,13 @@ def update_proveedor(id):
     proveedor.rut = data.get("rut", proveedor.rut)
     proveedor.nombre = data.get("nombre", proveedor.nombre)
     proveedor.apellido = data.get("apellido", proveedor.apellido)
-    proveedor.region = data.get("ciudad", proveedor.region)
+    proveedor.region = data.get("region", proveedor.region)
     proveedor.comuna = data.get("comuna", proveedor.comuna)
     proveedor.direccion = data.get("direccion", proveedor.direccion)
     proveedor.correo = data.get("correo", proveedor.correo)
     proveedor.telefono = data.get("telefono", proveedor.telefono)
     proveedor.red_social = data.get("red_social", proveedor.red_social)
-    proveedor.contraseña = data.get("contraseña", proveedor.contraseña)
+    proveedor.contrasena = data.get("contrasena", proveedor.contrasena)
 
     db.session.commit()
 
@@ -94,7 +125,8 @@ def update_servicio(id):
     servicio.precio = data.get("precio", servicio.precio)
     servicio.proveedor_id = data.get("proveedor_id", servicio.proveedor_id)
     servicio.categoria_id = data.get("categoria_id", servicio.categoria_id)
-    servicio.cobertura = data.get("cobertura", servicio.cobertura)
+    servicio.cobertura = data.get(
+        "cobertura", servicio.cobertura)
     servicio.estado = data.get("estado", servicio.estado)
 
     db.session.commit()
@@ -195,3 +227,44 @@ def update_categoria(id):
     db.session.commit()
 
     return jsonify(categoria.serialize())
+
+
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    correo = data.get('correo')
+    contrasena = data.get('contrasena')
+
+    print(correo)
+    print(contrasena)
+
+    if not correo or not contrasena:
+        return jsonify({'message': 'Correo y contraseña requeridos'}), 400
+
+    proveedor = Proveedor.query.filter_by(correo=correo).first()
+
+    if not proveedor:
+        return jsonify({'message': 'Proveedor no encontrado'}), 404
+
+    if proveedor.contrasena != contrasena:  # Compara la contraseña ingresada con la almacenada en la base de datos
+        return jsonify({'message': 'Contraseña incorrecta'}), 401
+
+    return jsonify({'message': 'Inicio de sesión exitoso'}), 200
+
+
+@api.route('/sendPasswordResetEmail', methods=['POST'])
+def send_password_reset_email():
+    email = request.json['email']
+
+    # Aquí deberías agregar la lógica para generar un token de recuperación de contraseña y guardarlo en tu base de datos
+
+    msg = Message('Recuperación de contraseña',
+                  sender='tu_correo@gmail.com', recipients=[email])
+    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: https://www.example.com/reset-password?token=tu_token'
+
+    try:
+        mail.send(msg)
+        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify(message='Error al enviar el correo electrónico de recuperación de contraseña'), 500
