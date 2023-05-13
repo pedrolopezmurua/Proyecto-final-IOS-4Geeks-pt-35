@@ -1,3 +1,4 @@
+#models.py
 from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
@@ -17,6 +18,7 @@ class Proveedor(db.Model):
     telefono = db.Column(db.String(50), nullable=False)
     red_social = db.Column(db.String(100), nullable=True)
     contrasena = db.Column(db.String(20), nullable=False)
+
 
     def __repr__(self):
         return f'<Proveedor {self.id}>'
@@ -40,6 +42,9 @@ class Categoria(db.Model):
     __tablename__ = 'categoria'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Categoria {self.id}>'
 
     def __repr__(self):
         return f'<Categoria {self.id}>'
