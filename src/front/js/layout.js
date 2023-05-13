@@ -5,16 +5,12 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Productos } from "./pages/productos";
-import { Productos } from "./pages/productos";
 import { ServicioTecnico } from "./pages/serviciotecnico";
-import { DetallesProducto } from "./pages/detalleProducto";
-import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
-import CrearProveedor from './pages/crearproveedor';
 import CrearProveedor from './pages/crearproveedor';
 import injectContext from "./store/appContext";
 
@@ -40,8 +36,6 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<RecuperaPassword />} path="/recuperapassword" />
-                        <Route element={<CrearProveedor />} path="/crearproveedor" />
-                        <Route element={<Productos />} path="/productos" />
                         <Route element={<CrearProveedor />} path="/crearproveedor" />
                         <Route element={<Productos />} path="/productos" />
                         <Route element={<ServicioTecnico />} path="/serviciotecnico" />

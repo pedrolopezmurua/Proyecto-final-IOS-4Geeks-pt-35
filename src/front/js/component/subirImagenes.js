@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const SubiendoImagenes = () => {
+export const SubirImagenes = () => {
 
     const [image, setImage] = useState("");
 
@@ -17,7 +17,6 @@ export const SubiendoImagenes = () => {
             };
             const resp = await fetch("https://api.cloudinary.com/v1_1/applegeeks/image/upload", opts);
             const file = await resp.json();
-            console.log("resp: ", resp)
             setImage(file.secure_url)
             console.log("secure url: ", file.secure_url)
         } catch (error) {

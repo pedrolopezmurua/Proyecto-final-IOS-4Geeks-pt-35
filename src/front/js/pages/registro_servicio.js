@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { SubiendoImagenes } from "../component/subirImagenes";
+import { SubirImagenes } from "../component/subirImagenes";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 
 export const RegistroServicio = () => {
@@ -12,96 +12,64 @@ export const RegistroServicio = () => {
 
   return (
     <div className="container my-3">
-      <h1>Ingreso del servicio</h1>
-      <div className="row" id="editar; carrusel 1, 2, 3 que se debe habilitar a medida que el proveedor se registra">
-        <p className="col">Ingreso de datos del proveedor</p>
-        <p className="col">Ingreso de servicio</p>
-        <p className="col">Publicar servicio</p>
-      </div>
-
+      <h1 className="mb-3">Crear nueva publicación</h1>
       <div className="container border border-secondary" id="contenedor-formulario">
-
-        <div className="container my-3" id="1 seleccion-categoria">
-          <div className="row">
-            <div className="col-4 d-flex justify-content-center">
-              <div className="col-6 alert alert-info text-center">
-                <i className="fas fa-hand-pointer"></i>
-                <p>Seleccione categoría</p>
-              </div>
-            </div>
-            <div className="col-8">
-
-              <form>
-                <div className="form-group my-3">
-                  <label htmlFor="categoría" className="form-label">Categoría</label>
-                  <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
-
-                    <option value="0">Seleccionar</option>
-                    <option value="1">Productos</option>
-                    <option value="2">Servicio técnico</option>
-                  </select>
-                </div>
-
-              </form>
+        <hr className="mx-5 my-5" />
+        <div className="row" id="contenido-formulario">
+          <div className="col-4 d-flex justify-content-center" id="cuadro-crear-servicio-izq">
+            <div className="alert alert-primary text-center m-2 p-3" style={{ maxHeight: "7rem", maxWidth: "auto" }}>
+              <i className="fas fa-file-alt"></i>
+              <p className="m-0">Crear Publicación</p>
+              <i className="fa-solid fa-arrow-right fa-2xs my-0"></i>
             </div>
           </div>
-        </div>
-
-        <hr className="mx-5" />
-
-        <div id="2 crear-servicio">
-          <div className="row">
-            <div className="col-4 d-flex justify-content-center">
-              <div className="col-6 alert alert-info text-center">
-                <i className="fas fa-file-alt"></i>
-                <p>Crear Servicio</p>
+          <div className="col-8" id="opciones-formulario">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group my-3" id="seleccion-categoria">
+                <label htmlFor="categoría" className="form-label">Categoría</label>
+                <select defaultValue="0" className="form-select" id="categoria" aria-label="Default select example">
+                  <option value="0">Seleccionar</option>
+                  <option value="1">Productos</option>
+                  <option value="2">Servicio técnico</option>
+                </select>
               </div>
-            </div>
-            <div className="col-8">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="nombre-servicio" className="form-label">Nombre del Servicio</label>
-                  <input type="email" className="form-control" id="nombre-servicio" placeholder="Ej. reparación de pantallas iPhone" />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="descripcion" className="form-label">Descripción detallada del Servicio</label>
-                  <textarea className="form-control" id="descripcion" rows="3"></textarea>
-                </div>
-                  <div className="col">
-                    <label htmlFor="valor" className="form-label" >Valor</label>
-                    <input type="text" className="form-control" id="valor" placeholder="$40.000.-" />
-                  </div>
+              <div className="mb-3" id="titulo-publicacion">
+                <label htmlFor="nombre-servicio" className="form-label">Título de la publicación</label>
+                <input type="email" className="form-control" id="titulo-publicacion" placeholder="Ej. Mantención de Macbook" />
+              </div>
+              <div className="mb-3" id="descripcion-publicacion">
+                <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
+                <textarea className="form-control" id="descripcion" rows="3"></textarea>
+              </div>
+              <div className="col" id="seleccion-valor-servicio">
+                <label htmlFor="valor" className="form-label" >Precio</label>
+                <input type="text" className="form-control" id="valor" placeholder="$40.000.-" />
+              </div>
+              <div className="row mt-3" id="seleccion-cobertura">
+                <SeleccionVariasComunas />
+              </div>
+              <div className="col" id="seleccion-imagenes">
+                <label htmlFor="valor" className="form-label" >Adjuntar fotos</label>
+                <hr className="mt-0 me-4" />
                 <div className="row">
-                  <SeleccionVariasComunas/>
+
+                  <div className="col-6">
+                    <SubirImagenes />
+                  </div>
+                  <div className="col-6">
+                    <SubirImagenes />
+                  </div>
                 </div>
-              </form>
-            </div>
+                <hr className="mt-4 me-4" />
+              </div>
+              <div className="d-flex justify-content-end me-4">
+
+                <button type="submit" className="btn btn-primary">Guardar</button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <hr className="mx-5" />
-
-        <div className="container my-3" id="3-fotos-servicio">
-          <div className="row">
-            <div className="col-4 d-flex justify-content-center">
-              <div className="col-6 alert alert-info text-center">
-                <i className="fas fa-paperclip"></i>
-                <p>Adjunte fotos</p>
-              </div>
-            </div>
-            <div className="col-8">
-              <div className="row">
-                <div className="col-6">
-                  <SubiendoImagenes />
-                </div>
-                <div className="col-6">
-                  <SubiendoImagenes />
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
+        <hr className="mx-5 my-5" />
 
 
       </div>
