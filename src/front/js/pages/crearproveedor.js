@@ -85,13 +85,15 @@ const CrearProveedor = () => {
             <div className="card">
                 <div className="card-header bg-primary text-white">Datos de Dirección</div>
                 <div className="card-body">
-                    <div className="form-group">
-                        <label htmlFor="ciudad">Ciudad:</label>
-                        <input type="text" className="form-control" id="ciudad" maxLength={20} style={{ width: '300px' }} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="comuna">Comuna:</label>
-                        <input type="text" className="form-control" id="comuna" maxLength={20} style={{ width: '300px' }} />
+                    <div className="form-group row mx-0">
+                        <div className="col">
+                            <label htmlFor="region">Region:</label>
+                            <input type="text" className="form-control" id="region" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="comuna">Comuna:</label>
+                            <input type="text" className="form-control" id="comuna" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="direccion">Dirección:</label>
