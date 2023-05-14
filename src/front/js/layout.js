@@ -32,46 +32,31 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    <Navbar />
-                    <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<RecuperaPassword />} path="/recuperapassword" />
-                        <Route element={<CrearProveedor />} path="/crearproveedor" />
-                        <Route element={<Productos />} path="/productos" />
-                        <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<DetallesProducto />} path="/productos/detalle/:theid" />
-                        <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
-                        <Route element={<SeleccionVariasComunas />} path="/prueba" />
-                        <Route element={<RegistroServicio />} path="/registro_servicio" />
-                        <Route element={<ModificaProducto />} path="/modificaproducto" />
+                <AuthContextProvider>
+                    <ScrollToTop>
+                        <Navbar />
+                        <Routes>
+                            <Route element={<Home />} path="/" />
+                            <Route element={<Login />} path="/login" />
+                            <Route element={<RecuperaPassword />} path="/recuperapassword" />
+                            <Route element={<CrearProveedor />} path="/crearproveedor" />
+                            <Route element={<Productos />} path="/productos" />
+                            <Route element={<ServicioTecnico />} path="/serviciotecnico" />
+                            <Route element={<Demo />} path="/demo" />
+                            <Route element={<DetallesProducto />} path="/productos/detalle/:theid" />
+                            <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
+                            <Route element={<SeleccionVariasComunas />} path="/prueba" />
+                            <Route element={<RegistroServicio />} path="/registro_servicio" />
+                            <Route element={<ModificaProducto />} path="/modificaproducto" />
 
-                        <AuthContextProvider>
-                            <ScrollToTop>
-                                <Navbar />
-                                <Routes>
-                                    <Route element={<Home />} path="/" />
-                                    <Route element={<Login />} path="/login" />
-                                    <Route element={<RecuperaPassword />} path="/recuperapassword" />
-                                    <Route element={<CrearProveedor />} path="/crearproveedor" />
-                                    <Route element={<Productos />} path="/productos" />
-                                    <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                                    <Route element={<Demo />} path="/demo" />
-                                    <Route element={<DetallesProducto />} path="/productos/detalle/:theid" />
-                                    <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
-                                    <Route element={<SeleccionVariasComunas />} path="/prueba" />
-                                    <Route element={<RegistroServicio />} path="/registro_servicio" />
-
-                                    <Route element={<h1>Not found!</h1>} />
-                                </Routes>
-                                <Footer />
-                            </ScrollToTop>
-                        </AuthContextProvider>
-                    </BrowserRouter>
-                </div>
-                );
+                            <Route element={<h1>Not found!</h1>} />
+                        </Routes>
+                        <Footer />
+                    </ScrollToTop>
+                </AuthContextProvider>
+            </BrowserRouter>
+        </div>
+    );
 };
 
-                export default injectContext(Layout);
+export default injectContext(Layout);

@@ -3,6 +3,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import logo from "../../img/logo.png";
+
+import { AuthContext } from '../store/authContext'
+
 export const Navbar = () => {
 	const { userName, userId, logOut } = useContext(AuthContext);
 
