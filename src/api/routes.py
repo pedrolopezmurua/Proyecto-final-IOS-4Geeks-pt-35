@@ -5,6 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
 from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
+import datetime
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -235,8 +237,8 @@ def login():
     correo = data.get('correo')
     contrasena = data.get('contrasena')
 
-    print(correo)
-    print(contrasena)
+    # print(correo)
+    # print(contrasena)
 
     if not correo or not contrasena:
         return jsonify({'message': 'Correo y contraseña requeridos'}), 400
@@ -248,8 +250,15 @@ def login():
 
     if proveedor.contrasena != contrasena:  # Compara la contraseña ingresada con la almacenada en la base de datos
         return jsonify({'message': 'Contraseña incorrecta'}), 401
-
-    return jsonify({'message': 'Inicio de sesión exitoso'}), 200
+    else:
+        expiracion = datetime.timedelta(minutes=5)
+        token = create_access_token(identity=correo, expires_delta=expiracion)
+        return jsonify({
+            "mensaje": "bienvenido, inicio se sesion exitoso",
+            "token": token,
+            "tiempo": expiracion.total_seconds(),
+            "data": proveedor.serialize()
+        }), 200
 
 
 @api.route('/sendPasswordResetEmail', methods=['POST'])
@@ -268,3 +277,13 @@ def send_password_reset_email():
     except Exception as e:
         print(str(e))
         return jsonify(message='Error al enviar el correo electrónico de recuperación de contraseña'), 500
+
+
+@api.route("/check", methods=["GET"])
+@jwt_required()
+def check_user():
+    identidad = get_jwt_identity()
+    return jsonify({
+        "logeado": True,
+        "identidad": identidad
+    })
