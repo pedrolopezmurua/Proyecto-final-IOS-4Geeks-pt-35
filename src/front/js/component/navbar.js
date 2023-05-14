@@ -1,21 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../img/logo.png";
+
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ marginBottom: '0' }}>
 			<div className="container-fluid ms-5">
-				<Link className="" to='/'>Logo here...</Link>
-				<div className="container d-flex justify-content-start mx-2" >
-					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+				<Link className="" to='/'><img className="" style={{ width: "150px", height: "60px", marginLeft: "100px", marginRight: "120px" }} src={logo} /></Link>
+
+				<div className="container d-flex justify-content-start mx-2 bg-transparent" >
+					<ul className="navbar-nav me-auto mb-3 mb-lg-0">
 						<li className="nav-item mx-3">
-							<Link className="text-decoration-none text-info bg-dark" to='/'>Inicio</Link>
+							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Inicio</Link>
 						</li>
 						<li className="nav-item mx-3">
-							<Link className="text-decoration-none text-info bg-dark" to='/'>Servicios</Link>
+							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Servicios</Link>
 						</li>
 						<li className="nav-item mx-3">
-							<Link className="text-decoration-none text-info bg-dark" to='/'>Soporte</Link>
+							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
 						</li>
 					</ul>
 				</div>
