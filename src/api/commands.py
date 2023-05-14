@@ -1,4 +1,4 @@
-
+#commands.py
 import click
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
 
@@ -74,7 +74,9 @@ def setup_commands(app):
 
         print("Todos los servicios de prueba creados")
 
-        @app.cli.command("insert-test-imagen_servicio")
+
+        @app.cli.command("insert-test-imagen-servicio")
+
         @click.argument("count")
         def insert_test_imagen_servicio(count):
             with app.app_context():

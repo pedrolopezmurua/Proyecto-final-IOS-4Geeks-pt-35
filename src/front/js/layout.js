@@ -12,6 +12,7 @@ import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import CrearProveedor from './pages/crearproveedor';
+import { ModificaProducto } from './pages/modificaproducto';
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -31,6 +32,7 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
+
                 <AuthContextProvider>
                     <ScrollToTop>
                         <Navbar />
@@ -46,6 +48,7 @@ const Layout = () => {
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
                             <Route element={<SeleccionVariasComunas />} path="/prueba" />
                             <Route element={<RegistroServicio />} path="/registro_servicio" />
+                            <Route element={<ModificaProducto />} path="/modificaproducto" />
 
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
