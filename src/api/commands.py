@@ -10,7 +10,7 @@ def setup_commands(app):
         with app.app_context():
             print("Creando proveedores de prueba")
             for x in range(1, int(count) + 1):
-                proveedor = Proveedor()        
+                proveedor = Proveedor()
                 proveedor.rut = "12345678-" + str(x)
                 proveedor.nombre = "Proveedor " + str(x)
                 proveedor.apellido = "Apellido " + str(x)
@@ -25,7 +25,6 @@ def setup_commands(app):
                 db.session.commit()
                 print("Proveedor: ", proveedor.nombre, " creado.")
                 print("Todos los proveedores de prueba creados")
-
 
     @app.cli.command("insert-test-categoria")
     def insert_test_categoria():
@@ -42,7 +41,7 @@ def setup_commands(app):
             db.session.commit()
             print("Categoria: ", categoria.nombre, " creada.")
 
-        print("Todas las categorias de prueba creadas")  
+        print("Todas las categorias de prueba creadas")
 
     @app.cli.command("insert-test-servicios")
     @click.argument("count")
@@ -52,7 +51,8 @@ def setup_commands(app):
 
         # Check if there are enough proveedores and categorias in the database
         proveedores = Proveedor.query.all()
-        categorias = Categoria.query.filter(Categoria.nombre.in_(["Ventas", "Servicio Técnico"])).all()
+        categorias = Categoria.query.filter(
+            Categoria.nombre.in_(["Ventas", "Servicio Técnico"])).all()
         if len(proveedores) < int(count) or len(categorias) < 2:
             print("No hay suficientes proveedores o categorías en la base de datos.")
             return
@@ -62,10 +62,11 @@ def setup_commands(app):
             servicio.titulo = "Titulo " + str(x)
             servicio.detalle = "Detalle " + str(x)
             servicio.precio = x * 100
-            servicio.proveedor_id = proveedores[x % len(proveedores)].id  # use id of existing proveedor
-            servicio.categoria_id = categorias[x % 2].id  # use id of existing categoria (0 or 1)
-            servicio.region = "Region " + str(x)
-            servicio.cobertura_servicio = "Cobertura " + str(x)
+            servicio.proveedor_id = proveedores[x % len(
+                proveedores)].id  # use id of existing proveedor
+            # use id of existing categoria (0 or 1)
+            servicio.categoria_id = categorias[x % 2].id
+            servicio.cobertura = "Cobertura " + str(x)
             servicio.estado = True
             db.session.add(servicio)
             db.session.commit()
@@ -73,9 +74,7 @@ def setup_commands(app):
 
         print("Todos los servicios de prueba creados")
 
-
-
-        @app.cli.command("insert-test-imagen-servicio")
+        @app.cli.command("insert-test-imagen_servicio")
         @click.argument("count")
         def insert_test_imagen_servicio(count):
             with app.app_context():
@@ -90,8 +89,10 @@ def setup_commands(app):
             for x in range(1, int(count) + 1):
                 # Create a new ImagenServicio
                 imagen_servicio = ImagenServicio()
-                imagen_servicio.secure_url = "https://example.com/imagen_servicio_" + str(x) + ".jpg"  # use a proper image url
-                imagen_servicio.servicio_id = servicios[x % len(servicios)].id  # use id of existing servicio
+                imagen_servicio.secure_url = "https://example.com/imagen_servicio_" + \
+                    str(x) + ".jpg"  # use a proper image url
+                imagen_servicio.servicio_id = servicios[x % len(
+                    servicios)].id  # use id of existing servicio
                 # Add the new ImagenServicio to the database session
                 db.session.add(imagen_servicio)
                 # Commit the session to insert the new ImagenServicio
@@ -99,10 +100,6 @@ def setup_commands(app):
                 print("ImagenServicio: ", imagen_servicio.secure_url, " creada.")
 
             print("Todos los imagen_servicio de prueba creados")
-
-
-
-
 
     @app.cli.command("insert-test-users")  # name of our command
     @click.argument("count")  # argument of out command
@@ -119,4 +116,3 @@ def setup_commands(app):
                 print("User: ", user.email, " created.")
 
             print("All test users created")
-
