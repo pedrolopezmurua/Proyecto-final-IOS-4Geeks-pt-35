@@ -32,7 +32,6 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
-
                 <AuthContextProvider>
                     <ScrollToTop>
                         <Navbar />
@@ -49,7 +48,6 @@ const Layout = () => {
                             <Route element={<SeleccionVariasComunas />} path="/prueba" />
                             <Route element={<RegistroServicio />} path="/registro_servicio" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
-
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
                         <Footer />
