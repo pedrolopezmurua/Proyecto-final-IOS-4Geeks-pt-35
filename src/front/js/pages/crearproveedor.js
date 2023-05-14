@@ -57,6 +57,10 @@ const CrearProveedor = () => {
         }
     };
 
+    const handleCancel = () => {
+        navigate('/');
+    };
+
     return (
         <div className="container" style={{ marginTop: '20px' }}>
             <h4>Creación de Cuenta</h4>
@@ -143,7 +147,7 @@ const CrearProveedor = () => {
                 <button className="btn btn-primary mx-2" onClick={handleSubmit}>
                     Crear
                 </button>
-                <button className="btn btn-secondary">Cancelar</button>
+                <button className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
             </div>
         </div >
     );

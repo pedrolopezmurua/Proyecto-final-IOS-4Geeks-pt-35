@@ -12,12 +12,14 @@ import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import CrearProveedor from './pages/crearproveedor';
+import { ModificaProducto } from './pages/modificaproducto';
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SeleccionVariasComunas } from "./component/seleccionVariasComunas";
 import { RegistroServicio } from "./pages/registro_servicio";
+import AuthContextProvider from './store/authContext';
 
 //create your first component
 const Layout = () => {
@@ -30,25 +32,29 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    <Navbar />
-                    <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<RecuperaPassword />} path="/recuperapassword" />
-                        <Route element={<CrearProveedor />} path="/crearproveedor" />
-                        <Route element={<Productos />} path="/productos" />
-                        <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
-                        <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
-                        <Route element={<SeleccionVariasComunas />} path="/prueba" />
-                        <Route element={<RegistroServicio />} path="/registro_servicio" />
 
-                        <Route element={<h1>Not found!</h1>} />
-                    </Routes>
-                    <Footer />
-                </ScrollToTop>
+                <AuthContextProvider>
+                    <ScrollToTop>
+                        <Navbar />
+                        <Routes>
+                            <Route element={<Home />} path="/" />
+                            <Route element={<Login />} path="/login" />
+                            <Route element={<RecuperaPassword />} path="/recuperapassword" />
+                            <Route element={<CrearProveedor />} path="/crearproveedor" />
+                            <Route element={<Productos />} path="/productos" />
+                            <Route element={<ServicioTecnico />} path="/serviciotecnico" />
+                            <Route element={<Demo />} path="/demo" />
+                            <Route element={<DetallesProducto />} path="/productos/detalle/:theid" />
+                            <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:theid" />
+                            <Route element={<SeleccionVariasComunas />} path="/prueba" />
+                            <Route element={<RegistroServicio />} path="/registro_servicio" />
+                            <Route element={<ModificaProducto />} path="/modificaproducto" />
+
+                            <Route element={<h1>Not found!</h1>} />
+                        </Routes>
+                        <Footer />
+                    </ScrollToTop>
+                </AuthContextProvider>
             </BrowserRouter>
         </div>
     );
