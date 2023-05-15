@@ -11,11 +11,13 @@ export const ServicioTecnico = () => {
     const { store, actions } = useContext(Context);
 
     return (
-        <div className="text-center mt-5">
-            <p>
-                <img className="m-5" style={{ width: "1113px", height: "561px", left: "151px", top: "193px" }} src={dispositivos} />
-            </p>
-            <h1>Servicio Técnico</h1>
+        <div className="text-center">
+            <div className="justify-content-center d-flex mt-3">
+                <div style={{ height: "250px", width: "1100px", overflow: "hidden" }}>
+                    <img src={dispositivos} style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                </div>
+            </div>
+            <h1 className="mt-4">Servicio Técnico</h1>
             <div className="justify-content-center d-flex">
                 <CardServiciosTecnicos />
 
