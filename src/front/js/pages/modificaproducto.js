@@ -25,7 +25,7 @@ export const ModificaProducto = () => {
                 <table className="table table-striped rounded p-5">
                     <thead>
                         <tr>
-                            <th>CATGORIA</th>
+                            <th>CATEGORIA</th>
                             <th>NOMBRE SERVICIO</th>
                             <th>ESTADO</th>
                             <th>VALOR</th>
@@ -69,10 +69,6 @@ export const ModificaProducto = () => {
                     </tbody>
                 </table>
             </div>
-
-
-            {/*prueba Navbar*/}
-
 
             {/*atras/siguiente*/}
             <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>

@@ -18,8 +18,11 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SeleccionVariasComunas } from "./component/seleccionVariasComunas";
-import { RegistroServicio } from "./pages/registro_servicio";
+import { CrearPublicacion } from "./pages/crear_publicacion";
+import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
+import { ListadoPublicaciones } from "./pages/listado_publicaciones";
+import { SubirImagenes } from "./component/subirImagenes";
 
 //create your first component
 const Layout = () => {
@@ -46,8 +49,12 @@ const Layout = () => {
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
                             <Route element={<SeleccionVariasComunas />} path="/prueba" />
-                            <Route element={<RegistroServicio />} path="/registro_servicio" />
+                            <Route element={<CrearPublicacion />} path="/crear-publicacion" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
+                            <Route element={<Perfil />} path="perfil" />
+                            <Route element={<ListadoPublicaciones />} path="listado-publicaciones" />
+                            <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
+
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>
                         <Footer />
