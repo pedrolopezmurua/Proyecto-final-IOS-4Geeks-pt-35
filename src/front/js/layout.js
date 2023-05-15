@@ -19,6 +19,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SeleccionVariasComunas } from "./component/seleccionVariasComunas";
 import { RegistroServicio } from "./pages/registro_servicio";
+import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
 
 //create your first component
@@ -49,6 +50,7 @@ const Layout = () => {
                             <Route element={<SeleccionVariasComunas />} path="/prueba" />
                             <Route element={<RegistroServicio />} path="/registro_servicio" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
+                            <Route element={<Perfil />} path="profile" />
 
                             <Route element={<h1>Not found!</h1>} />
                         </Routes>

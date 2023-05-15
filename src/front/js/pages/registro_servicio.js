@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { SubirImagenes } from "../component/subirImagenes";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
 
 export const RegistroServicio = () => {
+
+  const { userId } = useContext(AuthContext)
 
   const [selectedComunas, setSelectedComunas] = useState([]);
   const handleSelectedComunasChange = (comunas) => {
@@ -22,16 +23,17 @@ export const RegistroServicio = () => {
     const detalle = document.getElementById("descripcion").value;
     const precio = document.getElementById("precio").value;
     const precio_int = parseInt(precio, 10);
+    const proveedor_id = userId;
 
     // Crea el objeto de datos a enviar
     const data = {
-      "titulo": titulo,
-      "detalle": detalle,
-      "precio": precio_int,
-      "proveedor_id": 1,            //MODIFICAR EVENTUALMENTE
-      "categoria_id": categoria_id,
-      "cobertura": selectedComunas,
-      "estado": true
+      titulo: titulo,
+      detalle: detalle,
+      precio: precio_int,
+      proveedor_id: proveedor_id,            //MODIFICAR EVENTUALMENTE
+      categoria_id: categoria_id,
+      cobertura: JSON.stringify(selectedComunas),
+      estado: true
     };
 
     // Realiza la solicitud POST al endpoint de la ruta
@@ -55,6 +57,7 @@ export const RegistroServicio = () => {
   };
   useEffect(() => {
     console.log("a ver si se estan guardando las comunas", selectedComunas);
+    console.log("userID?", userId)
   }, [selectedComunas]);
   return (
     <div className="container my-3">
