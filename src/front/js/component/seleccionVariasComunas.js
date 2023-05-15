@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const SeleccionVariasComunas = () => {
+export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
     const RegionesYcomunas = {
 
         "regiones": [{
@@ -97,7 +97,10 @@ export const SeleccionVariasComunas = () => {
             setComuna("");
         }
     };
-    console.log(selectedComunas)
+
+    useEffect(() => {
+        onSelectedComunasChange(selectedComunas);
+    }, [selectedComunas, onSelectedComunasChange]);
 
     return (
         <div>
