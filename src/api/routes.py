@@ -90,6 +90,12 @@ def get_servicios():
     servicios = Servicio.query.all()
     return jsonify([servicio.serialize() for servicio in servicios])
 
+@api.route("/servicios/proveedor", methods=['GET'])
+def get_servicios_por_proveedor():
+    proveedor_id = request.args.get('proveedor_id')
+    servicios = Servicio.query.filter_by(proveedor_id=proveedor_id).all()
+    return jsonify([servicio.serialize() for servicio in servicios])
+
 
 @api.route("/servicios", methods=["POST"])
 def create_servicio():
@@ -155,7 +161,7 @@ def create_imagen_servicio():
     data = request.get_json()
 
     nueva_imagen_servicio = ImagenServicio(
-        ruta=data["ruta"],
+        secure_url=data["secure_url"],
         servicio_id=data["servicio_id"],
     )
 

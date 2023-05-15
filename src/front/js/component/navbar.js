@@ -47,7 +47,7 @@ export const Navbar = () => {
 					// Si el usuario está autenticado, muestra estos enlaces
 					<>
 						<span className="navbar-text mr-3">Bienvenido, {userName} - {userId} </span>
-						<Link className="btn btn-outline-info mx-2" to="/profile">Perfil</Link>
+						<Link className="btn btn-outline-info mx-2" to="/perfil">Perfil</Link>
 						<button className="btn btn-outline-info" onClick={handleLogout}>Cerrar sesión</button>
 					</>
 				) : (

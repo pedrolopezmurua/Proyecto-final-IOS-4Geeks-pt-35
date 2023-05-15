@@ -4,7 +4,7 @@ import { SubirImagenes } from "../component/subirImagenes";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
 
-export const RegistroServicio = () => {
+export const CrearPublicacion = () => {
 
   const { userId } = useContext(AuthContext)
 
@@ -36,7 +36,7 @@ export const RegistroServicio = () => {
       estado: true
     };
 
-    // Realiza la solicitud POST al endpoint de la ruta
+    // Solicitud POST tabla Servicio
     fetch("http://127.0.0.1:3001/api/servicios", {
       method: "POST",
       headers: {
@@ -52,13 +52,8 @@ export const RegistroServicio = () => {
         console.error(error);
       });
 
-
-
   };
-  useEffect(() => {
-    console.log("a ver si se estan guardando las comunas", selectedComunas);
-    console.log("userID?", userId)
-  }, [selectedComunas]);
+
   return (
     <div className="container my-3">
       <h1 className="mb-3">Crear nueva publicación</h1>
@@ -97,22 +92,7 @@ export const RegistroServicio = () => {
               <div className="row mt-3" id="seleccion-cobertura">
                 <SeleccionVariasComunas onSelectedComunasChange={handleSelectedComunasChange} />
               </div>
-              <div className="col" id="seleccion-imagenes">
-                <label htmlFor="valor" className="form-label" >Adjuntar fotos</label>
-                <hr className="mt-0 me-4" />
-                <div className="row">
-
-                  <div className="col-6">
-                    <SubirImagenes />
-                  </div>
-                  <div className="col-6">
-                    <SubirImagenes />
-                  </div>
-                </div>
-                <hr className="mt-4 me-4" />
-              </div>
               <div className="d-flex justify-content-end me-4">
-
                 <button type="submit" className="btn btn-primary">Guardar</button>
               </div>
             </form>

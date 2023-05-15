@@ -98,8 +98,6 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
         }
     };
 
-    console.log("desde seleccionVariasComunas", selectedComunas);
-
     useEffect(() => {
         onSelectedComunasChange(selectedComunas);
     }, [selectedComunas, onSelectedComunasChange]);
