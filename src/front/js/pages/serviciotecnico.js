@@ -18,9 +18,7 @@ export const ServicioTecnico = () => {
             <h1>Servicio Técnico</h1>
             <div className="justify-content-center d-flex">
                 <CardServiciosTecnicos />
-                <CardServiciosTecnicos />
-                <CardServiciosTecnicos />
-                <CardServiciosTecnicos />
+
             </div>
         </div>
     );

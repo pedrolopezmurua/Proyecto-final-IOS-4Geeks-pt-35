@@ -12,7 +12,7 @@ export const Productos = () => {
             <p>
                 <img className="m-5" style={{ width: "1113px", height: "561px", left: "151px", top: "193px" }} src={dispositivos} />
             </p>
-            <h1>Ventas</h1>
+            <h1>Productos</h1>
             <div className="justify-content-center d-flex">
                 <CardProductos />
 
