@@ -1,6 +1,7 @@
 import "../../styles/home.css";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from '../store/authContext'
+import { Link } from "react-router-dom";
 
 export const ListadoPublicaciones = () => {
     const { userId } = useContext(AuthContext);
@@ -48,6 +49,7 @@ export const ListadoPublicaciones = () => {
                         <th>Categoría</th>
                         <th>Cobertura</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,8 +61,12 @@ export const ListadoPublicaciones = () => {
                             <td>{Categoria(servicio.categoria_id)}</td>
                             <td>{servicio.cobertura}</td>
                             <td>{Estado(servicio.estado)}</td>
+                            <td><Link to={`/subir-imagenes/${servicio.id}`} className="btn btn-primary">
+                                Subir imágenes
+                            </Link></td>
                         </tr>
                     ))}
+
                 </tbody>
             </table>
 
