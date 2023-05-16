@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
     const RegionesYcomunas = {
@@ -88,12 +87,21 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
     };
 
     const handleAddComuna = () => {
-        if (selectedComunas && selectedRegion) {
-            setSelectedComunas((prevComunas) => [...prevComunas,
-            {
-                "region": selectedRegion,
-                "comuna": comuna
-            }]);
+        if (selectedComunas && selectedRegion && comuna) {
+            const existingRegion = selectedComunas.find(
+                (item) => item.region === selectedRegion
+            );
+            if (existingRegion) {
+                existingRegion.comunas.push(comuna);
+                setSelectedComunas([...selectedComunas]);
+            } else {
+                setSelectedComunas([...selectedComunas,
+                {
+                    region: region,
+                    comuna: [comuna]
+                },
+                ]);
+            }
             setComuna("");
         }
     };
@@ -109,10 +117,14 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                     <p className="form-label">Selecciona tu cobertura:</p>
                 </div>
                 <div className="row">
-
                     <div className="col-5" id="seleccionRegion" style={{ width: '300px' }} >
                         <label htmlFor="regiones">Región:</label>
-                        <select id="regiones" className="form-select mt-1" value={region} onChange={handleRegionChange}>
+                        <select
+                            id="regiones"
+                            className="form-select mt-1"
+                            value={region}
+                            onChange={handleRegionChange}
+                        >
                             <option value="">Seleccione una región</option>
                             {RegionesYcomunas.regiones.map((region, index) => (
                                 <option key={index} value={region.NombreRegion}>{region.NombreRegion}</option>
@@ -121,7 +133,12 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                     </div>
                     <div className="col-5" id="seleccionComuna" style={{ width: '300px' }} >
                         <label htmlFor="comunas">Comuna:</label>
-                        <select id="comunas" className="form-select mt-1" value={comuna} onChange={handleComunaChange}>
+                        <select
+                            id="comunas"
+                            className="form-select mt-1"
+                            value={comuna}
+                            onChange={handleComunaChange}
+                        >
                             <option value="">Seleccione una comuna</option>
                             {RegionesYcomunas.regiones.map((region) => {
                                 if (region.NombreRegion === selectedRegion) {
@@ -134,7 +151,13 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                         </select>
                     </div>
                     <div className="col-2 d-flex ">
-                        <button type="button" className="btn btn-primary btn-sm" onClick={handleAddComuna} style={{ width: "75%", fontSize: "75%" }}>Agregar comuna</button>
+                        <button
+                            type="button"
+                            className="btn btn-primary btn-sm"
+                            onClick={handleAddComuna}
+                            style={{ width: "75%", fontSize: "75%" }}
+                        >
+                            Agregar comuna</button>
                     </div>
                 </div>
                 <div>
@@ -142,7 +165,8 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                     <ul>
                         {selectedComunas.map((item, index) => (
 
-                            <li key={index}>{item.region}, comuna: {item.comuna}</li>
+                            <li key={index}>
+                                {item.region}, comuna: {item.comunas ? item.comunas.join(", ") : ''}</li>
                         ))}
                     </ul>
                 </div>
