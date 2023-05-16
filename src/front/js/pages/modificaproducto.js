@@ -14,14 +14,14 @@ export const ModificaProducto = () => {
 
     return (
         <div className="text-center">
-            <p>
+            {/*}    <p>
                 <img className="m-5" style={{ width: "1113px", height: "250px", left: "151px", top: "193px" }} src={banner} />
             </p>
             <h1>Modifica un producto</h1>
 
             {/*tabla*/}
 
-            <div className="d-flex justify-content-center p-5" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div className="d-flex justify-content-center p-5" style={{ maxWidth: '1500px', margin: '0 auto' }}>
                 <table className="table table-striped rounded p-5">
                     <thead>
                         <tr>
@@ -30,16 +30,28 @@ export const ModificaProducto = () => {
                             <th>ESTADO</th>
                             <th>VALOR</th>
                             <th>COBERTURA</th>
+                            <th>SUBIR FOTOGRAFIA</th>
                             <th>MODIFICAR</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>SERVICIO TECNICO</td>
+                            <td>REPARA TU PANTALLA EN LAS CONDES</td>
+                            <td>VIGENTE</td>
+                            <td>$80.000</td>
+                            <td>LAS CONDES, PROVIDENCIA, INDEPENDENCIA</td>
+                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
+                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
+                        </tr>
+
+                        <tr>
                             <td>...</td>
                             <td>...</td>
                             <td>...</td>
                             <td>...</td>
                             <td>...</td>
+                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
                             <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
                         </tr>
                         <tr>
@@ -49,13 +61,6 @@ export const ModificaProducto = () => {
                             <td>...</td>
                             <td>...</td>
                             <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                        </tr>
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
                             <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
                         </tr>
                         <tr>
@@ -64,6 +69,7 @@ export const ModificaProducto = () => {
                             <td>...</td>
                             <td>...</td>
                             <td>...</td>
+                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
                             <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
                         </tr>
                     </tbody>

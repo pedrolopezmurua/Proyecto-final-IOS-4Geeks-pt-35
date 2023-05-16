@@ -2,14 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import detalleVentas from "../../img/detalleVentas.png"
+import Carousel from 'react-bootstrap/Carousel';
 
 export const DetallesProducto = props => {
     const { store, actions } = useContext(Context);
     const { id } = useParams();
 
     const [detalleProducto, setDetalleProducto] = useState({});
-    const [imagen, setImagen] = useState("");
+    const [imagenes, setImagenes] = useState([]);
 
     useEffect(() => {
         fetch(process.env.BACKEND_URL + "/api/servicios/" + id)
@@ -19,10 +19,8 @@ export const DetallesProducto = props => {
     }, [id]);
 
     useEffect(() => {
-        const imagenServicio = Array.isArray(store.imagenes) && store.imagenes.find((img) => img.servicio_id === detalleProducto.id);
-        if (imagenServicio) {
-            setImagen(imagenServicio.secure_url);
-        }
+        const imagenesServicio = Array.isArray(store.imagenes) && store.imagenes.filter((img) => img.servicio_id === detalleProducto.id);
+        setImagenes(imagenesServicio);
     }, [store.imagenes, detalleProducto.id]);
 
     return (
@@ -41,13 +39,26 @@ export const DetallesProducto = props => {
                 {/* Derecha */}
                 <div className="col">
                     <div className="justify-content-center d-flex mt-5">
-                        <div className="text-center" style={{ height: "300px", width: "400px", overflow: "hidden" }}>
-                            {imagen && <img src={imagen} style={{ objectFit: "cover", height: "100%", width: "100%" }} alt="Detalle del producto" />}
+                        <div className="text-center" style={{ height: "400px", width: "400px", overflow: "hidden" }}>
+                            {imagenes.length > 0 && (
+                                <Carousel variant="dark">
+                                    {imagenes.map((imagen, index) => (
+                                        <Carousel.Item key={index}>
+                                            <img
+                                                className="mx-auto"
+                                                src={imagen.secure_url}
+                                                style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                                                alt={`Carousel${index + 1}`}
+                                            />
+                                        </Carousel.Item>
+                                    ))}
+                                </Carousel>
+                            )}
                         </div>
                     </div>
                     <div className="row p-4">
                         <div className="col-4">
-                            <h3 >Contacto</h3>
+                            <h3>Contacto</h3>
                         </div>
                         <div className="col">
                             <ul style={{ listStylePosition: "outside" }} >
@@ -70,6 +81,8 @@ export const DetallesProducto = props => {
                 <Link to="/productos">
                     <button type="button" className="btn btn-outline-dark mx-5">Atrás</button>
                 </Link>
+
+
             </div>
         </div>
     );
@@ -78,3 +91,4 @@ export const DetallesProducto = props => {
 DetallesProducto.propTypes = {
     match: PropTypes.object
 };
+
