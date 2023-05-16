@@ -23,6 +23,7 @@ import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
 import { ListadoPublicaciones } from "./pages/listado_publicaciones";
 import { SubirImagenes } from "./component/subirImagenes";
+import Error404 from "./pages/error404";
 
 //create your first component
 const Layout = () => {
@@ -55,7 +56,7 @@ const Layout = () => {
                             <Route element={<ListadoPublicaciones />} path="listado-publicaciones" />
                             <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
 
-                            <Route element={<h1>Not found!</h1>} />
+                            <Route element={<Error404 />} path="*" />
                         </Routes>
                         <Footer />
                     </ScrollToTop>
