@@ -8,14 +8,22 @@ export const DetallesProducto = props => {
     const { store, actions } = useContext(Context);
     const { id } = useParams();
 
-    const [detalleProducto, setDetalleProducto] = useState({})
+    const [detalleProducto, setDetalleProducto] = useState({});
+    const [imagen, setImagen] = useState("");
 
     useEffect(() => {
         fetch(process.env.BACKEND_URL + "/api/servicios/" + id)
             .then(response => response.json())
             .then(data => setDetalleProducto(data))
             .catch(error => console.log(error))
-    }, [id])
+    }, [id]);
+
+    useEffect(() => {
+        const imagenServicio = Array.isArray(store.imagenes) && store.imagenes.find((img) => img.servicio_id === detalleProducto.id);
+        if (imagenServicio) {
+            setImagen(imagenServicio.secure_url);
+        }
+    }, [store.imagenes, detalleProducto.id]);
 
     return (
         <div>
@@ -32,12 +40,14 @@ export const DetallesProducto = props => {
                 </div>
                 {/* Derecha */}
                 <div className="col">
-                    <div className="text-center mt-5">
-                        <img src={detalleVentas} style={{ height: "400px" }} />
+                    <div className="justify-content-center d-flex mt-5">
+                        <div className="text-center" style={{ height: "300px", width: "400px", overflow: "hidden" }}>
+                            {imagen && <img src={imagen} style={{ objectFit: "cover", height: "100%", width: "100%" }} alt="Detalle del producto" />}
+                        </div>
                     </div>
-                    <div className="row p-5">
+                    <div className="row p-4">
                         <div className="col-4">
-                            <h3 className="mx-5" style={{ marginTop: "25px" }}>Contacto</h3>
+                            <h3 >Contacto</h3>
                         </div>
                         <div className="col">
                             <ul style={{ listStylePosition: "outside" }} >
