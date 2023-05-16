@@ -92,14 +92,25 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                 (item) => item.region === selectedRegion
             );
             if (existingRegion) {
-                existingRegion.comunas.push(comuna);
-                setSelectedComunas([...selectedComunas]);
+                const updatedComunas = [...existingRegion.comunas, comuna]; // Agregar la comuna al array existente
+                const updatedRegion = {
+                    ...existingRegion,
+                    comunas: updatedComunas,
+                };
+                const updatedSelectedComunas = selectedComunas.map((item) => {
+                    if (item.region === selectedRegion) {
+                        return updatedRegion; // Reemplazar la región existente con la actualizada
+                    }
+                    return item;
+                });
+                setSelectedComunas(updatedSelectedComunas);
             } else {
-                setSelectedComunas([...selectedComunas,
-                {
-                    region: region,
-                    comuna: [comuna]
-                },
+                setSelectedComunas([
+                    ...selectedComunas,
+                    {
+                        region: selectedRegion,
+                        comunas: [comuna], // Crear un nuevo array de comunas con la comuna seleccionada
+                    },
                 ]);
             }
             setComuna("");
@@ -108,6 +119,7 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
 
     useEffect(() => {
         onSelectedComunasChange(selectedComunas);
+        console.log(selectedComunas)
     }, [selectedComunas, onSelectedComunasChange]);
 
     return (
@@ -164,9 +176,14 @@ export const SeleccionVariasComunas = ({ onSelectedComunasChange }) => {
                     <p className="form-label mt-3">Comunas seleccionadas:</p>
                     <ul>
                         {selectedComunas.map((item, index) => (
-
                             <li key={index}>
-                                {item.region}, comuna: {item.comunas ? item.comunas.join(", ") : ''}</li>
+                                {item.region}, comuna:{" "}
+                                {item.comunas && item.comunas.length > 0
+                                    ? item.comunas.length === 1
+                                        ? item.comunas[0]
+                                        : item.comunas.join(", ")
+                                    : ""}
+                            </li>
                         ))}
                     </ul>
                 </div>
