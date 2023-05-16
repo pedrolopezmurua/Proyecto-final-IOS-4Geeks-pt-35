@@ -46,8 +46,8 @@ export const Navbar = () => {
 				{isAuthenticated ? (
 					// Si el usuario está autenticado, muestra estos enlaces
 					<>
-						<span className="navbar-text mr-3">Bienvenido, {userName} - {userId} </span>
-						<Link className="btn btn-outline-info mx-2" to="/perfil">Perfil</Link>
+						<span className="navbar-text mr-3">Bienvenido, {userName} </span>
+						<Link className="btn btn-outline-info mx-2" to="/perfil">Panel Administración</Link>
 						<button className="btn btn-outline-info" onClick={handleLogout}>Cerrar sesión</button>
 					</>
 				) : (
