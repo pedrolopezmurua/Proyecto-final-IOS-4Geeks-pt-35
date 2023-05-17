@@ -1,4 +1,4 @@
-#commands.py
+# commands.py
 import click
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
 
@@ -74,13 +74,11 @@ def setup_commands(app):
 
         print("Todos los servicios de prueba creados")
 
-
-        @app.cli.command("insert-test-imagen-servicio")
-
-        @click.argument("count")
-        def insert_test_imagen_servicio(count):
-            with app.app_context():
-                print("Creando imagen_servicio de prueba")
+    @app.cli.command("insert-test-imagen-servicio")
+    @click.argument("count")
+    def insert_test_imagen_servicio(count):
+        with app.app_context():
+            print("Creando imagen_servicio de prueba")
 
             # Check if there are enough servicios in the database
             servicios = Servicio.query.all()

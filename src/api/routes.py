@@ -1,4 +1,5 @@
 """
+ /src/api/routes.py
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
@@ -7,6 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -89,6 +91,7 @@ def update_proveedor(id):
 def get_servicios():
     servicios = Servicio.query.all()
     return jsonify([servicio.serialize() for servicio in servicios])
+
 
 @api.route("/servicios/proveedor", methods=['GET'])
 def get_servicios_por_proveedor():
@@ -265,24 +268,6 @@ def login():
             "tiempo": expiracion.total_seconds(),
             "data": proveedor.serialize()
         }), 200
-
-
-@api.route('/sendPasswordResetEmail', methods=['POST'])
-def send_password_reset_email():
-    email = request.json['email']
-
-    # Aquí deberías agregar la lógica para generar un token de recuperación de contraseña y guardarlo en tu base de datos
-
-    msg = Message('Recuperación de contraseña',
-                  sender='tu_correo@gmail.com', recipients=[email])
-    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: https://www.example.com/reset-password?token=tu_token'
-
-    try:
-        mail.send(msg)
-        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
-    except Exception as e:
-        print(str(e))
-        return jsonify(message='Error al enviar el correo electrónico de recuperación de contraseña'), 500
 
 
 @api.route("/check", methods=["GET"])
