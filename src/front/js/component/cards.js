@@ -4,6 +4,7 @@ import ventas from ".//../../img/ventas.webp"
 import sTec from ".//../../img/sTec.jpg"
 import productoimg from ".//../../img/producto.jpeg"
 import { Context } from "../store/appContext";
+import noimage from ".//../../img/noimage.png"
 
 export const CardCategoriaSTec = () => {
     return (
@@ -50,8 +51,16 @@ export const CardProductos = () => {
                         <h5 className="card-title m-3">{producto.titulo}</h5>
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
-                                {/* Use the image's URL if available, otherwise use a placeholder */}
-                                <img src={imagen.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                {imagen ? (
+                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                ) : (
+                                    <img
+                                        className="mx-auto"
+                                        src={noimage}
+                                        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                                        alt=""
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="card-body">
@@ -70,7 +79,6 @@ export const CardProductos = () => {
 export const CardServiciosTecnicos = () => {
     const { store, actions } = useContext(Context);
 
-
     return (
         <div className="container-fluid row justify-content-center d-flex">
             {Array.isArray(store.servicioTecnico) && store.servicioTecnico.map((serviciotecnico, index) => {
@@ -82,13 +90,20 @@ export const CardServiciosTecnicos = () => {
                         <h5 className="card-title m-3">{serviciotecnico.titulo}</h5>
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
-                                {/* Use the image's URL if available, otherwise use a placeholder */}
-                                <img src={imagen.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                {imagen ? (
+                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                ) : (
+                                    <img
+                                        className="mx-auto"
+                                        src={noimage}
+                                        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                                        alt=""
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {serviciotecnico.precio}</p>
-
                             <Link to={"/serviciotecnico/detalle/" + serviciotecnico.id}>
                                 <button className="btn btn-dark mt-3" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
