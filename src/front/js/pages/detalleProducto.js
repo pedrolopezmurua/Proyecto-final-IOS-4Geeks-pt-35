@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Carousel from 'react-bootstrap/Carousel';
+import noimage from './/../../img/noimage.png'
 
 export const DetallesProducto = props => {
     const { store, actions } = useContext(Context);
@@ -40,9 +41,9 @@ export const DetallesProducto = props => {
                 <div className="col">
                     <div className="justify-content-center d-flex mt-5">
                         <div className="text-center" style={{ height: "400px", width: "400px", overflow: "hidden" }}>
-                            {imagenes.length > 0 && (
+                            {imagenes?.length > 0 ? (
                                 <Carousel variant="dark">
-                                    {imagenes.map((imagen, index) => (
+                                    {Array.isArray(imagenes) && imagenes.map((imagen, index) => (
                                         <Carousel.Item key={index}>
                                             <img
                                                 className="mx-auto"
@@ -53,7 +54,15 @@ export const DetallesProducto = props => {
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>
+                            ) : (
+                                <img
+                                    className="mx-auto"
+                                    src={noimage}
+                                    style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                                    alt=""
+                                />
                             )}
+
                         </div>
                     </div>
                     <div className="row p-4">
