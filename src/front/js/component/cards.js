@@ -51,7 +51,7 @@ export const CardProductos = () => {
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
                                 {/* Use the image's URL if available, otherwise use a placeholder */}
-                                <img src={imagen.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
                             </div>
                         </div>
                         <div className="card-body">
@@ -83,7 +83,7 @@ export const CardServiciosTecnicos = () => {
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
                                 {/* Use the image's URL if available, otherwise use a placeholder */}
-                                <img src={imagen.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
                             </div>
                         </div>
                         <div className="card-body">
