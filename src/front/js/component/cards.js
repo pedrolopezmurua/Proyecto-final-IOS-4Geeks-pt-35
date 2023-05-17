@@ -79,7 +79,6 @@ export const CardProductos = () => {
 export const CardServiciosTecnicos = () => {
     const { store, actions } = useContext(Context);
 
-
     return (
         <div className="container-fluid row justify-content-center d-flex">
             {Array.isArray(store.servicioTecnico) && store.servicioTecnico.map((serviciotecnico, index) => {
@@ -105,7 +104,6 @@ export const CardServiciosTecnicos = () => {
                         </div>
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {serviciotecnico.precio}</p>
-
                             <Link to={"/serviciotecnico/detalle/" + serviciotecnico.id}>
                                 <button className="btn btn-dark mt-3" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
