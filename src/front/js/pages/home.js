@@ -15,7 +15,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="text center">
+		<div className="text center" >
 			<div style={{ width: "800px", margin: "0 auto" }}>
 				<Carousel variant="dark">
 					<Carousel.Item>
@@ -26,8 +26,10 @@ export const Home = () => {
 							alt="Carousel1"
 						/>
 						<Carousel.Caption>
-							<h6>SERVICIO TÉCNICO EXPERTO PARA DISPOSITIVOS APPLE</h6>
-							<p>Reparación rápida para tus dispositivos.</p>
+							<Carousel.Caption>
+								<h6 className="p-1" style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>SERVICIO TÉCNICO EXPERTO PARA DISPOSITIVOS APPLE</h6>
+								<p style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>Reparación rápida para tus dispositivos.</p>
+							</Carousel.Caption>
 						</Carousel.Caption>
 					</Carousel.Item>
 					<Carousel.Item>
@@ -38,8 +40,8 @@ export const Home = () => {
 							alt="Carousel2"
 						/>
 						<Carousel.Caption>
-							<h6>ENCUENTRA EL DISPOSITIVO APPLE PERFECTO</h6>
-							<p>Ofertas irresistibles en productos Apple</p>
+							<h6 className="p-1" style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>ENCUENTRA EL DISPOSITIVO APPLE PERFECTO</h6>
+							<p style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>Ofertas irresistibles en productos Apple</p>
 						</Carousel.Caption>
 					</Carousel.Item>
 					<Carousel.Item>
@@ -50,8 +52,8 @@ export const Home = () => {
 							alt="Carousel3"
 						/>
 						<Carousel.Caption>
-							<h6>SOLUCIONES TÉCNICAS PARA TUS DISPOSITIVOS APPLE</h6>
-							<p>Expertos en servicio técnico Apple.</p>
+							<h6 className="p-1" style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>SOLUCIONES TÉCNICAS PARA TUS DISPOSITIVOS APPLE</h6>
+							<p style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>Expertos en servicio técnico Apple.</p>
 						</Carousel.Caption>
 					</Carousel.Item>
 					<Carousel.Item>
@@ -62,8 +64,8 @@ export const Home = () => {
 							alt="Carousel4"
 						/>
 						<Carousel.Caption>
-							<h6> AMPLIA SELECCIÓN DE PRODUCTOS APPLE</h6>
-							<p>Compra y repara: todo en un solo lugar</p>
+							<h6 className="p-1" style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}> AMPLIA SELECCIÓN DE PRODUCTOS APPLE</h6>
+							<p style={{ fontSize: "14px", color: "#ffffff", background: "rgba(0.3, 0.3, 0.3, 0.3)" }}>Compra y repara: todo en un solo lugar</p>
 						</Carousel.Caption>
 					</Carousel.Item>
 				</Carousel>
@@ -78,6 +80,6 @@ export const Home = () => {
 				<CardCategoriaProductos />
 				<CardCategoriaSTec />
 			</div>
-		</div>
+		</div >
 	);
 };
