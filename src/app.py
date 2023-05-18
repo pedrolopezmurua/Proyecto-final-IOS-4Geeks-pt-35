@@ -1,5 +1,5 @@
 """
-# app.py
+# /src/app.py
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
@@ -10,20 +10,29 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models import db
-from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-from flask_mail import Mail
 from flask_jwt_extended import JWTManager
-
+from flask_mail import Mail
+from api.routes import api
 
 # from models import Person
-
 ENV = os.getenv("FLASK_ENV")
+
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+app.config['MAIL_SERVER'] = 'mail.broadcast.cl'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = '4geek@broadcast.cl'
+app.config['MAIL_PASSWORD'] = '.Jorge1000.'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app)
+mail.init_app(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -49,7 +58,6 @@ setup_commands(app)
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
-
 
 jwt = JWTManager(app)
 
@@ -80,15 +88,6 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
-
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'tu_correo@gmail.com'
-app.config['MAIL_PASSWORD'] = 'tu_contraseña'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-
-mail = Mail(app)
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

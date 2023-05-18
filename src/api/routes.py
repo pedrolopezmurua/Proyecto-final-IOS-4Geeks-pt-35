@@ -1,12 +1,19 @@
 """
+ /src/api/routes.py
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+
+import re
+import base64
+from urllib.parse import quote
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
 from api.utils import generate_sitemap, APIException
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import SQLAlchemyError
 import datetime
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_mail import Message
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -31,6 +38,40 @@ def get_proveedores():
 def get_proveedor(id):
     proveedor = Proveedor.query.get_or_404(id)
     return jsonify(proveedor.serialize())
+
+
+@api.route("/proveedores/<string:correo>", methods=["GET"])
+def validar_correo_proveedor(correo):
+    print("imprime")
+    print(correo)
+    proveedor = Proveedor.query.filter_by(correo=correo).first()
+
+    if proveedor:
+        return jsonify({"existe": True})
+    else:
+        return jsonify({"existe": False})
+
+
+@api.route("/proveedores/update-password", methods=["PUT"])
+def actualizar_contrasena():
+    data = request.get_json()
+    correo = data.get("correo")
+    nueva_contrasena = data.get("contrasena")
+
+    # Validación de los datos de entrada
+    if not correo or not nueva_contrasena:
+        return jsonify({"mensaje": "Ambos 'correo' y 'contrasena' son requeridos."}), 400
+
+    proveedor = Proveedor.query.filter_by(correo=correo).first()
+    if not proveedor:
+        return jsonify({"mensaje": "No se encontró un proveedor con el correo proporcionado."}), 404
+
+    # Es posible añadir una función hash aquí por razones de seguridad
+    proveedor.contrasena = nueva_contrasena
+
+    db.session.commit()
+
+    return jsonify({"mensaje": "Contraseña actualizada con éxito."}), 200
 
 
 @api.route('/proveedor', methods=['POST'])
@@ -89,6 +130,7 @@ def update_proveedor(id):
 def get_servicios():
     servicios = Servicio.query.all()
     return jsonify([servicio.serialize() for servicio in servicios])
+
 
 @api.route("/servicios/proveedor", methods=['GET'])
 def get_servicios_por_proveedor():
@@ -267,24 +309,6 @@ def login():
         }), 200
 
 
-@api.route('/sendPasswordResetEmail', methods=['POST'])
-def send_password_reset_email():
-    email = request.json['email']
-
-    # Aquí deberías agregar la lógica para generar un token de recuperación de contraseña y guardarlo en tu base de datos
-
-    msg = Message('Recuperación de contraseña',
-                  sender='tu_correo@gmail.com', recipients=[email])
-    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: https://www.example.com/reset-password?token=tu_token'
-
-    try:
-        mail.send(msg)
-        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
-    except Exception as e:
-        print(str(e))
-        return jsonify(message='Error al enviar el correo electrónico de recuperación de contraseña'), 500
-
-
 @api.route("/check", methods=["GET"])
 @jwt_required()
 def check_user():
@@ -293,3 +317,52 @@ def check_user():
         "logeado": True,
         "identidad": identidad
     })
+
+
+@api.route('/sendResetEmail', methods=['POST'])
+def send_reset_email():
+    from app import mail
+
+    email = request.json.get('email')
+
+    if not email or not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return jsonify(message='Correo electrónico no válido'), 400
+
+    # Check if the email exists in the provider table
+    try:
+        provider = Proveedor.query.filter_by(correo=email).first()
+    except SQLAlchemyError as e:
+        return jsonify(message='Error al buscar el correo electrónico en la base de datos'), 500
+
+    if not provider:
+        return jsonify(message='El correo electrónico no se encuentra en nuestra base de datos'), 400
+
+    encoded_email = base64.b64encode(email.encode()).decode()
+    msg = Message('Recuperación de contraseña Apple Geeks',
+                  sender='info@applegeeks.com', recipients=[email])
+    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: http://localhost:3000/reset-password/' + \
+        encoded_email
+
+    try:
+        mail.send(msg)
+        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify(message=str(e)), 500
+
+
+@api.route('/update-password', methods=['PUT'])
+def update_password():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    # Aquí iría tu lógica para actualizar la contraseña en la tabla "proveedor"
+    # Puedes utilizar una base de datos o cualquier otro mecanismo de almacenamiento de datos
+
+    # Ejemplo: Simplemente imprimimos los datos recibidos
+    print('Correo:', email)
+    print('Nueva contraseña:', password)
+
+    # Enviar una respuesta exitosa
+    return jsonify({'updated': True})
