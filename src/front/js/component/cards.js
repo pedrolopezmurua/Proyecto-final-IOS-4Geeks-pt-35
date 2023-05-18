@@ -9,9 +9,8 @@ import noimage from ".//../../img/noimage.png"
 export const CardCategoriaSTec = () => {
     return (
         <div className="card m-4" style={{ width: "18rem" }}>
-            <img src={sTec} className="card-img-top" alt="..." style={{ height: "192px" }} />
-
-            <div className="card-body">
+            <img src={sTec} className="card-img-top" alt="..." style={{ height: "192px", width: "auto" }} />
+            <div className="card-body, text-center p-2">
                 <h5 className="card-title">Servicio Técnico</h5>
                 <Link to="/serviciotecnico">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Entrar</button>
@@ -24,8 +23,8 @@ export const CardCategoriaSTec = () => {
 export const CardCategoriaProductos = () => {
     return (
         <div className="card m-4" style={{ width: "18rem" }}>
-            <img src={ventas} className="card-img-top" alt="..." style={{ height: "192px" }} />
-            <div className="card-body">
+            <img src={ventas} className="card-img-top" alt="..." style={{ height: "192px", width: "auto" }} />
+            <div className="card-body text-center">
                 <h5 className="card-title">Productos</h5>
                 <Link to="/productos">
                     <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Entrar</button>

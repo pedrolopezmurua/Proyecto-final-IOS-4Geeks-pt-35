@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Carousel from 'react-bootstrap/Carousel';
 import noimage from './/../../img/noimage.png'
+import atras from "../../img/atras.png";
 
 export const DetallesServicioTec = props => {
     const { store, actions } = useContext(Context);
@@ -85,11 +86,12 @@ export const DetallesServicioTec = props => {
                     </div>
                 </div>
             </div>
-            {/* Abajo */}
-            <div className="mx-5">
-                <Link to="/serviciotecnico">
-                    <button type="button" className="btn btn-outline-dark mx-5">Atrás</button>
-                </Link>
+            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/serviciotecnico/">
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
             </div>
         </div >
     );

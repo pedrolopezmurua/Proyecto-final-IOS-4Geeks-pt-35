@@ -6,6 +6,8 @@ import "../../styles/home.css";
 import { CardCategoriaSTec } from "../component/cards";
 import { CardCategoriaVentas } from "../component/cards";
 import { CardServiciosTecnicos } from "../component/cards";
+import { Link } from "react-router-dom";
+import atras from "../../img/atras.png";
 
 export const ServicioTecnico = () => {
     const { store, actions } = useContext(Context);
@@ -21,6 +23,13 @@ export const ServicioTecnico = () => {
             <div className="justify-content-center d-flex">
                 <CardServiciosTecnicos />
 
+            </div>
+            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/">
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
             </div>
         </div>
     );
