@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import logo from "../../img/logo.png";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { WhatsApp } from './whatsapp';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const popoverStyle = {
 	maxHeight: '400px',

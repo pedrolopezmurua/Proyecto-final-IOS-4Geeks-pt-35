@@ -3,6 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
+import login from "../../img/login.png";
 
 function Login() {
     const { logIn } = useContext(AuthContext);
@@ -63,7 +64,7 @@ function Login() {
         <div className="container-fluid h-100">
             <div className="row h-100" style={{ marginTop: '75px' }}>
                 <div className="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="https://via.placeholder.com/800x600" alt="Imagen" style={{ width: '800px', height: '600px' }} />
+                    <img src={login} alt="Imagen" style={{ width: '800px', height: '600px' }} />
                 </div>
                 <div className="col-md-6 my-auto">
                     <h4 className="text-center mb-4">¡Bienvenido Proveedor!</h4>
