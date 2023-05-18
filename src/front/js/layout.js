@@ -16,7 +16,8 @@ import { ModificaProducto } from './pages/modificaproducto';
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import Footer from './component/footer';
+
 import { SeleccionVariasComunas } from "./component/seleccionVariasComunas";
 import { CrearPublicacion } from "./pages/crear_publicacion";
 import { Perfil } from "./pages/perfil";
