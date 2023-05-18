@@ -1,4 +1,5 @@
-# models.py
+# /src/api/models.py
+
 from sqlalchemy import ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
