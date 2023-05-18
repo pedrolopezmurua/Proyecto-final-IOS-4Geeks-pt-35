@@ -3,7 +3,6 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-import re
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -14,7 +13,7 @@ from api.models import db
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
-from flask_mail import Mail, Message
+from flask_mail import Mail
 from api.routes import api
 
 # from models import Person
@@ -33,6 +32,7 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
 mail = Mail(app)
+mail.init_app(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -87,25 +87,6 @@ def serve_any_other_file(path):
     response = send_from_directory(static_file_dir, path)
     response.cache_control.max_age = 0  # avoid cache memory
     return response
-
-
-@app.route('/api/sendResetEmail', methods=['POST'])
-def send_reset_email():
-    email = request.json.get('email')
-
-    if not email or not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-        return jsonify(message='Correo electrónico no válido'), 400
-
-    msg = Message('Recuperación de contraseña Apple Geeks',
-                  sender='info@applegeeks.com', recipients=[email])
-    msg.body = 'Aquí está tu enlace para restablecer tu contraseña: http://localhost:3000/reset-password?mail=' + email
-
-    try:
-        mail.send(msg)
-        return jsonify(message='Correo electrónico de recuperación de contraseña enviado'), 200
-    except Exception as e:
-        print(str(e))
-        return jsonify(message=str(e)), 500
 
 
 # this only runs if `$ python src/main.py` is executed

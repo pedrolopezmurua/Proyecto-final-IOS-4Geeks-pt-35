@@ -11,6 +11,7 @@ import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { Demo } from "./pages/demo";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
+import ResetPassword from "./pages/resetpassword";
 import CrearProveedor from './pages/crearproveedor';
 import { ModificaProducto } from './pages/modificaproducto';
 import injectContext from "./store/appContext";
@@ -44,7 +45,8 @@ const Layout = () => {
                         <Routes>
                             <Route element={<Home />} path="/" />
                             <Route element={<Login />} path="/login" />
-                            <Route element={<RecuperaPassword />} path="/recuperapassword" />
+                            <Route element={<RecuperaPassword />} path="/recupera-password" />
+                            <Route element={<ResetPassword />} path="/reset-password/:email" />
                             <Route element={<CrearProveedor />} path="/crearproveedor" />
                             <Route element={<Productos />} path="/productos" />
                             <Route element={<ServicioTecnico />} path="/serviciotecnico" />
