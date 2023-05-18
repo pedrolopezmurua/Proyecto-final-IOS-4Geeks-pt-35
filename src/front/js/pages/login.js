@@ -3,6 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
+import login from "../../img/login.png";
 
 function Login() {
     const { logIn } = useContext(AuthContext);
@@ -63,7 +64,7 @@ function Login() {
         <div className="container-fluid h-100">
             <div className="row h-100" style={{ marginTop: '75px' }}>
                 <div className="col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="https://via.placeholder.com/800x600" alt="Imagen" style={{ width: '800px', height: '600px' }} />
+                    <img src={login} alt="Imagen" style={{ width: '800px', height: '600px' }} />
                 </div>
                 <div className="col-md-6 my-auto">
                     <h4 className="text-center mb-4">¡Bienvenido Proveedor!</h4>
@@ -80,7 +81,7 @@ function Login() {
                         <div className="mb-3 text-center">
                             <button type="button" className="btn btn-primary me-2" onClick={handleLogin}>Ingresar</button>
                             <Link to="/" className="btn btn-secondary me-2">Cancelar</Link>
-                            <Link to="/recuperapassword" className="btn btn-link">¿Olvidaste tu contraseña?</Link>
+                            <Link to="/recupera-password" className="btn btn-link">¿Olvidaste tu contraseña?</Link>
                         </div>
                     </form>
                 </div>
