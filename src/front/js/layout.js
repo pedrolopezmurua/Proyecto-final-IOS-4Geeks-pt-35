@@ -28,6 +28,7 @@ import { SubirImagenes } from "./component/subirImagenes";
 import Error404 from "./pages/error404";
 import FaqPage from "./pages/faqpage";
 import DevolucionesPage from "./pages/devolucionespage";
+import { Prueba } from "./pages/prueba";
 
 //create your first component
 const Layout = () => {
@@ -54,7 +55,6 @@ const Layout = () => {
                             <Route element={<Demo />} path="/demo" />
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
-                            <Route element={<SeleccionVariasComunas />} path="/prueba" />
                             <Route element={<CrearPublicacion />} path="/crear-publicacion" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
                             <Route element={<Perfil />} path="perfil" />
@@ -62,6 +62,7 @@ const Layout = () => {
                             <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
                             <Route element={<FaqPage />} path="/faqpage" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
+                            <Route element={<Prueba />} path="/prueba" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
                         <Footer />

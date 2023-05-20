@@ -2,13 +2,13 @@ import React, { useContext, useState, useRef } from "react";
 import "../../styles/home.css";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { useNavigate } from "react-router-dom";
 
 export const CrearPublicacion = () => {
 
   const { userId } = useContext(AuthContext);
-  const MySwal = withReactContent(Swal)
+  const formRef = useRef(null);
+  let navigate = useNavigate();
 
   const [selectedComunas, setSelectedComunas] = useState([]);
   const handleSelectedComunasChange = (comunas) => {
@@ -48,8 +48,10 @@ export const CrearPublicacion = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
-        alert("Publicación creada con éxito")
+        console.log(data);
+        alert("Publicación creada con éxito");
+        formRef.current.reset();
+        navigate("/perfil")
       })
       .catch((error) => {
         console.error(error);
@@ -71,7 +73,7 @@ export const CrearPublicacion = () => {
             </div>
           </div>
           <div className="col-8" id="opciones-formulario">
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div className="form-group my-3" id="seleccion-categoria">
                 <label htmlFor="categoría" className="form-label">Categoría</label>
                 <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría">
