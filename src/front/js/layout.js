@@ -58,7 +58,7 @@ const Layout = () => {
                             <Route element={<CrearPublicacion />} path="/crear-publicacion" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
                             <Route element={<Perfil />} path="perfil" />
-                            <Route element={<ModificaProducto />} path="listado-publicaciones" />
+                            <Route element={<ModificaProducto />} path="publicaciones" />
                             <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
                             <Route element={<FaqPage />} path="/faqpage" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />

@@ -36,18 +36,6 @@ export const ModificaProducto = () => {
         if (categoria_id == 2) return "Servicio Técnico"
     }
 
-    // const Cobertura = () => {
-    //     return servicios ? (
-    //         servicios.map((servicio, index) => {
-    //             Array.isArray(servicio.cobertura) && servicio.cobertura.map((item, index) => {
-    //                 const region = item.region;
-    //                 const comunas = item.comuna;
-    //                 return <span key={index}>{`${region}: ${comunas}`}</span>
-    //             })
-    //         })
-    //     ) : <span>No hay datos de cobertura</span>
-    // }
-
     const Cobertura = (servicio) => {
         const coberturaData = JSON.parse(servicio.cobertura);
         const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {

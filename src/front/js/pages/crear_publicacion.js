@@ -1,12 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useRef } from "react";
 import "../../styles/home.css";
-import { SubirImagenes } from "../component/subirImagenes";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const CrearPublicacion = () => {
 
-  const { userId } = useContext(AuthContext)
+  const { userId } = useContext(AuthContext);
+  const MySwal = withReactContent(Swal)
 
   const [selectedComunas, setSelectedComunas] = useState([]);
   const handleSelectedComunasChange = (comunas) => {
@@ -46,7 +48,8 @@ export const CrearPublicacion = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data)
+        alert("Publicación creada con éxito")
       })
       .catch((error) => {
         console.error(error);
@@ -93,7 +96,9 @@ export const CrearPublicacion = () => {
                 <SeleccionVariasComunas onSelectedComunasChange={handleSelectedComunasChange} />
               </div>
               <div className="d-flex justify-content-end me-4">
+
                 <button type="submit" className="btn btn-primary">Guardar</button>
+
               </div>
             </form>
           </div>
