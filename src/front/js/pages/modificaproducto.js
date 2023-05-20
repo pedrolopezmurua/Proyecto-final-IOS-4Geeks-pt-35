@@ -1,25 +1,61 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
-import { CardCategoriaSTec } from "../component/cards";
-import { CardCategoriaProductos } from "../component/cards";
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from '../store/authContext'
+import { Link } from "react-router-dom";
 import atras from "../../img/atras.png";
-import banner from "../../img/banner.png";
-
 
 export const ModificaProducto = () => {
-    const { store, actions } = useContext(Context);
+    const { userId } = useContext(AuthContext);
+    const [servicios, setServicios] = useState([]);
+
+    useEffect(() => {
+        const proveedor_id = userId;
+        const url = `http://127.0.0.1:3001/api/servicios/proveedor?proveedor_id=${proveedor_id}`;
+        const opts = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+        fetch(url, opts)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setServicios(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, [userId])
+
+    const Estado = estado => {
+        return estado ? "Vigente" : "No vigente";
+    };
+    const Categoria = categoria_id => {
+        if (categoria_id == 1) return "Ventas"
+        if (categoria_id == 2) return "Servicio Técnico"
+    }
+
+    const Cobertura = (servicio) => {
+        const coberturaData = JSON.parse(servicio.cobertura);
+        const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {
+            const region = item.region;
+            const comunas = item.comunas.join(", ");
+
+            return <span key={index}>{`${region}: ${comunas}. `}</span>;
+        });
+
+        return (
+            <span>
+                {cobertura ? cobertura : <span>No hay datos de cobertura</span>}
+            </span>
+        );
+    };
 
     return (
         <div className="text-center">
-            {/*}    <p>
-                <img className="m-5" style={{ width: "1113px", height: "250px", left: "151px", top: "193px" }} src={banner} />
-            </p>
-            <h1>Modifica un producto</h1>
 
-            {/*tabla*/}
+            <h1>Modifica un producto</h1>
 
             <div className="d-flex justify-content-center p-5" style={{ maxWidth: '1500px', margin: '0 auto' }}>
                 <table className="table table-striped rounded p-5">
@@ -35,43 +71,31 @@ export const ModificaProducto = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>SERVICIO TECNICO</td>
-                            <td>REPARA TU PANTALLA EN LAS CONDES</td>
-                            <td>VIGENTE</td>
-                            <td>$80.000</td>
-                            <td>LAS CONDES, PROVIDENCIA, INDEPENDENCIA</td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                        </tr>
-
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                        </tr>
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                        </tr>
-                        <tr>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td>...</td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                            <td><button type="button" className="btn btn-success" data-bs-dismiss="modal">Modificar</button></td>
-                        </tr>
+                        {servicios.length > 0 ? (
+                            servicios.map((servicio, index) => (
+                                <tr key={index}>
+                                    <td>{Categoria(servicio.categoria_id)}</td>
+                                    <td>{servicio.titulo}</td>
+                                    <td>{Estado(servicio.estado)}</td>
+                                    <td>{servicio.precio}</td>
+                                    <td>{Cobertura(servicio)}</td>
+                                    <td>
+                                        <Link to={`/subir-imagenes/${servicio.id}`} className="btn btn-success">
+                                            Modificar
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">
+                                            Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="7">No hay servicios disponibles</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
