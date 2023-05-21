@@ -2,37 +2,24 @@ import React from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 export const Prueba = () => {
-    // const MySwal = withReactContent(Swal)
-    // const showSwalWithLink = () => {
-    //     MySwal.fire({
-    //         html: (
-    //             <HistoryRouter history={browserHistory}>
-    //                 <Link to={`${rootPath}/about`} onClick={() => Swal.close()}>
-    //                     Navigate to /about
-    //                 </Link>
-    //             </HistoryRouter>
-    //         ),
-    //     });
-    // };
+    const MySwal = withReactContent(Swal);
 
-    // return (
-    //     <div>
-    //         <h1>Home</h1>
-    //         <button onClick={showSwalWithLink}>Show SweetAlert2 modal with Link inside</button>
-    //     </div>
-    // );
-    let navigate = useNavigate();
-    function handleClick() {
-        navigate("/");
+    useEffect(() => {
+        mostrarAlerta()
+    }, [])
+    const mostrarAlerta = () => {
+        MySwal.fire(
+            'Éxito',
+            'La publicación se creó correctamente',
+            'success'
+        )
     }
+
     return (
         <div>
-            <button onClick={handleClick}>go home</button>
+            <h1>Hello world</h1>
         </div>
-    );
-};
-
+    )
+}

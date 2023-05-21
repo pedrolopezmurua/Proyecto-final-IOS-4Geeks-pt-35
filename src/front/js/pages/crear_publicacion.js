@@ -1,14 +1,16 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/home.css";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const CrearPublicacion = () => {
 
   const { userId } = useContext(AuthContext);
-  const formRef = useRef(null);
   let navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const [selectedComunas, setSelectedComunas] = useState([]);
   const handleSelectedComunasChange = (comunas) => {
@@ -49,8 +51,11 @@ export const CrearPublicacion = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        alert("Publicación creada con éxito");
-        formRef.current.reset();
+        MySwal.fire(
+          'Éxito',
+          'La publicación se creó correctamente',
+          'success'
+        )
         navigate("/perfil")
       })
       .catch((error) => {
@@ -73,7 +78,7 @@ export const CrearPublicacion = () => {
             </div>
           </div>
           <div className="col-8" id="opciones-formulario">
-            <form ref={formRef} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="form-group my-3" id="seleccion-categoria">
                 <label htmlFor="categoría" className="form-label">Categoría</label>
                 <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría">
@@ -95,6 +100,7 @@ export const CrearPublicacion = () => {
                 <input type="text" className="form-control" id="precio" placeholder="$40.000.-" />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
+                <p className="form-label">Selecciona tu cobertura:</p>
                 <SeleccionVariasComunas onSelectedComunasChange={handleSelectedComunasChange} />
               </div>
               <div className="d-flex justify-content-end me-4">

@@ -1,12 +1,14 @@
+//./pages/ver_publicaciones.js
 import "../../styles/home.css";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from '../store/authContext'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import atras from "../../img/atras.png";
 
-export const ModificaProducto = () => {
+export const VerPublicaciones = () => {
     const { userId } = useContext(AuthContext);
     const [servicios, setServicios] = useState([]);
+    let navigate = useNavigate();
 
     useEffect(() => {
         const proveedor_id = userId;
@@ -52,6 +54,29 @@ export const ModificaProducto = () => {
         );
     };
 
+    const eliminarServicio = (id) => {
+        const url = `http://127.0.0.1:3001/api/servicios/${id}`;
+        const opts = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+
+        fetch(url, opts)
+            .then(response => {
+                if (response.status === 204) {
+                    console.log("Servicio eliminado con éxito");
+                    navigate("../publicaciones");
+                } else {
+                    console.log("Error al eliminar el servicio");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     return (
         <div className="text-center">
 
@@ -66,8 +91,9 @@ export const ModificaProducto = () => {
                             <th>ESTADO</th>
                             <th>VALOR</th>
                             <th>COBERTURA</th>
-                            <th>SUBIR FOTOGRAFIA</th>
+                            <th>IMAGENES</th>
                             <th>MODIFICAR</th>
+                            <th>ELIMINAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,14 +107,17 @@ export const ModificaProducto = () => {
                                     <td>{Cobertura(servicio)}</td>
                                     <td>
                                         <Link to={`/subir-imagenes/${servicio.id}`} className="btn btn-success">
+                                            Ver o Modificar
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={`/modificar-publicacion/${servicio.id}`} className="btn btn-success">
                                             Modificar
                                         </Link>
                                     </td>
                                     <td>
-                                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">
-                                            Modificar
-                                        </button>
-                                    </td>
+                                        <button onClick={() => eliminarServicio(servicio.id)} className="btn btn-success">Eliminar</button>                                    </td>
+
                                 </tr>
                             ))
                         ) : (
