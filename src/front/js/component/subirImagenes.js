@@ -41,10 +41,6 @@ export const SubirImagenes = () => {
         fetchImages();
     }, []);
 
-    useEffect(() => {
-        console.log("console.log de images", images)
-    }, [images])
-
     const deleteImage = async (id) => {
         try {
             const url = `http://127.0.0.1:3001/api/imagenes_servicio/${id}`;
