@@ -44,7 +44,7 @@ export const VerPublicaciones = () => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return <span key={index}>{`${region}: ${comunas}. `}</span>;
+            return <div><span key={index}>{`${region}: ${comunas}. `}</span></div>;
         });
 
         return (
@@ -54,7 +54,7 @@ export const VerPublicaciones = () => {
         );
     };
 
-    
+
 
     return (
         <div className="text-center">
@@ -70,9 +70,7 @@ export const VerPublicaciones = () => {
                             <th>ESTADO</th>
                             <th>VALOR</th>
                             <th>COBERTURA</th>
-                            <th>IMAGENES</th>
-                            <th>MODIFICAR</th>
-                            <th>ELIMINAR</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,19 +80,17 @@ export const VerPublicaciones = () => {
                                     <td>{Categoria(servicio.categoria_id)}</td>
                                     <td>{servicio.titulo}</td>
                                     <td>{Estado(servicio.estado)}</td>
-                                    <td>{servicio.precio}</td>
+                                    <td>{`$${servicio.precio.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}</td>
                                     <td>{Cobertura(servicio)}</td>
                                     <td>
-                                        <Link to={`/subir-imagenes/${servicio.id}`} className="btn btn-success">
-                                            Ver o Modificar
+                                        <Link to={`/subir-imagenes/${servicio.id}`} >
+                                            <span className="badge bg-success text-wrap me-1" style={{ width: "6rem" }}> Ver o Modificar Imágenes</span>
+                                        </Link>
+                                        <Link to={`/modificar-publicacion/${servicio.id}`} >
+                                            <span className="badge bg-success text-wrap" style={{ width: "6rem" }}> Modificar o Eliminar Publicación</span>
                                         </Link>
                                     </td>
-                                    <td>
-                                        <Link to={`/modificar-publicacion/${servicio.id}`} className="btn btn-success">
-                                            Modificar
-                                        </Link>
-                                    </td>
-                                    
+
 
                                 </tr>
                             ))
