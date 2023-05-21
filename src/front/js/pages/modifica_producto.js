@@ -124,6 +124,34 @@ export const ModificaProducto = () => {
             return <p>No hay datos de cobertura disponibles.</p>;
         }
     };
+    const eliminarServicio = (servicio_id) => {
+        const url = `http://127.0.0.1:3001/api/servicios/${servicio_id}`;
+        const opts = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+
+        fetch(url, opts)
+            .then(response => {
+                if (response.status === 204) {
+                    console.log("Servicio eliminado con éxito");
+                    MySwal.fire(
+                        'Éxito',
+                        'La publicación se eliminó correctamente',
+                        'success'
+                    )
+                    navigate("/perfil")
+                    navigate("../publicaciones");
+                } else {
+                    console.log("Error al eliminar el servicio");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
 
     return (
@@ -170,6 +198,7 @@ export const ModificaProducto = () => {
                             <div className="d-flex justify-content-end me-4">
 
                                 <button type="submit" className="btn btn-primary">Guardar</button>
+                                <button type="button" onClick={() => eliminarServicio(servicio_id)} className="btn btn-danger">Eliminar</button>
 
                             </div>
                         </form>

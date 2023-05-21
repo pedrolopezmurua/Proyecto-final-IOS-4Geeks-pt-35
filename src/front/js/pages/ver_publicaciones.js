@@ -54,28 +54,7 @@ export const VerPublicaciones = () => {
         );
     };
 
-    const eliminarServicio = (id) => {
-        const url = `http://127.0.0.1:3001/api/servicios/${id}`;
-        const opts = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
-
-        fetch(url, opts)
-            .then(response => {
-                if (response.status === 204) {
-                    console.log("Servicio eliminado con éxito");
-                    navigate("../publicaciones");
-                } else {
-                    console.log("Error al eliminar el servicio");
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    };
+    
 
     return (
         <div className="text-center">
@@ -115,8 +94,7 @@ export const VerPublicaciones = () => {
                                             Modificar
                                         </Link>
                                     </td>
-                                    <td>
-                                        <button onClick={() => eliminarServicio(servicio.id)} className="btn btn-success">Eliminar</button>                                    </td>
+                                    
 
                                 </tr>
                             ))
