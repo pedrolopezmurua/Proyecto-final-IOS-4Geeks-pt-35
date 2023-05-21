@@ -1,12 +1,14 @@
+//./pages/ver_publicaciones.js
 import "../../styles/home.css";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from '../store/authContext'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import atras from "../../img/atras.png";
 
-export const ModificaProducto = () => {
+export const VerPublicaciones = () => {
     const { userId } = useContext(AuthContext);
     const [servicios, setServicios] = useState([]);
+    let navigate = useNavigate();
 
     useEffect(() => {
         const proveedor_id = userId;
@@ -42,7 +44,7 @@ export const ModificaProducto = () => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return <span key={index}>{`${region}: ${comunas}. `}</span>;
+            return <div><span key={index}>{`${region}: ${comunas}. `}</span></div>;
         });
 
         return (
@@ -51,6 +53,8 @@ export const ModificaProducto = () => {
             </span>
         );
     };
+
+
 
     return (
         <div className="text-center">
@@ -66,8 +70,7 @@ export const ModificaProducto = () => {
                             <th>ESTADO</th>
                             <th>VALOR</th>
                             <th>COBERTURA</th>
-                            <th>SUBIR FOTOGRAFIA</th>
-                            <th>MODIFICAR</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,18 +80,18 @@ export const ModificaProducto = () => {
                                     <td>{Categoria(servicio.categoria_id)}</td>
                                     <td>{servicio.titulo}</td>
                                     <td>{Estado(servicio.estado)}</td>
-                                    <td>{servicio.precio}</td>
+                                    <td>{`$${servicio.precio.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}</td>
                                     <td>{Cobertura(servicio)}</td>
                                     <td>
-                                        <Link to={`/subir-imagenes/${servicio.id}`} className="btn btn-success">
-                                            Modificar
+                                        <Link to={`/subir-imagenes/${servicio.id}`} >
+                                            <span className="badge bg-success text-wrap me-1" style={{ width: "6rem" }}> Ver o Modificar Imágenes</span>
+                                        </Link>
+                                        <Link to={`/modificar-publicacion/${servicio.id}`} >
+                                            <span className="badge bg-success text-wrap" style={{ width: "6rem" }}> Modificar o Eliminar Publicación</span>
                                         </Link>
                                     </td>
-                                    <td>
-                                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">
-                                            Modificar
-                                        </button>
-                                    </td>
+
+
                                 </tr>
                             ))
                         ) : (
