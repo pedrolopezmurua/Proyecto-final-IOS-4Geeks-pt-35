@@ -113,16 +113,14 @@ export const SubirImagenes = () => {
     return (
         <div className="container-fluid">
             <div className="row justify-content-center">
-                {images.length < 8 && (
+                {images.length < 10 && (
                     <div className="col">
-
                         <input
                             onChange={uploadImage}
                             type="file"
                             className="form-control"
                             id="upload_img"
-                            aria-describedby="inputGroupFileAddon04"
-                            aria-label="Upload"
+                            aria-label="Upload image"
                         />
                     </div>
                 )}
