@@ -1,7 +1,7 @@
 // .index.js
 
 import React from "react";
-import ReactDOM, { createRoot } from 'react-dom';
+import ReactDOM, { createRoot } from 'react-dom/client';
 import Layout from "./layout";
 
 // Create root for concurrent mode

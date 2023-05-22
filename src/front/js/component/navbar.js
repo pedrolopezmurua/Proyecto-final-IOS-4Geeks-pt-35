@@ -7,7 +7,7 @@ import { AuthContext } from '../store/authContext';
 import { showPopupInfo } from './popupx';
 
 export const Navbar = () => {
-	const { userName, userId, logOut } = useContext(AuthContext);
+	const { userName, logOut } = useContext(AuthContext);
 
 	// Comprueba si el usuario está autenticado
 	const isAuthenticated = Boolean(userName);
@@ -15,7 +15,7 @@ export const Navbar = () => {
 	const handleLogout = () => {
 		// Elimina el token y el correo del usuario del almacenamiento local
 		localStorage.removeItem('Token');
-		localStorage.removeItem('userEmail');
+		localStorage.removeItem('userName');
 		showPopupInfo("Usuario ha cerrado sesión")
 		// Limpia el estado
 		logOut();
