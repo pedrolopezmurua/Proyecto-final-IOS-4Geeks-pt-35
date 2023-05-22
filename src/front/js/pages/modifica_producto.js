@@ -37,7 +37,9 @@ export const ModificaProducto = () => {
                 document.getElementById("tituloPublicacion").value = data.titulo;
                 document.getElementById("descripcion").value = data.detalle;
                 document.getElementById("precio").value = data.precio;
-                const parsedCobertura = JSON.parse(data.cobertura)
+                console.log("data.cobertura", data.cobertura)
+                const parsedCobertura = JSON.parse(data.cobertura) //me traigo la cobertura como un objeto en JS
+                console.log("parsedCobertura", parsedCobertura)
                 setDataCobertura(parsedCobertura);
                 setCoberturaCargada(true);
                 const categoriaSelect = document.getElementById("categoria");
@@ -49,6 +51,15 @@ export const ModificaProducto = () => {
                 console.error(error);
             });
     }, [userId])
+
+    useEffect(() => {
+        console.log("dataCobertura", dataCobertura)
+    }, [dataCobertura])
+
+
+    useEffect(() => {
+        console.log("selectedComunas", selectedComunas)
+    }, [dataCobertura])
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -17,8 +17,6 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import Footer from './component/footer';
 import { VerPublicaciones } from './pages/ver_publicaciones';
-import { ModificaProducto } from './pages/modifica_producto';
-
 import { CrearPublicacion } from "./pages/crear_publicacion";
 import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
@@ -26,7 +24,7 @@ import { SubirImagenes } from "./component/subirImagenes";
 import Error404 from "./pages/error404";
 import FaqPage from "./pages/faqpage";
 import DevolucionesPage from "./pages/devolucionespage";
-import { Prueba } from "./pages/prueba";
+import { ModificaProducto } from './pages/modifica_producto';
 
 //create your first component
 const Layout = () => {
@@ -60,7 +58,6 @@ const Layout = () => {
                             <Route element={<ModificaProducto />} path="modificar-publicacion/:servicioId" />
                             <Route element={<FaqPage />} path="/faqpage" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
-                            <Route element={<Prueba />} path="/prueba" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
                         <Footer />
