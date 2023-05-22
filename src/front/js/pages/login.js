@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
 import login from "../../img/login.png";
+import { showPopupInfo, showPopupError } from '../component/popupx';
 
 function Login() {
     const { logIn } = useContext(AuthContext);
@@ -19,7 +20,7 @@ function Login() {
     const handleLogin = async () => {
         // Validación simple: usuario y contraseña no deben estar vacíos
         if (!username.trim() || !password.trim()) {
-            alert('Ambos campos, usuario y contraseña, son obligatorios.');
+            showPopupError('Ambos campos, usuario y contraseña, son obligatorios.');
             return;
         }
 
@@ -43,15 +44,15 @@ function Login() {
             const responseData = await response.json();
 
             // Almacena el token en el localStorage
-            localStorage.setItem('userEmail', username);
-            localStorage.setItem('authToken', responseData.token);
+            localStorage.setItem('Token', responseData.token);
             logIn(username, responseData.data.id);
-            console.log('Inicio de sesión exitoso:', responseData);
+            console.error('Inicio de sesión exitoso: ' + responseData);
+            showPopupInfo('Inicio de sesión exitoso.');
             navigate('/');
 
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
-            alert('Error: ' + response.statusText);
+            showPopupError('Usuario o Password son incorrectas. ');
         }
     };
 

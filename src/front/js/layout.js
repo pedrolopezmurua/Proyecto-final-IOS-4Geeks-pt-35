@@ -9,6 +9,7 @@ import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { Demo } from "./pages/demo";
+import { Demo2 } from "./pages/demo2";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import ResetPassword from "./pages/resetpassword";
@@ -28,6 +29,7 @@ import { SubirImagenes } from "./component/subirImagenes";
 import Error404 from "./pages/error404";
 import FaqPage from "./pages/faqpage";
 import DevolucionesPage from "./pages/devolucionespage";
+import ProtectedRoute from "./component/protectedroute";
 
 //create your first component
 const Layout = () => {
@@ -51,20 +53,21 @@ const Layout = () => {
                             <Route element={<CrearProveedor />} path="/crearproveedor" />
                             <Route element={<Productos />} path="/productos" />
                             <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                            <Route element={<Demo />} path="/demo" />
+                            <Route element={<ProtectedRoute component={Demo2} />} path="/demo1" />
+                            <Route element={<Demo2 />} path="/demo2" />
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
                             <Route element={<SeleccionVariasComunas />} path="/prueba" />
                             <Route element={<CrearPublicacion />} path="/crear-publicacion" />
                             <Route element={<ModificaProducto />} path="/modificaproducto" />
-                            <Route element={<Perfil />} path="perfil" />
-                            <Route element={<ListadoPublicaciones />} path="listado-publicaciones" />
+                            <Route element={<Perfil />} path="/perfil" />
+                            <Route element={<ListadoPublicaciones />} path="/listado-publicaciones" />
                             <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
                             <Route element={<FaqPage />} path="/faqpage" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
-                        <Footer />
+
                     </ScrollToTop>
                 </AuthContextProvider>
             </BrowserRouter>

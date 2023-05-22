@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import logo from "../../img/logo.png";
-
-import { AuthContext } from '../store/authContext'
+import { AuthContext } from '../store/authContext';
+import { showPopupInfo } from './popupx';
 
 export const Navbar = () => {
 	const { userName, userId, logOut } = useContext(AuthContext);
@@ -15,9 +14,9 @@ export const Navbar = () => {
 
 	const handleLogout = () => {
 		// Elimina el token y el correo del usuario del almacenamiento local
-		localStorage.removeItem('authToken');
+		localStorage.removeItem('Token');
 		localStorage.removeItem('userEmail');
-
+		showPopupInfo("Usuario ha cerrado sesión")
 		// Limpia el estado
 		logOut();
 	};
