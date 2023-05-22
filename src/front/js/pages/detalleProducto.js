@@ -18,6 +18,7 @@ export const DetallesProducto = props => {
             .then(response => response.json())
             .then(data => setDetalleProducto(data))
             .catch(error => console.log(error))
+        console.log("detalleProducto", detalleProducto)
     }, [id]);
 
     useEffect(() => {
