@@ -35,7 +35,7 @@ export const Navbar = () => {
 							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Servicios</Link>
 						</li>
 						<li className="nav-item mx-3">
-							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
+							<Link className="text-decoration-none" to='/prueba' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
 						</li>
 					</ul>
 				</div>
