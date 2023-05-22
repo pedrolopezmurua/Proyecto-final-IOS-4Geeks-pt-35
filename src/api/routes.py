@@ -213,10 +213,10 @@ def create_imagen_servicio():
     return jsonify(nueva_imagen_servicio.serialize()), 201
 
 
-@api.route("/imagenes_servicio/<int:id>", methods=["GET"])
-def get_imagen_servicio(id):
-    imagen_servicio = ImagenServicio.query.get_or_404(id)
-    return jsonify(imagen_servicio.serialize())
+@api.route("/imagenes_servicio/<int:servicio_id>", methods=["GET"])
+def get_imagen_servicio(servicio_id):
+    imagenes_servicio = ImagenServicio.query.filter_by(servicio_id=servicio_id).all()
+    return jsonify([imagen.serialize() for imagen in imagenes_servicio])
 
 
 @api.route("/imagenes_servicio/<int:id>", methods=["PUT"])

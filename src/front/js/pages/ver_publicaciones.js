@@ -22,7 +22,6 @@ export const VerPublicaciones = () => {
         fetch(url, opts)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 setServicios(data);
             })
             .catch(error => {
@@ -44,7 +43,10 @@ export const VerPublicaciones = () => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return <div><span key={index}>{`${region}: ${comunas}. `}</span></div>;
+            return (
+                <div key={index}>
+                    <span>{`${region}: ${comunas}. `}</span>
+                </div>);
         });
 
         return (
@@ -76,7 +78,7 @@ export const VerPublicaciones = () => {
                     <tbody>
                         {servicios.length > 0 ? (
                             servicios.map((servicio, index) => (
-                                <tr key={index}>
+                                <tr key={servicio.id}>
                                     <td>{Categoria(servicio.categoria_id)}</td>
                                     <td>{servicio.titulo}</td>
                                     <td>{Estado(servicio.estado)}</td>
@@ -96,7 +98,7 @@ export const VerPublicaciones = () => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="7">No hay servicios disponibles</td>
+                                <td colSpan="6">No hay servicios disponibles</td>
                             </tr>
                         )}
                     </tbody>
