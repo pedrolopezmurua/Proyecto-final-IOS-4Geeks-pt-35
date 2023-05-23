@@ -20,8 +20,11 @@ function AuthContextProvider({ children }) {
 
     useEffect(() => {
         const user = localStorage.getItem('userName');
+        const id = localStorage.getItem('userId');
+
         if (user) {
             setUserName(user);
+            setUserName(id);
         }
     }, []);
 

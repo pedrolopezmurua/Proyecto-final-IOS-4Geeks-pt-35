@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { showPopupError, showPopupCreated } from '../component/popupx';
 
 const CrearProveedor = () => {
 
@@ -32,7 +33,7 @@ const CrearProveedor = () => {
 
         // Validar que las contraseñas sean iguales
         if (formValues.contrasena !== formValues['confirm-password']) {
-            alert('Las contraseñas no coinciden');
+            showPopupError('Las contraseñas no coinciden');
             return;
         }
 
@@ -47,12 +48,14 @@ const CrearProveedor = () => {
 
             if (response.ok) {
                 console.log('Datos enviados correctamente');
-                alert('Éxito en crear el proveedor');
+                showPopupCreated(formValues.correo);
                 navigate('/');  // Redirige a la página de inicio
             } else {
-                console.error('Error al enviar los datos:', response.statusText);
+                showPopupError('Error al enviar los datos: ' + response.statusText)
+                console.error('Error al enviar los datos: ', response.statusText);
             }
         } catch (error) {
+            showPopupError('Error al enviar los datos: ' + error)
             console.error('Error al enviar los datos:', error);
         }
     };
@@ -73,6 +76,10 @@ const CrearProveedor = () => {
                         <div className="col">
                             <label htmlFor="rut">Rut:</label>
                             <input type="text" className="form-control" id="rut" maxLength={12} style={{ width: '150px' }} onChange={handleChange} />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="nombre">Nombre:</label>
+                            <input type="text" className="form-control" id="nombre" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="apellido">Apellido:</label>
@@ -97,7 +104,7 @@ const CrearProveedor = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="direccion">Dirección:</label>
-                        <input type="text" className="form-control" id="direccion" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />
+                        <input type="text" className="form-control" id="direccion" maxLength={200} style={{ width: '600px' }} onChange={handleChange} />
                     </div>
                 </div>
             </div>
@@ -129,11 +136,11 @@ const CrearProveedor = () => {
                         </div>
                         <div className="col">
                             <label htmlFor="contrasena">Ingrese Contraseña:</label>
-                            <input type="password" className="form-control" id="contrasena" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
+                            <input type="password" className="form-control" id="contrasena" maxLength={20} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="confirm-password">Confirmación de Contraseña:</label>
-                            <input type="password" className="form-control" id="confirm-password" maxLength={8} style={{ width: '300px' }} onChange={handleChange} />
+                            <input type="password" className="form-control" id="confirm-password" maxLength={20} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                     </div>
                 </div>

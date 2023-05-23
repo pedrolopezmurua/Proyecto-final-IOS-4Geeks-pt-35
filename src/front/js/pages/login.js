@@ -46,6 +46,8 @@ function Login() {
             // Almacena el token en el localStorage
             localStorage.setItem('Token', responseData.token);
             localStorage.setItem('userName', username);
+            localStorage.setItem('userId', responseData.data.id);
+
             logIn(username, responseData.data.id);
             console.error('Inicio de sesión exitoso: ' + responseData);
             showPopupInfo('Inicio de sesión exitoso.');
