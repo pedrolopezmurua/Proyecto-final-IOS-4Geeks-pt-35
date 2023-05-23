@@ -9,6 +9,7 @@ import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import { Demo } from "./pages/demo";
+import { Demo2 } from "./pages/demo2";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import ResetPassword from "./pages/resetpassword";
@@ -25,6 +26,7 @@ import Error404 from "./pages/error404";
 import FaqPage from "./pages/faqpage";
 import DevolucionesPage from "./pages/devolucionespage";
 import { ModificaProducto } from './pages/modifica_producto';
+import ProtectedRoute from "./component/protectedroute";
 
 //create your first component
 const Layout = () => {
@@ -36,7 +38,7 @@ const Layout = () => {
 
     return (
         <div>
-            <BrowserRouter basename={basename}>
+            <BrowserRouter>
                 <AuthContextProvider>
                     <ScrollToTop>
                         <Navbar />
@@ -48,7 +50,12 @@ const Layout = () => {
                             <Route element={<CrearProveedor />} path="/crearproveedor" />
                             <Route element={<Productos />} path="/productos" />
                             <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                            <Route element={<Demo />} path="/demo" />
+                            <Route path="/demo1" element={
+                                <ProtectedRoute>
+                                    <Demo2 />
+                                </ProtectedRoute>
+                            } />
+                            <Route element={<Demo2 />} path="/demo2" />
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
                             <Route element={<Perfil />} path="perfil" />
@@ -60,7 +67,7 @@ const Layout = () => {
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
-                        <Footer />
+
                     </ScrollToTop>
                 </AuthContextProvider>
             </BrowserRouter>

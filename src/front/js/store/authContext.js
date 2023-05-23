@@ -1,15 +1,12 @@
 // ./store/authContext.js
 
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
-// Crea el contexto de autenticación
 export const AuthContext = createContext();
 
-// Componente principal de la aplicación
-function authContext({ children }) {
+function AuthContextProvider({ children }) {
     const [userName, setUserName] = useState(null);
     const [userId, setUserId] = useState(null);
-
 
     const logIn = (user, id) => {
         setUserName(user);
@@ -21,6 +18,13 @@ function authContext({ children }) {
         setUserId(null);
     };
 
+    useEffect(() => {
+        const user = localStorage.getItem('userName');
+        if (user) {
+            setUserName(user);
+        }
+    }, []);
+
     return (
         <AuthContext.Provider value={{ userName, userId, logIn, logOut }}>
             {children}
@@ -28,4 +32,4 @@ function authContext({ children }) {
     );
 }
 
-export default authContext;
+export default AuthContextProvider;
