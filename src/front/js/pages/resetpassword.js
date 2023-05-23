@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { showPopupInfo, showPopupError } from '../component/popupx';
 
 function ResetPassword() {
     const { email } = useParams();
@@ -20,6 +21,7 @@ function ResetPassword() {
                 const data = await response.json();
                 setEmailExists(data.existe);
             } catch (error) {
+                setPopupError('Error al validar el correo electrónico:' + error);
                 console.error('Error al validar el correo electrónico:', error);
                 setEmailExists(false);
             }
