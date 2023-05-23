@@ -26,6 +26,30 @@ export const DetallesProducto = props => {
         setImagenes(imagenesServicio);
     }, [store.imagenes, detalleProducto.id]);
 
+
+
+    const Cobertura = () => {
+        const coberturaData = detalleProducto.cobertura && JSON.parse(detalleProducto.cobertura);
+
+        const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {
+            const region = item.region;
+            const comunas = item.comunas.join(", ");
+
+            return (
+                <div key={index}>
+                    <span>{`${region}: ${comunas}. `}</span>
+                </div>);
+        });
+
+        return (
+            <span>
+                {cobertura ? cobertura : <span>No hay datos de cobertura</span>}
+            </span>
+        );
+    };
+
+
+
     return (
         <div>
             {/* Arriba */}
@@ -80,7 +104,7 @@ export const DetallesProducto = props => {
                                     <li>Red Social: {detalleProducto.proveedor?.red_social}</li>
                                 )}
                                 {detalleProducto.cobertura !== null && (
-                                    <li>Cobertura: {detalleProducto.cobertura}</li>
+                                    <li>Cobertura:{Cobertura(detalleProducto)} </li>
                                 )}
                             </ul>
                         </div>
