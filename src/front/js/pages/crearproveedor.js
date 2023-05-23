@@ -75,10 +75,6 @@ const CrearProveedor = () => {
                             <input type="text" className="form-control" id="rut" maxLength={12} style={{ width: '150px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
-                            <label htmlFor="nombre">Nombre:</label>
-                            <input type="text" className="form-control" id="nombre" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
-                        </div>
-                        <div className="col">
                             <label htmlFor="apellido">Apellido:</label>
                             <input type="text" className="form-control" id="apellido" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>

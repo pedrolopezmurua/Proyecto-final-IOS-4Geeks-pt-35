@@ -2,22 +2,21 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import logo from "../../img/logo.png";
-
-import { AuthContext } from '../store/authContext'
+import { AuthContext } from '../store/authContext';
+import { showPopupInfo } from './popupx';
 
 export const Navbar = () => {
-	const { userName, userId, logOut } = useContext(AuthContext);
+	const { userName, logOut } = useContext(AuthContext);
 
 	// Comprueba si el usuario está autenticado
 	const isAuthenticated = Boolean(userName);
 
 	const handleLogout = () => {
 		// Elimina el token y el correo del usuario del almacenamiento local
-		localStorage.removeItem('authToken');
-		localStorage.removeItem('userEmail');
-
+		localStorage.removeItem('Token');
+		localStorage.removeItem('userName');
+		showPopupInfo("Usuario ha cerrado sesión")
 		// Limpia el estado
 		logOut();
 	};
@@ -36,7 +35,7 @@ export const Navbar = () => {
 							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Servicios</Link>
 						</li>
 						<li className="nav-item mx-3">
-							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
+							<Link className="text-decoration-none" to='/prueba' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
 						</li>
 					</ul>
 				</div>

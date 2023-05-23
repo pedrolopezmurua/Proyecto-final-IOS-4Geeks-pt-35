@@ -1,12 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/home.css";
-import { SubirImagenes } from "../component/subirImagenes";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext'
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const CrearPublicacion = () => {
 
-  const { userId } = useContext(AuthContext)
+  const { userId } = useContext(AuthContext);
+  let navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const [selectedComunas, setSelectedComunas] = useState([]);
   const handleSelectedComunasChange = (comunas) => {
@@ -47,6 +51,12 @@ export const CrearPublicacion = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        MySwal.fire(
+          'Éxito',
+          'La publicación se creó correctamente',
+          'success'
+        )
+        navigate("/perfil")
       })
       .catch((error) => {
         console.error(error);
@@ -85,15 +95,19 @@ export const CrearPublicacion = () => {
                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
                 <textarea className="form-control" id="descripcion" rows="3"></textarea>
               </div>
-              <div className="col" id="seleccion-valor-servicio">
-                <label htmlFor="precio" className="form-label" >Precio</label>
-                <input type="text" className="form-control" id="precio" placeholder="$40.000.-" />
+              <label htmlFor="precio" className="form-label" >Precio</label>
+              <div className="input-group mb-3" id="seleccion-valor-servicio">
+                <span className="input-group-text">$</span>
+                <input type="text" className="form-control" id="precio" placeholder="40000" />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
+                <p className="form-label">Selecciona tu cobertura:</p>
                 <SeleccionVariasComunas onSelectedComunasChange={handleSelectedComunasChange} />
               </div>
               <div className="d-flex justify-content-end me-4">
+
                 <button type="submit" className="btn btn-primary">Guardar</button>
+
               </div>
             </form>
           </div>
