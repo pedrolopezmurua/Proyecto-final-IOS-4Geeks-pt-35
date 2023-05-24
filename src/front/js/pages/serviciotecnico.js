@@ -12,6 +12,10 @@ import atras from "../../img/atras.png";
 export const ServicioTecnico = () => {
     const { store, actions } = useContext(Context);
 
+    // useEffect(() => {
+    //     actions.getServicios()
+    // }, [store.ServicioTecnico])
+
     return (
         <div className="text-center">
             <div className="justify-content-center d-flex mt-3">
