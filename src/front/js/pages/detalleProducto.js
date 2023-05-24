@@ -66,17 +66,20 @@ export const DetallesProducto = props => {
                 {/* Derecha */}
                 <div className="col">
                     <div className="justify-content-center d-flex mt-5">
-                        <div className="text-center" style={{ height: "400px", width: "400px", overflow: "hidden" }}>
+                        <div className="text-center" style={{ height: "400px", width: "600px", overflow: "hidden" }}>
                             {imagenes?.length > 0 ? (
                                 <Carousel variant="dark">
                                     {Array.isArray(imagenes) && imagenes.map((imagen, index) => (
                                         <Carousel.Item key={index}>
-                                            <img
-                                                className="mx-auto"
-                                                src={imagen.secure_url}
-                                                style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                                                alt={`Carousel${index + 1}`}
-                                            />
+                                            <div className="text-center" style={{ height: "400px", width: "600px", overflow: "hidden" }}>
+                                                <img
+                                                    className="mx-auto"
+                                                    src={imagen.secure_url}
+                                                    style={{ height: "400px", objectFit: "contain" }}
+                                                    alt={`Carousel${index + 1}`}
+                                                />
+                                            </div>
+
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>

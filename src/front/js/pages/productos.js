@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
