@@ -1,24 +1,23 @@
 // ./component/navbar.js
 
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { AuthContext } from '../store/authContext';
 import { showPopupInfo } from './popupx';
 
 export const Navbar = () => {
 	const { userName, logOut } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	// Comprueba si el usuario está autenticado
 	const isAuthenticated = Boolean(userName);
 
 	const handleLogout = () => {
-		// Elimina el token y el correo del usuario del almacenamiento local
-		localStorage.removeItem('Token');
-		localStorage.removeItem('userName');
-		showPopupInfo("Usuario ha cerrado sesión")
+		showPopupInfo("Usuario ha cerrado sesión");
 		// Limpia el estado
 		logOut();
+		navigate('/');
 	};
 
 	return (
