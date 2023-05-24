@@ -56,7 +56,8 @@ export const CrearPublicacion = () => {
           'La publicación se creó correctamente',
           'success'
         )
-        navigate("/perfil")
+        //agregar solicitud GET que me traiga el ID que se le asignó a este servicio, para redirigirlo a su página para subir imágenes
+        navigate(`/subir-imagenes/${data.id}`)
       })
       .catch((error) => {
         console.error(error);

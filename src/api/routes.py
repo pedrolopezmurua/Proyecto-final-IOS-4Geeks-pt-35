@@ -187,6 +187,8 @@ def update_servicio(id):
 @api.route("/servicios/<int:id>", methods=["DELETE"])
 def delete_servicio(id):
     servicio = Servicio.query.get_or_404(id)
+    if servicio.imagenes_servicio:
+        return jsonify({"msg": "No se puede eliminar el servicio. Debe eliminar las imágenes asociadas a este."}), 400
     db.session.delete(servicio)
     db.session.commit()
     return jsonify({"message": "Servicio eliminado con éxito"}), 204

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../store/authContext';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -11,7 +11,7 @@ export const SubirImagenes = () => {
     const servicio_id = window.location.pathname.split("/").pop();
     const [images, setImages] = useState([]);
 
-    const fetchImages = async () => {
+    const fetchImages = async () => {   //Solicitud GET a nuestra API
         try {
             const url = `http://127.0.0.1:3001/api/imagenes_servicio/${servicio_id}`;
             const opts = {
@@ -27,7 +27,6 @@ export const SubirImagenes = () => {
                     id: imagen.id,
                     secure_url: imagen.secure_url
                 }));
-                console.log("imagenData: ", imagenData)
                 setImages(imagenData);
             } else {
                 console.error("Error al obtener las imágenes");
@@ -37,11 +36,11 @@ export const SubirImagenes = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect(() => {   //Actualiza el array de imágenes asociadas a este servicio
         fetchImages();
     }, []);
 
-    const deleteImage = async (id) => {
+    const deleteImage = async (id) => {     //Solicitud DELETE a nuestra API
         try {
             const url = `http://127.0.0.1:3001/api/imagenes_servicio/${id}`;
             const opts = {
@@ -53,6 +52,11 @@ export const SubirImagenes = () => {
             const response = await fetch(url, opts);
             if (response.ok) {
                 console.log("Imagen eliminada con éxito");
+                MySwal.fire(
+                    'Éxito',
+                    'La imagen se eliminó correctamente',
+                    'success'
+                )
                 fetchImages();
             } else {
                 console.error("Error al eliminar la imagen");
@@ -60,18 +64,17 @@ export const SubirImagenes = () => {
         } catch (error) {
             console.error(error);
         }
-
     };
 
 
-    const uploadImage = async (e, servicio_id) => {
-        const files = e.target.files;   //obtienes la imagen que subió el usuario en ese input
-        const data = new FormData();    //crea un objeto en donde se almacenará la información que se subió; utiliza un append() para agregar pares clave/valor al objeto FormData; {file: [archivo del usuario], upload_preset: "applegeeks_preset"}	
-        data.append("file", files[0]);
+    const uploadImage = async (e, servicio_id) => {     //Manejo del archivo que sube el usuario
+        const files = e.target.files;   //obtienes la imagen que subió el usuario al input
+        const data = new FormData();    //crea un objeto en donde se almacenará la información que se subió 	
+        data.append("file", files[0]);  //utiliza un append() para agregar pares clave/valor al objeto FormData; {file: [archivo del usuario], upload_preset: "applegeeks_preset"}
         data.append("upload_preset", "applegeeks_preset");
-        console.log("data de uploadImage: ", data)
 
         try {
+            //Solicitud POST a API Cloudinary
             const uploadOpts = {
                 method: "POST",
                 body: data,
@@ -80,16 +83,13 @@ export const SubirImagenes = () => {
             const file = await resp.json();
             setImages(file.secure_url);
             const secureURL = file.secure_url;
-            console.log("secure url: ", file.secure_url);
 
-
-            //Para guardar la imagen en nuestra base de datos
+            //Solicitud POST a nuestra API
             const servicio_id = window.location.pathname.split("/").pop();
             const imagenServicioData = {
                 secure_url: secureURL,
                 servicio_id: servicio_id
             };
-            console.log("imagenServicioData, para el POST a nuestra db: ", imagenServicioData);
             const saveOpts = {
                 method: "POST",
                 headers: {
@@ -99,7 +99,11 @@ export const SubirImagenes = () => {
             };
             const saveResp = await fetch("http://127.0.0.1:3001/api/imagenes_servicio", saveOpts);
             const nuevaImagenServicio = await saveResp.json();
-            console.log("nueva imagen del servicio: ", nuevaImagenServicio);
+            MySwal.fire(
+                'Éxito',
+                'La imagen se agregó correctamente',
+                'success'
+            )
             fetchImages();
         } catch (error) {
             console.error("Error al cargar la imagen: ", error);
@@ -108,13 +112,26 @@ export const SubirImagenes = () => {
 
     return (
         <div className="container-fluid">
+            <div className="row mb-3 mt-3">
+                <div className="col">
+                    <Link to={`/modificar-publicacion/${servicio_id}`} >
+                        <button type="button" className="btn btn-success">Modificar o eliminar esta publicación</button>
+                    </Link>
+                </div>
+                <div className="col">
+                    <Link to={`/publicaciones`} >
+                        <button type="button" className="btn btn-success">Volver a todas mis publicaciones</button>
+                    </Link>
+                </div>
+            </div>
+            <h1>Agrega tus imágenes aquí:</h1>
             <div className="row justify-content-center">
                 {images.length < 10 && (
                     <div className="col">
                         <input
                             onChange={uploadImage}
                             type="file"
-                            className="form-control"
+                            className="form-control mb-2"
                             id="upload_img"
                             aria-label="Upload image"
                         />

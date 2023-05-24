@@ -58,11 +58,11 @@ const Layout = () => {
                             <Route element={<Demo2 />} path="/demo2" />
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
-                            <Route element={<Perfil />} path="perfil" />
-                            <Route element={<CrearPublicacion />} path="/crear-publicacion" />
-                            <Route element={<VerPublicaciones />} path="/publicaciones" />
-                            <Route element={<SubirImagenes />} path="subir-imagenes/:servicioId" />
-                            <Route element={<ModificaProducto />} path="modificar-publicacion/:servicioId" />
+                            <Route element={<ProtectedRoute><Perfil /></ProtectedRoute>} path="perfil" />
+                            <Route element={<ProtectedRoute><CrearPublicacion /></ProtectedRoute>} path="/crear-publicacion" />
+                            <Route element={<ProtectedRoute><VerPublicaciones /></ProtectedRoute>} path="/publicaciones" />
+                            <Route element={<ProtectedRoute><SubirImagenes /></ProtectedRoute>} path="subir-imagenes/:servicioId" />
+                            <Route element={<ProtectedRoute><ModificaProducto /></ProtectedRoute>} path="modificar-publicacion/:servicioId" />
                             <Route element={<FaqPage />} path="/faqpage" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
