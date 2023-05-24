@@ -1,21 +1,20 @@
 import React, { useContext, useState } from "react";
 import "../../styles/home.css";
-import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
+import { AllRegionesYcomunas } from "../component/regionesYcomunas";
 import { AuthContext } from '../store/authContext'
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 export const CrearPublicacion = () => {
 
+  const { store, actions } = useContext(Context);
   const { userId } = useContext(AuthContext);
   let navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-
+  const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedComunas, setSelectedComunas] = useState([]);
-  const handleSelectedComunasChange = (comunas) => {
-    setSelectedComunas(comunas);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +55,7 @@ export const CrearPublicacion = () => {
           'La publicación se creó correctamente',
           'success'
         )
-        //agregar solicitud GET que me traiga el ID que se le asignó a este servicio, para redirigirlo a su página para subir imágenes
+        actions.getServicios();
         navigate(`/subir-imagenes/${data.id}`)
       })
       .catch((error) => {
@@ -64,6 +63,123 @@ export const CrearPublicacion = () => {
       });
 
   };
+
+  const SeleccionaCobertura = () => {
+    const RegionesYcomunas = AllRegionesYcomunas;
+    const [region, setRegion] = useState("");
+    const [comuna, setComuna] = useState("");
+
+    const handleRegionChange = (e) => {
+      const selectedRegion = e.target.value;
+      setRegion(selectedRegion);
+      setComuna("");
+      setSelectedRegion(selectedRegion);
+    };
+    const handleComunaChange = (e) => {
+      const selectedComuna = e.target.value;
+      setComuna(selectedComuna);
+    };
+    const handleAddComuna = () => {
+      if (selectedComunas && selectedRegion && comuna) {
+        const existingRegion = selectedComunas.find(
+          (item) => item.region === selectedRegion
+        );
+        if (existingRegion) {
+          const updatedComunas = [...existingRegion.comunas, comuna]; // Agregar la comuna al array existente
+          const updatedRegion = {
+            ...existingRegion,
+            comunas: updatedComunas,
+          };
+          const updatedSelectedComunas = selectedComunas.map((item) => {
+            if (item.region === selectedRegion) {
+              return updatedRegion;
+            }
+            return item;
+          });
+          setSelectedComunas(updatedSelectedComunas);
+        } else {
+          setSelectedComunas([
+            ...selectedComunas,
+            {
+              region: selectedRegion,
+              comunas: [comuna], // Crear un nuevo array de comunas con la comuna seleccionada
+            },
+          ]);
+        }
+        setComuna("");
+      }
+    };
+    const handleRemoveComuna = (index) => {
+      const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index);
+      setSelectedComunas(updatedSelectedComunas);
+    };
+
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-5" id="seleccionRegion" style={{ width: '300px' }} >
+            <label htmlFor="regiones">Región:</label>
+            <select
+              id="regiones"
+              className="form-select mt-1"
+              value={region}
+              onChange={handleRegionChange}
+            >
+              <option value="">Seleccione una región</option>
+              {RegionesYcomunas.regiones.map((region, index) => (
+                <option key={index} value={region.NombreRegion}>{region.NombreRegion}</option>
+              ))}
+            </select>
+          </div>
+          <div className="col-5" id="seleccionComuna" style={{ width: '300px' }} >
+            <label htmlFor="comunas">Comuna:</label>
+            <select
+              id="comunas"
+              className="form-select mt-1"
+              value={comuna}
+              onChange={handleComunaChange}
+            >
+              <option value="">Seleccione una comuna</option>
+              {RegionesYcomunas.regiones.map((region) => {
+                if (region.NombreRegion === selectedRegion) {
+                  return region.comunas.map((comuna, index) => (
+                    <option key={index} value={comuna}>{comuna}</option>
+                  ));
+                }
+                return null;
+              })}
+            </select>
+          </div>
+        </div>
+        <div className="col-3 d-flex mt-1">
+          <button
+            type="button"
+            className="btn btn-outline-primary btn-sm"
+            onClick={handleAddComuna}
+            style={{ width: "75%", fontSize: "75%" }}
+          >
+            Agregar comuna</button>
+        </div>
+        <div>
+          <p className="form-label mt-3">Comunas seleccionadas:</p>
+          <ul>
+            {selectedComunas.map((item, index) => (
+              <li key={index}>
+                {item.region}, comuna:{" "}
+                {item.comunas && item.comunas.length > 0
+                  ? item.comunas.length === 1
+                    ? item.comunas[0]
+                    : item.comunas.join(", ")
+                  : ""}
+                <button onClick={() => handleRemoveComuna(index)} type="button" className="btn-close" aria-label="Remove"></button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+    );
+  }
 
   return (
     <div className="container my-3">
@@ -82,7 +198,7 @@ export const CrearPublicacion = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group my-3" id="seleccion-categoria">
                 <label htmlFor="categoría" className="form-label">Categoría</label>
-                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría">
+                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría" required>
                   <option value="0">Seleccionar</option>
                   <option value="1">Productos</option>
                   <option value="2">Servicio técnico</option>
@@ -90,20 +206,20 @@ export const CrearPublicacion = () => {
               </div>
               <div className="mb-3" id="titulo-publicacion">
                 <label htmlFor="nombre-servicio" className="form-label">Título de la publicación</label>
-                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" />
+                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" required />
               </div>
               <div className="mb-3" id="descripcion-publicacion">
                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
-                <textarea className="form-control" id="descripcion" rows="3"></textarea>
+                <textarea className="form-control" id="descripcion" rows="3" required></textarea>
               </div>
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input type="text" className="form-control" id="precio" placeholder="40000" />
+                <input type="text" className="form-control" id="precio" placeholder="40000" required />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>
-                <SeleccionVariasComunas onSelectedComunasChange={handleSelectedComunasChange} />
+                <SeleccionaCobertura />
               </div>
               <div className="d-flex justify-content-end me-4">
 
