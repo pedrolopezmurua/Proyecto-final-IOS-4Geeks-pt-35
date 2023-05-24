@@ -89,7 +89,7 @@ export const DetallesProducto = props => {
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div className="d-flex align-items-center">
-                    <Link className="d-flex align-items-center" to="/productos/">
+                    <Link className="d-flex align-items-center" to="/productos/" style={{ textDecorationLine: "none", color: "black" }}>
                         <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
                     </Link>
                 </div>
