@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { showPopupInfo, showPopupError } from '../component/popupx';
 
 function ResetPassword() {
     const { email } = useParams();
@@ -20,6 +21,7 @@ function ResetPassword() {
                 const data = await response.json();
                 setEmailExists(data.existe);
             } catch (error) {
+                showPopupError('Error al validar el correo electrónico:' + error);
                 console.error('Error al validar el correo electrónico:', error);
                 setEmailExists(false);
             }
@@ -53,27 +55,32 @@ function ResetPassword() {
                         contrasena: password,
                     }),
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
+                    .then((response) => {
                         if (response.ok) {
-                            console.log('Contraseña actualizada exitosamente');
-                            setPasswordUpdated(true);
-                            setError('');
+                            return response.json();
                         } else {
-                            console.log('Error al actualizar la contraseña');
-                            setError('Error al actualizar la contraseña');
+                            throw new Error("Error al actualizar la contraseña");
                         }
                     })
+                    .then((data) => {
+                        showPopupInfo('Contraseña actualizada exitosamente');
+                        console.log('Contraseña actualizada exitosamente');
+                        setPasswordUpdated(true);
+                        setError('');
+                    })
                     .catch((error) => {
+                        showPopupError('Error al actualizar la contraseña:' + error);
                         console.error('Error al actualizar la contraseña:', error);
                         setError('Error al actualizar la contraseña');
                     });
             } else {
+                showPopupError('La contraseña y la confirmación no coinciden');
                 console.log('La contraseña y la confirmación no coinciden');
                 setError('La contraseña y la confirmación no coinciden');
             }
         } else {
-            console.log('El correo no existe en la tabla "proveedor"');
+            showPopupError('El correo ingresado no existe');
+            console.log(`El correo ${decodedEmail} no existe en la tabla "proveedor"`);
             setError(`El correo ${decodedEmail} no existe en la tabla "proveedor"`);
         }
     };

@@ -86,7 +86,7 @@ export const VerPublicaciones = () => {
                                     <td>{Cobertura(servicio)}</td>
                                     <td>
                                         <Link to={`/subir-imagenes/${servicio.id}`} >
-                                            <span className="badge bg-success text-wrap me-1" style={{ width: "6rem" }}> Ver o Modificar Imágenes</span>
+                                            <span className="badge bg-success text-wrap me-1 mb-1" style={{ width: "6rem" }}> Ver o Modificar Imágenes</span>
                                         </Link>
                                         <Link to={`/modificar-publicacion/${servicio.id}`} >
                                             <span className="badge bg-success text-wrap" style={{ width: "6rem" }}> Modificar o Eliminar Publicación</span>
@@ -103,15 +103,6 @@ export const VerPublicaciones = () => {
                         )}
                     </tbody>
                 </table>
-            </div>
-
-            {/*atras/siguiente*/}
-            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
-                <div className="d-flex align-items-center">
-                    <img src={atras} alt="Atras" />
-                    <p className="mb-0 ml-2">Atras</p>
-                </div>
-                <button className="btn btn-success btn-sm">Siguiente</button>
             </div>
 
 

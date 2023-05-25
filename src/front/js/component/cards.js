@@ -39,6 +39,7 @@ export const CardCategoriaProductos = () => {
 export const CardProductos = () => {
     const { store, actions } = useContext(Context);
 
+
     return (
         <div className="container-fluid row justify-content-center d-flex">
             {Array.isArray(store.productos) && store.productos.map((producto, index) => {

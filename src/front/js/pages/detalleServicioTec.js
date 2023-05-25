@@ -25,6 +25,31 @@ export const DetallesServicioTec = props => {
         setImagenes(imagenesServicio);
     }, [store.imagenes, detalleServicioTec.id]);
 
+
+
+    const Cobertura = () => {
+        const coberturaData = detalleServicioTec.cobertura && JSON.parse(detalleServicioTec.cobertura);
+
+        const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {
+            const region = item.region;
+            const comunas = item.comunas.join(", ");
+
+            return (
+                <div key={index}>
+                    <span>{`${region}: ${comunas}. `}</span>
+                </div>);
+        });
+
+        return (
+            <span>
+                {cobertura ? cobertura : <span>No hay datos de cobertura</span>}
+            </span>
+        );
+    };
+
+
+
+
     return (
         <div>
             {/* Arriba */}
@@ -79,7 +104,7 @@ export const DetallesServicioTec = props => {
                                     <li>Red Social: {detalleServicioTec.proveedor?.red_social}</li>
                                 )}
                                 {detalleServicioTec.cobertura !== null && (
-                                    <li>Cobertura: {detalleServicioTec.cobertura}</li>
+                                    <li>Cobertura: {Cobertura(detalleServicioTec)}</li>
                                 )}
                             </ul>
                         </div>
@@ -88,7 +113,7 @@ export const DetallesServicioTec = props => {
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div className="d-flex align-items-center">
-                    <Link className="d-flex align-items-center" to="/serviciotecnico/">
+                    <Link className="d-flex align-items-center" to="/serviciotecnico/" style={{ textDecorationLine: "none", color: "black" }}>
                         <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
                     </Link>
                 </div>

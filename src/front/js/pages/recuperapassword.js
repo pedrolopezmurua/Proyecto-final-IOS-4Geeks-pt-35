@@ -1,6 +1,7 @@
 // ./pages/recuperapassword.js
 
 import React, { useState } from 'react';
+import { showPopupInfo, showPopupError } from '../component/popupx';
 
 function RecuperaPassword() {
     const [email, setEmail] = useState('');
@@ -23,11 +24,13 @@ function RecuperaPassword() {
             const data = await response.json();
 
             if (response.ok) {
+                showPopupInfo('Correo electrónico de recuperación de contraseña enviado');
                 setMessage('Correo electrónico de recuperación de contraseña enviado');
             } else {
                 setMessage(data.message);
             }
         } catch (error) {
+            showPopupError('Hubo un error al enviar el correo electrónico de recuperación de contraseña');
             setMessage('Hubo un error al enviar el correo electrónico de recuperación de contraseña');
         } finally {
             setLoading(false);
