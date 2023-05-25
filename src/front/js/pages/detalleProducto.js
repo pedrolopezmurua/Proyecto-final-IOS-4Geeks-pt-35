@@ -26,6 +26,30 @@ export const DetallesProducto = props => {
         setImagenes(imagenesServicio);
     }, [store.imagenes, detalleProducto.id]);
 
+
+
+    const Cobertura = () => {
+        const coberturaData = detalleProducto.cobertura && JSON.parse(detalleProducto.cobertura);
+
+        const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {
+            const region = item.region;
+            const comunas = item.comunas.join(", ");
+
+            return (
+                <div key={index}>
+                    <span>{`${region}: ${comunas}. `}</span>
+                </div>);
+        });
+
+        return (
+            <span>
+                {cobertura ? cobertura : <span>No hay datos de cobertura</span>}
+            </span>
+        );
+    };
+
+
+
     return (
         <div>
             {/* Arriba */}
@@ -42,17 +66,20 @@ export const DetallesProducto = props => {
                 {/* Derecha */}
                 <div className="col">
                     <div className="justify-content-center d-flex mt-5">
-                        <div className="text-center" style={{ height: "400px", width: "400px", overflow: "hidden" }}>
+                        <div className="text-center" style={{ height: "400px", width: "600px", overflow: "hidden" }}>
                             {imagenes?.length > 0 ? (
                                 <Carousel variant="dark">
                                     {Array.isArray(imagenes) && imagenes.map((imagen, index) => (
                                         <Carousel.Item key={index}>
-                                            <img
-                                                className="mx-auto"
-                                                src={imagen.secure_url}
-                                                style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                                                alt={`Carousel${index + 1}`}
-                                            />
+                                            <div className="text-center" style={{ height: "400px", width: "600px", overflow: "hidden" }}>
+                                                <img
+                                                    className="mx-auto"
+                                                    src={imagen.secure_url}
+                                                    style={{ height: "400px", objectFit: "contain" }}
+                                                    alt={`Carousel${index + 1}`}
+                                                />
+                                            </div>
+
                                         </Carousel.Item>
                                     ))}
                                 </Carousel>
@@ -80,7 +107,7 @@ export const DetallesProducto = props => {
                                     <li>Red Social: {detalleProducto.proveedor?.red_social}</li>
                                 )}
                                 {detalleProducto.cobertura !== null && (
-                                    <li>Cobertura: {detalleProducto.cobertura}</li>
+                                    <li>Cobertura:{Cobertura(detalleProducto)} </li>
                                 )}
                             </ul>
                         </div>
@@ -89,7 +116,7 @@ export const DetallesProducto = props => {
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div className="d-flex align-items-center">
-                    <Link className="d-flex align-items-center" to="/productos/">
+                    <Link className="d-flex align-items-center" to="/productos/" style={{ textDecorationLine: "none", color: "black" }}>
                         <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
                     </Link>
                 </div>
