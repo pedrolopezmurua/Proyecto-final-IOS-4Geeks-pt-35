@@ -45,6 +45,10 @@ export const ModificaProducto = () => {
 
     const handleSubmit = (e) => {   //Solicitud PUT a nuestra API
         e.preventDefault();
+        if (!categoriaSeleccionada) {
+            // Mostrar un mensaje de error o realizar alguna acción
+            alert("Debes seleccionar una categoría");
+        }
 
         // Obtiene los valores del formulario
         const categoria_select = document.getElementById("categoria");
@@ -256,7 +260,7 @@ export const ModificaProducto = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="form-group my-3" id="seleccion-categoria">
                                 <label htmlFor="categoría" className="form-label">Categoría</label>
-                                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría">
+                                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría" onChange={(e) => setCategoriaSeleccionada(e.target.value !== "0")}>
                                     <option value="0">Seleccionar</option>
                                     <option value="1">Productos</option>
                                     <option value="2">Servicio técnico</option>
@@ -264,15 +268,15 @@ export const ModificaProducto = () => {
                             </div>
                             <div className="mb-3" id="titulo-publicacion">
                                 <label htmlFor="nombre-servicio" className="form-label">Título de la publicación</label>
-                                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" />
+                                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" maxLength={100} required />
                             </div>
                             <div className="mb-3" id="descripcion-publicacion">
                                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
-                                <textarea className="form-control" id="descripcion" rows="3"></textarea>
+                                <textarea className="form-control" id="descripcion" rows="3" maxLength={3000} required></textarea>
                             </div>
                             <div className="col" id="seleccion-valor-servicio">
                                 <label htmlFor="precio" className="form-label" >Precio</label>
-                                <input type="text" className="form-control" id="precio" placeholder="$40.000.-" />
+                                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
                             </div>
                             <div className="row mt-3" id="seleccion-cobertura">
                                 <SeleccionaCobertura />

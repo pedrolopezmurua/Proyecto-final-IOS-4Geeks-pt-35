@@ -221,7 +221,7 @@ export const CrearPublicacion = () => {
               </div>
               <div className="mb-3" id="descripcion-publicacion">
                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
-                <textarea className="form-control" id="descripcion" rows="3" maxLength={1000} required></textarea>
+                <textarea className="form-control" id="descripcion" rows="3" maxLength={3000} required></textarea>
               </div>
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
