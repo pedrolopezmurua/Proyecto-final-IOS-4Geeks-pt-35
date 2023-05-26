@@ -90,7 +90,7 @@ export const DetallesProducto = props => {
                                 <img
                                     className="mx-auto"
                                     src={noimage}
-                                    style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                                    style={{ height: "100%", width: "100%", objectFit: "scale-down" }}
                                     alt=""
                                 />
                             )}
