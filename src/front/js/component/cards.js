@@ -48,11 +48,15 @@ export const CardProductos = () => {
                 console.log(imagen)
                 return (
                     <div className="card m-4 " style={{ width: "18rem" }} key={producto.id}>
-                        <h5 className="card-title m-3">{producto.titulo}</h5>
+
+                        <div style={{ height: "25%" }}>
+                            <h5 className="card-title m-3">{producto.titulo}</h5>
+                        </div>
+
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
                                 {imagen ? (
-                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "scale-down", height: "100%", width: "100%" }} />
                                 ) : (
                                     <img
                                         className="mx-auto"
@@ -87,11 +91,13 @@ export const CardServiciosTecnicos = () => {
                 console.log(imagen)
                 return (
                     <div className="card m-4" style={{ width: "18rem" }} key={serviciotecnico.id}>
-                        <h5 className="card-title m-3">{serviciotecnico.titulo}</h5>
+                        <div style={{ height: "25%" }}>
+                            <h5 className="card-title m-3">{serviciotecnico.titulo}</h5>
+                        </div>
                         <div className="justify-content-center d-flex">
                             <div style={{ height: "200px", width: "250px", overflow: "hidden" }}>
                                 {imagen ? (
-                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                                    <img src={imagen?.secure_url} className="card-img-top" alt="..." style={{ objectFit: "scale-down", height: "100%", width: "100%" }} />
                                 ) : (
                                     <img
                                         className="mx-auto"
