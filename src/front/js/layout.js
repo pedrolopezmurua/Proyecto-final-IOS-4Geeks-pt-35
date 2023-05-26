@@ -67,7 +67,7 @@ const Layout = () => {
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
-
+                        <Footer />
                     </ScrollToTop>
                 </AuthContextProvider>
             </BrowserRouter>
