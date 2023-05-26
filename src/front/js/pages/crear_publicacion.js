@@ -9,15 +9,24 @@ import withReactContent from "sweetalert2-react-content";
 
 export const CrearPublicacion = () => {
 
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
   const { userId } = useContext(AuthContext);
   let navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedComunas, setSelectedComunas] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!categoriaSeleccionada) {
+      // Mostrar un mensaje de error o realizar alguna acción
+      alert("Debes seleccionar una categoría");
+    }
+
+
 
     // Obtiene los valores del formulario
     const categoria_select = document.getElementById("categoria");
@@ -33,7 +42,7 @@ export const CrearPublicacion = () => {
       titulo: titulo,
       detalle: detalle,
       precio: precio_int,
-      proveedor_id: proveedor_id,            //MODIFICAR EVENTUALMENTE
+      proveedor_id: proveedor_id,
       categoria_id: categoria_id,
       cobertura: JSON.stringify(selectedComunas),
       estado: true
@@ -61,6 +70,8 @@ export const CrearPublicacion = () => {
       .catch((error) => {
         console.error(error);
       });
+
+
 
   };
 
@@ -198,7 +209,7 @@ export const CrearPublicacion = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-group my-3" id="seleccion-categoria">
                 <label htmlFor="categoría" className="form-label">Categoría</label>
-                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría" required>
+                <select defaultValue="0" className="form-select" id="categoria" aria-label="Selecciona una categoría" required onChange={(e) => setCategoriaSeleccionada(e.target.value !== "0")}>
                   <option value="0">Seleccionar</option>
                   <option value="1">Productos</option>
                   <option value="2">Servicio técnico</option>
@@ -206,16 +217,16 @@ export const CrearPublicacion = () => {
               </div>
               <div className="mb-3" id="titulo-publicacion">
                 <label htmlFor="nombre-servicio" className="form-label">Título de la publicación</label>
-                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" required />
+                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" maxLength={100} required />
               </div>
               <div className="mb-3" id="descripcion-publicacion">
                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
-                <textarea className="form-control" id="descripcion" rows="3" required></textarea>
+                <textarea className="form-control" id="descripcion" rows="3" maxLength={1000} required></textarea>
               </div>
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input type="text" className="form-control" id="precio" placeholder="40000" required />
+                <input type="number" className="form-control" id="precio" placeholder="40000" required inputMode="numeric" pattern="[0-9]*" />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>

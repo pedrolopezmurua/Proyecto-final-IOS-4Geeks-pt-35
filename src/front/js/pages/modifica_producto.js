@@ -2,7 +2,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import "../../styles/home.css";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
-import { AuthContext } from '../store/authContext'
+import { AuthContext } from '../store/authContext';
+import { Context } from "../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
 import { AllRegionesYcomunas } from "../component/regionesYcomunas";
 import Swal from "sweetalert2";
@@ -10,6 +11,7 @@ import withReactContent from "sweetalert2-react-content";
 
 export const ModificaProducto = () => {
 
+    const { actions } = useContext(Context);
     const MySwal = withReactContent(Swal);
     let navigate = useNavigate();
     const { userId } = useContext(AuthContext);
@@ -77,6 +79,7 @@ export const ModificaProducto = () => {
                     'La publicación se modificó correctamente',
                     'success'
                 )
+                actions.getServicios();
                 navigate("/publicaciones")
             })
             .catch((error) => {
@@ -101,6 +104,7 @@ export const ModificaProducto = () => {
                         'La publicación se eliminó correctamente',
                         'success'
                     )
+                    actions.getServicios();
                     navigate("/perfil")
                     navigate("../publicaciones");
                 } else if (response.status === 400) {
