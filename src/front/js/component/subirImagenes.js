@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../store/authContext';
+import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 export const SubirImagenes = () => {
+    const { actions } = useContext(Context);
     let navigate = useNavigate();
     const { userId } = useContext(AuthContext);
     const MySwal = withReactContent(Swal);
@@ -57,6 +59,7 @@ export const SubirImagenes = () => {
                     'La imagen se eliminó correctamente',
                     'success'
                 )
+                actions.getServicios();
                 fetchImages();
             } else {
                 console.error("Error al eliminar la imagen");
@@ -104,6 +107,7 @@ export const SubirImagenes = () => {
                 'La imagen se agregó correctamente',
                 'success'
             )
+            actions.getServicios();
             fetchImages();
         } catch (error) {
             console.error("Error al cargar la imagen: ", error);
