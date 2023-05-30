@@ -1,7 +1,7 @@
 // .index.js
 
 import React from "react";
-import ReactDOM, { createRoot } from "react-dom";
+import ReactDOM, { createRoot } from "react-dom/client";
 
 //include your index.scss file into the bundle
 import "../styles/index.css";

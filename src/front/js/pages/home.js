@@ -10,6 +10,7 @@ import Carousel2 from "../../img/Carousel2.png";
 import Carousel3 from "../../img/Carousel3.png";
 import Carousel4 from "../../img/Carousel4.png";
 import Carousel from 'react-bootstrap/Carousel';
+import ReactDOM, { createRoot } from "react-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);

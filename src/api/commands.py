@@ -1,6 +1,7 @@
 # commands.py
 import click
 from api.models import db, User, Proveedor, Categoria, Servicio, ImagenServicio
+import json
 
 
 def setup_commands(app):
@@ -66,7 +67,11 @@ def setup_commands(app):
                 proveedores)].id  # use id of existing proveedor
             # use id of existing categoria (0 or 1)
             servicio.categoria_id = categorias[x % 2].id
-            servicio.cobertura = "Cobertura " + str(x)
+            cobertura = [
+            {"region": "Region " + str(x),
+            "comunas": ["Comuna " + str(x)]},
+            ]
+            servicio.cobertura = json.dumps(cobertura)
             servicio.estado = True
             db.session.add(servicio)
             db.session.commit()
