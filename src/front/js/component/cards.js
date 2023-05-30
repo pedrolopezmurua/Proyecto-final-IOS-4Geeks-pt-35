@@ -13,7 +13,7 @@ export const CardCategoriaSTec = () => {
             <div className="card-body, text-center p-2">
                 <h5 className="card-title">Servicio Técnico</h5>
                 <Link to="/serviciotecnico">
-                    <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Entrar</button>
+                    <button className="btn btn-secondary" style={{ width: "10rem" }}>Entrar</button>
                 </Link>
             </div>
         </div>
@@ -27,7 +27,7 @@ export const CardCategoriaProductos = () => {
             <div className="card-body text-center">
                 <h5 className="card-title">Productos</h5>
                 <Link to="/productos">
-                    <button className="btn btn-dark m-2" style={{ width: "10rem" }}>Entrar</button>
+                    <button className="btn btn-secondary" style={{ width: "10rem" }}>Entrar</button>
                 </Link>
             </div>
         </div>
@@ -70,7 +70,7 @@ export const CardProductos = () => {
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {producto.precio}</p>
                             <Link to={"/productos/detalle/" + producto.id}>
-                                <button className="btn btn-dark mt-3" style={{ width: "10rem" }}>Detalles</button></Link>
+                                <button className="btn btn-secondary" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
                     </div>
                 );
@@ -111,7 +111,7 @@ export const CardServiciosTecnicos = () => {
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {serviciotecnico.precio}</p>
                             <Link to={"/serviciotecnico/detalle/" + serviciotecnico.id}>
-                                <button className="btn btn-dark mt-3" style={{ width: "10rem" }}>Detalles</button></Link>
+                                <button className="btn btn-secondary" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
                     </div>
                 );

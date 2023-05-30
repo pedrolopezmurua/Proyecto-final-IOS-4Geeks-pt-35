@@ -82,7 +82,7 @@ function Login() {
                         </div>
                         <div className="mb-3 text-center">
                             <button type="button" className="btn btn-primary me-2" onClick={handleLogin}>Ingresar</button>
-                            <Link to="/" className="btn btn-secondary me-2">Cancelar</Link>
+                            <Link to="/" className="btn btn-secondary">Cancelar</Link>
                             <Link to="/recupera-password" className="btn btn-link">¿Olvidaste tu contraseña?</Link>
                         </div>
                     </form>
