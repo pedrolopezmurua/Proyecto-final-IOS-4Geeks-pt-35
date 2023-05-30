@@ -4,11 +4,17 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { AuthContext } from '../store/authContext';
-import { showPopupInfo } from './popupx';
+import { useShowPopup } from '../component/popupx';
 
 export const Navbar = () => {
 	const { userName, logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
+
+	const {
+		showPopupInfo,
+		showPopupError,
+		showPopupErrorLogin
+	} = useShowPopup();
 
 	// Comprueba si el usuario está autenticado
 	const isAuthenticated = Boolean(userName);
@@ -52,7 +58,7 @@ export const Navbar = () => {
 					// Si el usuario no está autenticado, muestra estos enlaces
 					<>
 						<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-						<Link className="btn btn-outline-info" to="/crearproveedor">Registro proveedor</Link>
+						<Link className="btn btn-outline-info" to="/crear-proveedor">Registro proveedor</Link>
 					</>
 				)}
 			</div>

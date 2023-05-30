@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
 import login from "../../img/login.png";
-import { showPopupInfo, showPopupError } from '../component/popupx';
+import { useShowPopup } from '../component/popupx';
 
 function Login() {
     const { logIn } = useContext(AuthContext);
@@ -22,6 +22,13 @@ function Login() {
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
         return emailRegex.test(email);
     };
+
+    const {
+        showPopupInfo,
+        showPopupError,
+        showPopupErrorLogin
+    } = useShowPopup();
+
 
     const handleLogin = async () => {
         // Validación del formato de correo electrónico
@@ -71,7 +78,7 @@ function Login() {
 
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
-            showPopupError('Usuario o Password son incorrectas. ');
+            showPopupErrorLogin('No estas registrado. Regístrate como proveedor.');
         }
     };
 

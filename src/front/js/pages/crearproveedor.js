@@ -2,11 +2,19 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { showPopupError, showPopupCreated } from '../component/popupx';
+import { useShowPopup } from '../component/popupx';
+import { ValidaRut } from '../component/validarut';
+import { ValidaNombre } from '../component/validanombre';
 
 const CrearProveedor = () => {
 
     let navigate = useNavigate();
+
+    const {
+        showPopupInfo,
+        showPopupError,
+        showPopupErrorLogin
+    } = useShowPopup();
 
     const [formValues, setFormValues] = useState({
         rut: '',
@@ -15,8 +23,8 @@ const CrearProveedor = () => {
         region: '',
         comuna: '',
         direccion: '',
-        telefono: '',
-        red_social: '',
+        telefono: '+569 ',
+        red_social: 'http://',
         correo: '',
         contrasena: '',
     });
@@ -75,11 +83,11 @@ const CrearProveedor = () => {
                     <div className="form-group row mx-0">
                         <div className="col">
                             <label htmlFor="rut">Rut:</label>
-                            <input type="text" className="form-control" id="rut" maxLength={12} style={{ width: '150px' }} onChange={handleChange} />
+                            <ValidaRut rutInicial={formValues.rut} onChange={(formattedRut) => setFormValues({ ...formValues, rut: formattedRut })} />
                         </div>
                         <div className="col">
                             <label htmlFor="nombre">Nombre:</label>
-                            <input type="text" className="form-control" id="nombre" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                            <ValidaNombre nombreInicial={formValues.nombre} onChange={(updatedNombre) => setFormValues({ ...formValues, nombre: updatedNombre })} />
                         </div>
                         <div className="col">
                             <label htmlFor="apellido">Apellido:</label>
@@ -115,13 +123,13 @@ const CrearProveedor = () => {
                     <div className="form-group row mx-0">
                         <div className="col">
                             <label htmlFor="telefono">Teléfono:</label>
-                            <input type="tel" className="form-control" id="telefono" maxLength={50} style={{ width: '300px' }} onChange={handleChange} />
+                            <input type="tel" className="form-control" id="telefono" maxLength={50} style={{ width: '300px' }} value={formValues.telefono} onChange={handleChange} />
                         </div>
-                    </div>
 
-                    <div className="form-group">
-                        <label htmlFor="red_social">Red Social:</label>
-                        <input type="text" className="form-control" id="red_social" maxLength={100} style={{ width: '600px' }} onChange={handleChange} />
+                        <div className="col">
+                            <label htmlFor="red_social">Red Social:</label>
+                            <input type="text" className="form-control" id="red_social" maxLength={100} style={{ width: '600px' }} value={formValues.red_social} onChange={handleChange} />
+                        </div>
                     </div>
                 </div>
             </div>
