@@ -2,11 +2,15 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { showPopupError } from './popupx';
+import { useShowPopup } from '../component/popupx';
 
 const ProtectedRoute = ({ children }) => {
     const navigate = useNavigate();
     const userName = localStorage.getItem('userName');
+
+    const {
+        showPopupError,
+    } = useShowPopup();
 
     useEffect(() => {
         if (!userName) {

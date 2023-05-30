@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
 import login from "../../img/login.png";
-import { showPopupInfo, showPopupError } from '../component/popupx';
+import { useShowPopup } from '../component/popupx';
 
 function Login() {
     const { logIn } = useContext(AuthContext);
@@ -17,10 +17,35 @@ function Login() {
     const handleUsernameChange = (event) => setUsername(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
 
+    const isEmailValid = (email) => {
+        // Expresión regular para validar el formato de correo electrónico
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        return emailRegex.test(email);
+    };
+
+    const {
+        showPopupInfo,
+        showPopupError,
+        showPopupErrorLogin
+    } = useShowPopup();
+
+
     const handleLogin = async () => {
+        // Validación del formato de correo electrónico
+        if (!isEmailValid(username)) {
+            showPopupError('Por favor, ingrese un correo electrónico válido.');
+            return;
+        }
+
         // Validación simple: usuario y contraseña no deben estar vacíos
         if (!username.trim() || !password.trim()) {
             showPopupError('Ambos campos, usuario y contraseña, son obligatorios.');
+            return;
+        }
+
+        // Validación de la longitud mínima de la contraseña
+        if (password.length < 3) {
+            showPopupError('La contraseña debe tener al menos 3 caracteres.');
             return;
         }
 
@@ -53,7 +78,7 @@ function Login() {
 
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
-            showPopupError('Usuario o Password son incorrectas. ');
+            showPopupErrorLogin('No estas registrado. Regístrate como proveedor.');
         }
     };
 
@@ -74,11 +99,17 @@ function Login() {
                     <form onSubmit={(event) => event.preventDefault()} className="mx-auto col-6">
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Usuario:</label>
-                            <input type="text" className="form-control" id="username" maxLength="30" value={username} onChange={handleUsernameChange} />
+                            <input type="email" className="form-control" id="username" maxLength="50" value={username} onChange={handleUsernameChange} required />
+                            <div className="invalid-feedback">
+                                Por favor, ingrese un correo electrónico válido.
+                            </div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Contraseña:</label>
-                            <input type="password" className="form-control" id="password" maxLength="30" value={password} onChange={handlePasswordChange} />
+                            <input type="password" className="form-control" id="password" minLength="3" maxLength="50" value={password} onChange={handlePasswordChange} required />
+                            <div className="invalid-feedback">
+                                La contraseña debe tener al menos 3 caracteres.
+                            </div>
                         </div>
                         <div className="mb-3 text-center">
                             <button type="button" className="btn btn-primary me-2" onClick={handleLogin}>Ingresar</button>

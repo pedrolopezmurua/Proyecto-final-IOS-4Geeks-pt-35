@@ -1,7 +1,7 @@
 // ./pages/recuperapassword.js
 
 import React, { useState } from 'react';
-import { showPopupInfo, showPopupError } from '../component/popupx';
+import { useShowPopup } from '../component/popupx';
 
 function RecuperaPassword() {
     const [email, setEmail] = useState('');
@@ -9,6 +9,11 @@ function RecuperaPassword() {
     const [loading, setLoading] = useState(false);
 
     const handleEmailChange = (event) => setEmail(event.target.value);
+
+    const {
+        showPopupInfo,
+        showPopupError,
+    } = useShowPopup();
 
     const sendPasswordResetEmail = async () => {
         setLoading(true);
