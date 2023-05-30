@@ -12,15 +12,11 @@ import atras from "../../img/atras.png";
 export const ServicioTecnico = () => {
     const { store, actions } = useContext(Context);
 
-    // useEffect(() => {
-    //     actions.getServicios()
-    // }, [store.ServicioTecnico])
-
     return (
         <div className="text-center">
             <div className="justify-content-center d-flex mt-3">
                 <div style={{ height: "250px", width: "1100px", overflow: "hidden" }}>
-                    <img src={dispositivos} style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                    <img src={dispositivos} style={{ objectFit: "fill", height: "100%", width: "100%" }} />
                 </div>
             </div>
             <h1 className="mt-4">Servicio Técnico</h1>
