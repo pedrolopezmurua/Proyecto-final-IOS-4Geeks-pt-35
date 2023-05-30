@@ -8,12 +8,12 @@ import noimage from ".//../../img/noimage.png"
 
 export const CardCategoriaSTec = () => {
     return (
-        <div className="card m-4" style={{ width: "18rem" }}>
+        <div className="card m-4 shadow" style={{ width: "18rem" }}>
             <img src={sTec} className="card-img-top" alt="..." style={{ height: "192px", width: "auto" }} />
             <div className="card-body, text-center p-2">
                 <h5 className="card-title">Servicio Técnico</h5>
                 <Link to="/serviciotecnico">
-                    <button className="btn btn-secondary" style={{ width: "10rem" }}>Entrar</button>
+                    <button className="btn btn-dark m-2 shadow" style={{ width: "10rem" }}>Entrar</button>
                 </Link>
             </div>
         </div>
@@ -22,12 +22,12 @@ export const CardCategoriaSTec = () => {
 
 export const CardCategoriaProductos = () => {
     return (
-        <div className="card m-4" style={{ width: "18rem" }}>
+        <div className="card m-4 shadow" style={{ width: "18rem" }}>
             <img src={ventas} className="card-img-top" alt="..." style={{ height: "192px", width: "auto" }} />
             <div className="card-body text-center">
                 <h5 className="card-title">Productos</h5>
                 <Link to="/productos">
-                    <button className="btn btn-secondary" style={{ width: "10rem" }}>Entrar</button>
+                    <button className="btn btn-dark m-2 shadow" style={{ width: "10rem" }}>Entrar</button>
                 </Link>
             </div>
         </div>
@@ -47,7 +47,7 @@ export const CardProductos = () => {
                 const imagen = Array.isArray(store.imagenes) && store.imagenes.find((img) => img.servicio_id === producto.id);
                 console.log(imagen)
                 return (
-                    <div className="card m-4 " style={{ width: "18rem" }} key={producto.id}>
+                    <div className="card m-4 shadow" style={{ width: "18rem" }} key={producto.id}>
 
                         <div style={{ height: "25%" }}>
                             <h5 className="card-title m-3">{producto.titulo}</h5>
@@ -70,7 +70,7 @@ export const CardProductos = () => {
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {producto.precio}</p>
                             <Link to={"/productos/detalle/" + producto.id}>
-                                <button className="btn btn-secondary" style={{ width: "10rem" }}>Detalles</button></Link>
+                                <button className="btn btn-dark mt-3 shadow" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
                     </div>
                 );
@@ -90,7 +90,7 @@ export const CardServiciosTecnicos = () => {
                 const imagen = Array.isArray(store.imagenes) && store.imagenes.find((img) => img.servicio_id === serviciotecnico.id);
                 console.log(imagen)
                 return (
-                    <div className="card m-4" style={{ width: "18rem" }} key={serviciotecnico.id}>
+                    <div className="card m-4 shadow" style={{ width: "18rem" }} key={serviciotecnico.id}>
                         <div style={{ height: "25%" }}>
                             <h5 className="card-title m-3">{serviciotecnico.titulo}</h5>
                         </div>
@@ -111,7 +111,7 @@ export const CardServiciosTecnicos = () => {
                         <div className="card-body">
                             <p className="fs-5 m-0">Precio {serviciotecnico.precio}</p>
                             <Link to={"/serviciotecnico/detalle/" + serviciotecnico.id}>
-                                <button className="btn btn-secondary" style={{ width: "10rem" }}>Detalles</button></Link>
+                                <button className="btn btn-dark mt-3 shadow" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
                     </div>
                 );
