@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import productos from "../../img/productos.jpg";
+import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
 import { CardProductos } from "../component/cards";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ export const Productos = () => {
         <div className="text-center">
             <div className="justify-content-center d-flex mt-3">
                 <div style={{ height: "250px", width: "1100px", overflow: "hidden" }}>
-                    <img src={productos} style={{ objectFit: "cover", height: "100%", width: "100%" }} />
+                    <img src={dispositivos} style={{ objectFit: "cover", height: "100%", width: "100%" }} />
                 </div>
             </div>
             <h1 className="mt-4">Productos</h1>

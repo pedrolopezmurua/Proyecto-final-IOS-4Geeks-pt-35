@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
-import dispositivos from "../../img/dispositivos.jpg";
+import product from "../../img/product.jpg";
 import "../../styles/home.css";
 import { CardCategoriaSTec } from "../component/cards";
 import { CardCategoriaVentas } from "../component/cards";
@@ -16,7 +16,7 @@ export const ServicioTecnico = () => {
         <div className="text-center">
             <div className="justify-content-center d-flex mt-3">
                 <div style={{ height: "250px", width: "1100px", overflow: "hidden" }}>
-                    <img src={dispositivos} style={{ objectFit: "fill", height: "100%", width: "100%" }} />
+                    <img src={product} style={{ objectFit: "fill", height: "100%", width: "100%" }} />
                 </div>
             </div>
             <h1 className="mt-4">Servicio Técnico</h1>
