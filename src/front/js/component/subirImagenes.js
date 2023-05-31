@@ -105,6 +105,7 @@ export const SubirImagenes = () => {
                 'success'
             )
             actions.getServicios();
+            actions.getImagenes();
             fetchImages();
         } catch (error) {
             console.error("Error al cargar la imagen: ", error);
