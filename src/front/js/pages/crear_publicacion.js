@@ -1,3 +1,4 @@
+//./pages/crear_publicacion.js
 import React, { useContext, useState } from "react";
 import "../../styles/home.css";
 import { AllRegionesYcomunas } from "../component/regionesYcomunas";
@@ -16,17 +17,10 @@ export const CrearPublicacion = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
-
-
+  const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!categoriaSeleccionada) {
-      // Mostrar un mensaje de error o realizar alguna acción
-      alert("Debes seleccionar una categoría");
-    }
-
-
 
     // Obtiene los valores del formulario
     const categoria_select = document.getElementById("categoria");
@@ -36,6 +30,35 @@ export const CrearPublicacion = () => {
     const precio = document.getElementById("precio").value;
     const precio_int = parseInt(precio, 10);
     const proveedor_id = userId;
+    //Validaciones
+    if (!categoriaSeleccionada) {
+      alert("Debes seleccionar una categoría");
+    }
+    if (categoriaSeleccionada && !coberturaSeleccionada) {
+      alert("Debes indicar tu cobertura");
+      return;
+    }
+    if (titulo.length < 5 && titulo.length > 50) {
+      alert("El título debe tener entre 5 y 50 caracteres");
+      return;
+    }
+
+    if (detalle.length < 20 && detalle.length > 1000) {
+      alert("La descripción debe tener entre 20 y 1000 caracteres");
+      return;
+    }
+    if (precio_int < 1000) {
+      alert("El precio debe ser de al menos $1000")
+      return;
+    }
+    if (!categoriaSeleccionada) {
+      alert("Debes seleccionar una categoría");
+    }
+    if (categoriaSeleccionada && !coberturaSeleccionada) {
+      alert("Debes indicar tu cobertura");
+      return;
+    }
+
 
     // Crea el objeto de datos a enviar
     const data = {
@@ -74,8 +97,8 @@ export const CrearPublicacion = () => {
 
 
   };
-
   const SeleccionaCobertura = () => {
+
     const RegionesYcomunas = AllRegionesYcomunas;
     const [region, setRegion] = useState("");
     const [comuna, setComuna] = useState("");
@@ -91,6 +114,14 @@ export const CrearPublicacion = () => {
       setComuna(selectedComuna);
     };
     const handleAddComuna = () => {
+      if (region === "") {
+        alert("Debes seleccionar al menos una región");
+        return;
+      }
+      if (comuna === "") {
+        alert("Debes seleccionar al menos una comuna");
+        return;
+      }
       if (selectedComunas && selectedRegion && comuna) {
         const existingRegion = selectedComunas.find(
           (item) => item.region === selectedRegion
@@ -117,13 +148,19 @@ export const CrearPublicacion = () => {
             },
           ]);
         }
-        setComuna("");
+        setComuna("")
+        if (region !== "") { setCoberturaSeleccionada(true); }
       }
     };
+
     const handleRemoveComuna = (index) => {
-      const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index);
-      setSelectedComunas(updatedSelectedComunas);
+      const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index); // Filtra los elementos de selectedComunas y crea un nuevo array sin el elemento en el índice proporcionado
+      setSelectedComunas(updatedSelectedComunas); // Actualiza el estado selectedComunas con el nuevo array sin el elemento eliminado
+      if (updatedSelectedComunas.length === 0) {
+        setCoberturaSeleccionada(false);
+      }
     };
+
 
     return (
       <div className="container">
@@ -192,6 +229,7 @@ export const CrearPublicacion = () => {
     );
   }
 
+
   return (
     <div className="container my-3">
       <h1 className="mb-3">Crear nueva publicación</h1>
@@ -226,11 +264,11 @@ export const CrearPublicacion = () => {
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input type="number" className="form-control" id="precio" placeholder="40000" required inputMode="numeric" pattern="[0-9]*" />
+                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>
-                <SeleccionaCobertura />
+                <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />
               </div>
               <div className="d-flex justify-content-end me-4">
 

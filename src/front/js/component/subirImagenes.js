@@ -1,14 +1,12 @@
+// ./component/subirImagenes.js
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from '../store/authContext';
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 export const SubirImagenes = () => {
     const { actions } = useContext(Context);
-    let navigate = useNavigate();
-    const { userId } = useContext(AuthContext);
     const MySwal = withReactContent(Swal);
     const servicio_id = window.location.pathname.split("/").pop();
     const [images, setImages] = useState([]);
@@ -68,7 +66,6 @@ export const SubirImagenes = () => {
             console.error(error);
         }
     };
-
 
     const uploadImage = async (e, servicio_id) => {     //Manejo del archivo que sube el usuario
         const files = e.target.files;   //obtienes la imagen que subió el usuario al input
