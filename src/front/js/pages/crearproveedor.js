@@ -83,7 +83,7 @@ const CrearProveedor = () => {
             <h5>Datos de Proveedor</h5>
 
             <div className="card">
-                <div className="card-header bg-primary text-white">Datos Personales</div>
+                <div className="card-header bg-dark-subtle text-black">Datos Personales</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
@@ -103,7 +103,7 @@ const CrearProveedor = () => {
             </div>
 
             <div className="card">
-                <div className="card-header bg-primary text-white">Datos de Dirección</div>
+                <div className="card-header bg-dark-subtle text-black">Datos de Dirección</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
@@ -123,7 +123,7 @@ const CrearProveedor = () => {
             </div>
 
             <div className="card">
-                <div className="card-header bg-primary text-white">Datos de Contacto</div>
+                <div className="card-header bg-dark-subtle text-black">Datos de Contacto</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
@@ -140,7 +140,7 @@ const CrearProveedor = () => {
             </div>
 
             <div className="card">
-                <div className="card-header bg-primary text-white">Datos de Cuenta</div>
+                <div className="card-header bg-dark-subtle text-black">Datos de Cuenta</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
                         <div className="col">
@@ -160,10 +160,10 @@ const CrearProveedor = () => {
             </div>
 
             <div className="d-flex justify-content-end mt-3">
-                <button className="btn btn-primary mx-2" onClick={handleSubmit}>
+                <button className="btn btn-success mx-2" onClick={handleSubmit}>
                     Crear
                 </button>
-                <button className="btn btn-secondary" onClick={handleCancel}>Cancelar</button>
+                <button className="btn btn-dark shadow" onClick={handleCancel}>Cancelar</button>
             </div>
         </div >
     );
