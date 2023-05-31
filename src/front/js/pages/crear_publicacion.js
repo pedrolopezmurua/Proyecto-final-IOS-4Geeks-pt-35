@@ -18,8 +18,6 @@ export const CrearPublicacion = () => {
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
   const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
-  const [precioInput, setPrecioInput] = useState("");
-  const [precioFormateado, setPrecioFormateado] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -230,15 +228,7 @@ export const CrearPublicacion = () => {
       </div>
     );
   }
-  const handleChangePrecio = (e) => {
-    setPrecioInput(e.target.value);
-  };
-  const handleBlurPrecio = () => {
-    const precio = parseInt(precioInput, 10);
-    if (!isNaN(precio)) {
-      setPrecioFormateado(precio.toLocaleString("es-ES", { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
-    }
-  };
+
 
   return (
     <div className="container my-3">
@@ -274,17 +264,7 @@ export const CrearPublicacion = () => {
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="precio"
-                  placeholder="40000"
-                  value={precioInput}
-                  onChange={handleChangePrecio}
-                  onBlur={handleBlurPrecio}
-                  required
-                  inputMode="numeric"
-                  pattern="[0-9]*" />
+                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>
