@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useShowPopup } from '../component/popupx';
 import { ValidaRut } from '../component/validarut';
-import { ValidaNombre } from '../component/validanombre';
 
 const CrearProveedor = () => {
 
@@ -13,7 +12,7 @@ const CrearProveedor = () => {
     const {
         showPopupInfo,
         showPopupError,
-        showPopupErrorLogin
+        showPopupCreated,
     } = useShowPopup();
 
     const [formValues, setFormValues] = useState({
@@ -93,11 +92,11 @@ const CrearProveedor = () => {
                         </div>
                         <div className="col">
                             <label htmlFor="nombre">Nombre:</label>
-                            <ValidaNombre nombreInicial={formValues.nombre} onChange={(updatedNombre) => setFormValues({ ...formValues, nombre: updatedNombre })} />
+                            <input type="text" className="form-control" id="nombre" minLength={3} maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                         <div className="col">
                             <label htmlFor="apellido">Apellido:</label>
-                            <input type="text" className="form-control" id="apellido" maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
+                            <input type="text" className="form-control" id="apellido" minLength={3} maxLength={100} style={{ width: '300px' }} onChange={handleChange} />
                         </div>
                     </div>
                 </div>
