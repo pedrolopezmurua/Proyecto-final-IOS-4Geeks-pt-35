@@ -68,7 +68,7 @@ export const CardProductos = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <p className="fs-5 m-0">Precio {producto.precio}</p>
+                            <p className="fs-5 m-0">Precio {`$${producto.precio.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}</p>
                             <Link to={"/productos/detalle/" + producto.id}>
                                 <button className="btn btn-dark mt-3 shadow" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>
@@ -109,7 +109,7 @@ export const CardServiciosTecnicos = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <p className="fs-5 m-0">Precio {serviciotecnico.precio}</p>
+                            <p className="fs-5 m-0">Precio {`$${serviciotecnico.precio.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}</p>
                             <Link to={"/serviciotecnico/detalle/" + serviciotecnico.id}>
                                 <button className="btn btn-dark mt-3 shadow" style={{ width: "10rem" }}>Detalles</button></Link>
                         </div>

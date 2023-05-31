@@ -21,6 +21,8 @@ export const ModificaProducto = () => {
     const [selectedComunas, setSelectedComunas] = useState([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
     const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
+    const [region, setRegion] = useState("");
+    const [comuna, setComuna] = useState("");
     const servicio_id = window.location.pathname.split("/").pop();
 
     useEffect(() => {       //Solicitud GET a nuestra API
@@ -153,8 +155,6 @@ export const ModificaProducto = () => {
     const SeleccionaCobertura = () => {
 
         const RegionesYcomunas = AllRegionesYcomunas;
-        const [region, setRegion] = useState("");
-        const [comuna, setComuna] = useState("");
 
         const handleRegionChange = (e) => {
             const selectedRegion = e.target.value;

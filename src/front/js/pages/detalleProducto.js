@@ -58,7 +58,7 @@ export const DetallesProducto = props => {
             {/* Arriba */}
             <div className="text-center mt-5">
                 <h2>{detalleProducto.titulo}</h2>
-                <h3>Precio: {detalleProducto.precio}</h3>
+                <h3>Precio: {`$${detalleProducto?.precio?.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}</h3>
             </div>
             {/* Izquierda */}
             <div className="mx-5 row">
