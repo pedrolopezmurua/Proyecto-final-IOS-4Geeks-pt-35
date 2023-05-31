@@ -169,6 +169,7 @@ export const SubirImagenes = () => {
                             ) : (<div>No hay imágenes asociadas a esta publicación</div>)}
                     </div>
                 </div>
+                <hr className="mx-5 my-5" />
             </div>
         </div>
     )

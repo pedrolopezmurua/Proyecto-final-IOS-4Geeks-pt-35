@@ -5,9 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../store/authContext'
 import login from "../../img/login.png";
 import { useShowPopup } from '../component/popupx';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function Login() {
     const { logIn } = useContext(AuthContext);
+    const MySwal = withReactContent(Swal);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -73,7 +76,11 @@ function Login() {
 
             logIn(username, responseData.data.id);
             console.error('Inicio de sesión exitoso: ' + responseData);
-            showPopupInfo('Inicio de sesión exitoso.');
+            MySwal.fire(
+                'Éxito',
+                'Inicio de sesión exitoso',
+                'success'
+            )
             navigate('/');
 
         } else {
@@ -112,8 +119,8 @@ function Login() {
                             </div>
                         </div>
                         <div className="mb-3 text-center">
-                            <button type="button" className="btn btn-primary me-2" onClick={handleLogin}>Ingresar</button>
-                            <Link to="/" className="btn btn-secondary">Cancelar</Link>
+                            <button type="button" className="btn btn-success me-2" onClick={handleLogin}>Ingresar</button>
+                            <Link to="/" className="btn btn-dark shadow">Cancelar</Link>
                             <Link to="/recupera-password" className="btn btn-link">¿Olvidaste tu contraseña?</Link>
                         </div>
                     </form>

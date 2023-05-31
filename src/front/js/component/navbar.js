@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { AuthContext } from '../store/authContext';
 import { useShowPopup } from '../component/popupx';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const Navbar = () => {
 	const { userName, logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
+	const MySwal = withReactContent(Swal);
 
 	const {
 		showPopupInfo,
@@ -20,7 +23,11 @@ export const Navbar = () => {
 	const isAuthenticated = Boolean(userName);
 
 	const handleLogout = () => {
-		showPopupInfo("Usuario ha cerrado sesión");
+		MySwal.fire(
+			'Éxito',
+			'Cierre de sesión exitoso',
+			'success'
+		);
 		// Limpia el estado
 		logOut();
 		navigate('/');
@@ -56,14 +63,14 @@ export const Navbar = () => {
 					// Si el usuario está autenticado, muestra estos enlaces
 					<>
 						<span className="navbar-text mr-3">Bienvenido, {userName} </span>
-						<Link className="btn btn-outline-info mx-2" to="/perfil">Panel Administración</Link>
-						<button className="btn btn-outline-info me-5" onClick={handleLogout}>Cerrar sesión</button>
+						<Link className="btn btn-outline-success mx-2" to="/perfil">Panel Administración</Link>
+						<button className="btn btn-outline-success me-5" onClick={handleLogout}>Cerrar sesión</button>
 					</>
 				) : (
 					// Si el usuario no está autenticado, muestra estos enlaces
 					<>
-						<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-						<Link className="btn btn-outline-info me-5" to="/crear-proveedor">Registro proveedor</Link>
+						<Link className="btn btn-outline-success mx-2" to="/login">Ingreso proveedor</Link>
+						<Link className="btn btn-outline-success me-5" to="/crear-proveedor">Registro proveedor</Link>
 					</>
 				)}
 			</div>
