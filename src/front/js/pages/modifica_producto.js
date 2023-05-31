@@ -1,5 +1,5 @@
 //./pages/modifica_producto.js
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import "../../styles/home.css";
 import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
 import { AuthContext } from '../store/authContext';
@@ -9,15 +9,19 @@ import { AllRegionesYcomunas } from "../component/regionesYcomunas";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+
+
 export const ModificaProducto = () => {
 
     const { actions } = useContext(Context);
-    const MySwal = withReactContent(Swal);
-    let navigate = useNavigate();
     const { userId } = useContext(AuthContext);
-    const servicio_id = window.location.pathname.split("/").pop();
+    let navigate = useNavigate();
+    const MySwal = withReactContent(Swal);
     const [selectedRegion, setSelectedRegion] = useState("");
     const [selectedComunas, setSelectedComunas] = useState([]);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
+    const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
+    const servicio_id = window.location.pathname.split("/").pop();
 
     useEffect(() => {       //Solicitud GET a nuestra API
         const url = `http://127.0.0.1:3001/api/servicios/${servicio_id}`;
@@ -37,6 +41,8 @@ export const ModificaProducto = () => {
                 categoriaSelect.value = data.categoria_id.toString();
                 const parsedCobertura = JSON.parse(data.cobertura) //me traigo la cobertura como un objeto en JS
                 setSelectedComunas(parsedCobertura);
+                setCategoriaSeleccionada(true);
+                setCoberturaSeleccionada(true);
             })
             .catch(error => {
                 console.error(error);
@@ -45,10 +51,6 @@ export const ModificaProducto = () => {
 
     const handleSubmit = (e) => {   //Solicitud PUT a nuestra API
         e.preventDefault();
-        if (!categoriaSeleccionada) {
-            // Mostrar un mensaje de error o realizar alguna acción
-            alert("Debes seleccionar una categoría");
-        }
 
         // Obtiene los valores del formulario
         const categoria_select = document.getElementById("categoria");
@@ -58,6 +60,28 @@ export const ModificaProducto = () => {
         const precio = document.getElementById("precio").value;
         const precio_int = parseInt(precio, 10);
         const proveedor_id = userId;
+        //Validaciones
+        if (!categoriaSeleccionada) {
+            alert("Debes seleccionar una categoría");
+        }
+        if (categoriaSeleccionada && !coberturaSeleccionada) {
+            alert("Debes indicar tu cobertura");
+            return;
+        }
+        if (titulo.length < 5 || titulo.length > 50) {
+            alert("El título debe tener entre 5 y 50 caracteres");
+            return;
+        }
+
+        if (detalle.length < 20 || detalle.length > 1000) {
+            alert("La descripción debe tener entre 20 y 1000 caracteres");
+            return;
+        }
+        if (precio_int < 1000) {
+            alert("El precio debe ser de al menos $1000")
+            return;
+        }
+
         // Crea el objeto de datos a enviar
         const data = {
             titulo: titulo,
@@ -127,6 +151,7 @@ export const ModificaProducto = () => {
     };
 
     const SeleccionaCobertura = () => {
+
         const RegionesYcomunas = AllRegionesYcomunas;
         const [region, setRegion] = useState("");
         const [comuna, setComuna] = useState("");
@@ -142,6 +167,14 @@ export const ModificaProducto = () => {
             setComuna(selectedComuna);
         };
         const handleAddComuna = () => {
+            if (region === "") {
+                alert("Debes seleccionar al menos una región");
+                return;
+            }
+            if (comuna === "") {
+                alert("Debes seleccionar al menos una comuna");
+                return;
+            }
             if (selectedComunas && selectedRegion && comuna) {
                 const existingRegion = selectedComunas.find(
                     (item) => item.region === selectedRegion
@@ -168,13 +201,19 @@ export const ModificaProducto = () => {
                         },
                     ]);
                 }
-                setComuna("");
+                setComuna("")
+                if (region !== "") { setCoberturaSeleccionada(true); }
             }
         };
+
         const handleRemoveComuna = (index) => {
-            const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index);
-            setSelectedComunas(updatedSelectedComunas);
+            const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index); // Filtra los elementos de selectedComunas y crea un nuevo array sin el elemento en el índice proporcionado
+            setSelectedComunas(updatedSelectedComunas); // Actualiza el estado selectedComunas con el nuevo array sin el elemento eliminado
+            if (updatedSelectedComunas.length === 0) {
+                setCoberturaSeleccionada(false);
+            }
         };
+
 
         return (
             <div className="container">
@@ -252,7 +291,7 @@ export const ModificaProducto = () => {
                     <div className="col-4 d-flex justify-content-center" id="cuadro-crear-servicio-izq">
                         <div className="alert alert-primary text-center m-2 p-3" style={{ maxHeight: "7rem", maxWidth: "auto" }}>
                             <i className="fas fa-file-alt"></i>
-                            <p className="m-0">Crear Publicación</p>
+                            <p className="m-0">Modificar Publicación</p>
                             <i className="fa-solid fa-arrow-right fa-2xs my-0"></i>
                         </div>
                     </div>
@@ -279,7 +318,7 @@ export const ModificaProducto = () => {
                                 <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
                             </div>
                             <div className="row mt-3" id="seleccion-cobertura">
-                                <SeleccionaCobertura />
+                                <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />
                             </div>
                             <div className="row">
                                 <div className="col d-flex justify-content-start me-4">
