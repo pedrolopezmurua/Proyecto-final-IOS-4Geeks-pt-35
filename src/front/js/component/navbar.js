@@ -63,7 +63,7 @@ export const Navbar = () => {
 					// Si el usuario no está autenticado, muestra estos enlaces
 					<>
 						<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-						<Link className="btn btn-outline-info" to="/crear-proveedor">Registro proveedor</Link>
+						<Link className="btn btn-outline-info me-5" to="/crear-proveedor">Registro proveedor</Link>
 					</>
 				)}
 			</div>
