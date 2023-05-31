@@ -33,7 +33,7 @@ export const Navbar = () => {
 
 				<div className="container d-flex justify-content-start mx-2 bg-transparent" >
 					<ul className="navbar-nav me-auto mb-3 mb-lg-0">
-						<li class="nav-item">
+						<li className="nav-item">
 							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/'>
 								Inicio
 							</Link>
@@ -42,7 +42,7 @@ export const Navbar = () => {
 							<a className="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontSize: '18px' }}>
 								Servicios
 							</a>
-							<ul class="dropdown-menu">
+							<ul className="dropdown-menu">
 								<li><Link className="dropdown-item" to='/productos'>Productos</Link></li>
 								<li><Link className="dropdown-item" to='/serviciotecnico'>Servicio Técnico</Link></li>
 							</ul>
