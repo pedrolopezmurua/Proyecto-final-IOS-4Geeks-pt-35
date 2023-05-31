@@ -4,11 +4,17 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { AuthContext } from '../store/authContext';
-import { showPopupInfo } from './popupx';
+import { useShowPopup } from '../component/popupx';
 
 export const Navbar = () => {
 	const { userName, logOut } = useContext(AuthContext);
 	const navigate = useNavigate();
+
+	const {
+		showPopupInfo,
+		showPopupError,
+		showPopupErrorLogin
+	} = useShowPopup();
 
 	// Comprueba si el usuario está autenticado
 	const isAuthenticated = Boolean(userName);
@@ -27,14 +33,19 @@ export const Navbar = () => {
 
 				<div className="container d-flex justify-content-start mx-2 bg-transparent" >
 					<ul className="navbar-nav me-auto mb-3 mb-lg-0">
-						<li className="nav-item mx-3">
-							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Inicio</Link>
+						<li class="nav-item">
+							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/'>
+								Inicio
+							</Link>
 						</li>
-						<li className="nav-item mx-3">
-							<Link className="text-decoration-none" to='/' style={{ color: '#18A0FB', fontSize: '18px' }}>Servicios</Link>
-						</li>
-						<li className="nav-item mx-3">
-							<Link className="text-decoration-none" to='/prueba' style={{ color: '#18A0FB', fontSize: '18px' }}>Soporte</Link>
+						<li className="nav-item dropdown mx-3">
+							<a className="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ fontSize: '18px' }}>
+								Servicios
+							</a>
+							<ul class="dropdown-menu">
+								<li><Link className="dropdown-item" to='/productos'>Productos</Link></li>
+								<li><Link className="dropdown-item" to='/serviciotecnico'>Servicio Técnico</Link></li>
+							</ul>
 						</li>
 					</ul>
 				</div>
@@ -52,7 +63,7 @@ export const Navbar = () => {
 					// Si el usuario no está autenticado, muestra estos enlaces
 					<>
 						<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-						<Link className="btn btn-outline-info" to="/crearproveedor">Registro proveedor</Link>
+						<Link className="btn btn-outline-info" to="/crear-proveedor">Registro proveedor</Link>
 					</>
 				)}
 			</div>

@@ -1,20 +1,14 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/648d4bfa8d8c_.py
-Revision ID: 648d4bfa8d8c
+<<<<<<<< HEAD:migrations/versions/b3b22df5543b_.py
+Revision ID: b3b22df5543b
 Revises: 
-Create Date: 2023-05-14 13:32:46.718522
+Create Date: 2023-05-25 22:21:55.793533
 ========
-<<<<<<<< HEAD:migrations/versions/bafe5b67a289_.py
-Revision ID: bafe5b67a289
-Revises: 
-Create Date: 2023-05-13 11:48:54.176863
-========
-Revision ID: cab71544da7d
-Revises: 
-Create Date: 2023-05-13 10:54:04.308789
->>>>>>>> main:migrations/versions/cab71544da7d_.py
->>>>>>>> main:migrations/versions/cab71544da7d_.py
+Revision ID: 762cc409029a
+Revises: cab71544da7d
+Create Date: 2023-05-25 20:07:35.506392
+>>>>>>>> 447ec4cfdd787298822b4637460efdc0a6ad76e2:migrations/versions/762cc409029a_.py
 
 """
 from alembic import op
@@ -22,12 +16,13 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/648d4bfa8d8c_.py
-revision = '648d4bfa8d8c'
-========
-revision = 'cab71544da7d'
->>>>>>>> main:migrations/versions/cab71544da7d_.py
+<<<<<<<< HEAD:migrations/versions/b3b22df5543b_.py
+revision = 'b3b22df5543b'
 down_revision = None
+========
+revision = '762cc409029a'
+down_revision = 'cab71544da7d'
+>>>>>>>> 447ec4cfdd787298822b4637460efdc0a6ad76e2:migrations/versions/762cc409029a_.py
 branch_labels = None
 depends_on = None
 
@@ -57,8 +52,8 @@ def upgrade():
     )
     op.create_table('servicio',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('titulo', sa.String(length=200), nullable=True),
-    sa.Column('detalle', sa.String(length=1000), nullable=True),
+    sa.Column('titulo', sa.String(length=100), nullable=True),
+    sa.Column('detalle', sa.String(length=3000), nullable=True),
     sa.Column('precio', sa.Integer(), nullable=False),
     sa.Column('proveedor_id', sa.Integer(), nullable=False),
     sa.Column('categoria_id', sa.Integer(), nullable=False),

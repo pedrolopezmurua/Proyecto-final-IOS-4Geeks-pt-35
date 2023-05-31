@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { showPopupInfo, showPopupError } from '../component/popupx';
+import { useShowPopup } from '../component/popupx';
 
 function ResetPassword() {
     const { email } = useParams();
@@ -13,6 +13,11 @@ function ResetPassword() {
     const [emailExists, setEmailExists] = useState(true);
     const [passwordUpdated, setPasswordUpdated] = useState(false);
     const [error, setError] = useState('');
+
+    const {
+        showPopupInfo,
+        showPopupError,
+    } = useShowPopup();
 
     useEffect(() => {
         const checkEmailExists = async () => {
