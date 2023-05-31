@@ -105,6 +105,7 @@ export const SubirImagenes = () => {
                 'success'
             )
             actions.getServicios();
+            actions.getImagenes();
             fetchImages();
         } catch (error) {
             console.error("Error al cargar la imagen: ", error);
@@ -143,9 +144,9 @@ export const SubirImagenes = () => {
                 {images && images.length > 0 ?
                     (Array.isArray(images) && images.map((image, index) => (
                         <div className="col-4 position-relative m-3" style={{ width: "300px" }} key={index}>
-                            <div className="" key={index} style={{ width: "300px", height: "300px" }}>
+                            <div className="" key={index}>
                                 <button type="button" onClick={() => deleteImage(image.id)} className="btn-close position-absolute top-0 start-0 translate-middle"></button>
-                                <img src={image.secure_url} style={{ height: "100%", width: "100%", objectFit: "scale-down" }} />
+                                <img src={image.secure_url} style={{ width: "300px" }} />
                             </div>
                         </div>
                     ))

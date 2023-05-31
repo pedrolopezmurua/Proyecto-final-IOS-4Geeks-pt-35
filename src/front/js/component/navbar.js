@@ -27,7 +27,7 @@ export const Navbar = () => {
 	};
 
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ marginBottom: '0' }}>
+		<nav className="navbar navbar-expand-lg navbar-light bg-light pe-5" style={{ marginBottom: '0' }}>
 			<div className="container-fluid ms-5">
 				<Link className="" to='/'><img className="" style={{ width: "150px", height: "60px", marginLeft: "100px", marginRight: "120px" }} src={logo} /></Link>
 
@@ -57,13 +57,13 @@ export const Navbar = () => {
 					<>
 						<span className="navbar-text mr-3">Bienvenido, {userName} </span>
 						<Link className="btn btn-outline-info mx-2" to="/perfil">Panel Administración</Link>
-						<button className="btn btn-outline-info" onClick={handleLogout}>Cerrar sesión</button>
+						<button className="btn btn-outline-info me-5" onClick={handleLogout}>Cerrar sesión</button>
 					</>
 				) : (
 					// Si el usuario no está autenticado, muestra estos enlaces
 					<>
 						<Link className="btn btn-outline-info mx-2" to="/login">Ingreso proveedor</Link>
-						<Link className="btn btn-outline-info" to="/crear-proveedor">Registro proveedor</Link>
+						<Link className="btn btn-outline-info me-5" to="/crear-proveedor">Registro proveedor</Link>
 					</>
 				)}
 			</div>
