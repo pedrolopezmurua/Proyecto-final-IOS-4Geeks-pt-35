@@ -114,16 +114,19 @@ export const SubirImagenes = () => {
 
     return (
         <div className="container my-3">
-            <div className="row m-5" id="botones-navegación">
-                <div className="col">
-                    <Link to={`/modificar-publicacion/${servicio_id}`} >
-                        <button type="button" className="btn btn-success">Modificar o eliminar esta publicación</button>
-                    </Link>
-                </div>
-                <div className="col">
-                    <Link to={`/publicaciones`} >
-                        <button type="button" className="btn btn-success">Volver a todas mis publicaciones</button>
-                    </Link>
+            <div className="container text-center" id="container-botones-navegacion">
+                <div className="row gx-5 my-3" id="botones-navegación">
+
+                    <div className="col">
+                        <Link to={`/modificar-publicacion/${servicio_id}`} >
+                            <button type="button" className="btn btn-success">Modificar o eliminar esta publicación</button>
+                        </Link>
+                    </div>
+                    <div className="col">
+                        <Link to={`/publicaciones`} >
+                            <button type="button" className="btn btn-success">Volver a todas mis publicaciones</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <h1>Agrega imágenes a tu publicación</h1>
