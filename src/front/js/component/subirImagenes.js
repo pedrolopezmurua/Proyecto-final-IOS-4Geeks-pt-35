@@ -113,8 +113,8 @@ export const SubirImagenes = () => {
     };
 
     return (
-        <div className="container-fluid">
-            <div className="row mb-3 mt-3">
+        <div className="container my-3">
+            <div className="row m-5" id="botones-navegación">
                 <div className="col">
                     <Link to={`/modificar-publicacion/${servicio_id}`} >
                         <button type="button" className="btn btn-success">Modificar o eliminar esta publicación</button>
@@ -126,31 +126,46 @@ export const SubirImagenes = () => {
                     </Link>
                 </div>
             </div>
-            <h1>Agrega tus imágenes aquí:</h1>
-            <div className="row justify-content-center">
-                {images.length < 10 && (
-                    <div className="col">
-                        <input
-                            onChange={uploadImage}
-                            type="file"
-                            className="form-control mb-2"
-                            id="upload_img"
-                            aria-label="Upload image"
-                        />
-                    </div>
-                )}
-            </div>
-            <div className="row">
-                {images && images.length > 0 ?
-                    (Array.isArray(images) && images.map((image, index) => (
-                        <div className="col-4 position-relative m-3" style={{ width: "300px" }} key={index}>
-                            <div className="" key={index}>
-                                <button type="button" onClick={() => deleteImage(image.id)} className="btn-close position-absolute top-0 start-0 translate-middle"></button>
-                                <img src={image.secure_url} style={{ width: "300px" }} />
-                            </div>
+            <h1>Agrega imágenes a tu publicación</h1>
+            <div className="container border border-secondary p-2" id="contenedor-formulario">
+                <hr className="mx-5 my-5" />
+                <div className="row justify-content-center align-items-center" id="contenido-formulario">
+                    <div className="col-4 d-flex justify-content-center" id="cuadro-agregar-img-izq">
+                        <div className="alert alert-primary text-center m-2 p-3" style={{ maxHeight: "7rem", maxWidth: "auto" }}>
+                            <i class="fa-solid fa-camera"></i>
+                            <p className="m-0">Agregar imágenes</p>
+                            <i className="fa-solid fa-arrow-right fa-2xs my-0"></i>
                         </div>
-                    ))
-                    ) : (<div>No hay imágenes asociadas a esta publicación</div>)}
+                    </div>
+                    <div className="col-8" id="input-formulario">
+                        <div className="row justify-content-center my-2">
+                            <p className="mb-2">Arrastra o busca tus imágenes aquí:</p>
+                            {images.length < 10 && (
+                                <div className="col">
+                                    <input
+                                        onChange={uploadImage}
+                                        type="file"
+                                        className="form-control"
+                                        id="upload_img"
+                                        aria-label="Upload image"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="row">
+                        {images && images.length > 0 ?
+                            (Array.isArray(images) && images.map((image, index) => (
+                                <div className="col-4 position-relative m-3" style={{ width: "300px" }} key={index}>
+                                    <div className="" key={index}>
+                                        <button type="button" onClick={() => deleteImage(image.id)} className="btn-close position-absolute top-0 start-0 translate-middle"></button>
+                                        <img src={image.secure_url} style={{ width: "300px" }} />
+                                    </div>
+                                </div>
+                            ))
+                            ) : (<div>No hay imágenes asociadas a esta publicación</div>)}
+                    </div>
+                </div>
             </div>
         </div>
     )

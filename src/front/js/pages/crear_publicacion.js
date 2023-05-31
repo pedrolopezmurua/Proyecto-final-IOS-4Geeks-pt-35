@@ -18,6 +18,8 @@ export const CrearPublicacion = () => {
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
   const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
+  const [region, setRegion] = useState("");
+  const [comuna, setComuna] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,12 +40,12 @@ export const CrearPublicacion = () => {
       alert("Debes indicar tu cobertura");
       return;
     }
-    if (titulo.length < 5 && titulo.length > 50) {
+    if (titulo.length < 5 || titulo.length > 50) {
       alert("El título debe tener entre 5 y 50 caracteres");
       return;
     }
 
-    if (detalle.length < 20 && detalle.length > 1000) {
+    if (detalle.length < 20 || detalle.length > 1000) {
       alert("La descripción debe tener entre 20 y 1000 caracteres");
       return;
     }
@@ -51,15 +53,6 @@ export const CrearPublicacion = () => {
       alert("El precio debe ser de al menos $1000")
       return;
     }
-    if (!categoriaSeleccionada) {
-      alert("Debes seleccionar una categoría");
-    }
-    if (categoriaSeleccionada && !coberturaSeleccionada) {
-      alert("Debes indicar tu cobertura");
-      return;
-    }
-
-
     // Crea el objeto de datos a enviar
     const data = {
       titulo: titulo,
@@ -100,8 +93,7 @@ export const CrearPublicacion = () => {
   const SeleccionaCobertura = () => {
 
     const RegionesYcomunas = AllRegionesYcomunas;
-    const [region, setRegion] = useState("");
-    const [comuna, setComuna] = useState("");
+
 
     const handleRegionChange = (e) => {
       const selectedRegion = e.target.value;
