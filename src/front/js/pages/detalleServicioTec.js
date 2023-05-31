@@ -29,7 +29,7 @@ export const DetallesServicioTec = props => {
 
     const Cobertura = () => {
         const coberturaData = detalleServicioTec.cobertura && JSON.parse(detalleServicioTec.cobertura);
-
+        console.log(coberturaData)
         const cobertura = Array.isArray(coberturaData) && coberturaData.map((item, index) => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
