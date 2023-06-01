@@ -5,6 +5,7 @@ import logo from "../../img/logo.png";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { WhatsApp } from './whatsapp';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 
@@ -29,21 +30,21 @@ const Footer = () => {
 					<div className="col-md-4">
 						<h5 className="border-bottom pb-1 p-3">Legal</h5>
 						<div className="row p-2">
-							<a href="#" className="text-secondary">
+							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqterminos'>
 								Términos y Condiciones
-							</a>
+							</Link>
 						</div>
 
 						<div className="row p-2">
-							<a href="#" className="text-secondary">
+							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqregistro'>
 								Registro y Cuenta
-							</a>
+							</Link>
 						</div>
 
 						<div className="row p-2">
-							<a href="#" className="text-secondary">
+							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqresponsabilidad'>
 								Responsabilidad
-							</a>
+							</Link>
 						</div>
 					</div>
 
