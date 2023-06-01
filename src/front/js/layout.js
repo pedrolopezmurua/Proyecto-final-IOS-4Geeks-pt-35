@@ -23,10 +23,12 @@ import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
 import { SubirImagenes } from "./component/subirImagenes";
 import Error404 from "./pages/error404";
-import FaqPage from "./pages/faqpage";
 import DevolucionesPage from "./pages/devolucionespage";
 import { ModificaProducto } from './pages/modifica_producto';
 import ProtectedRoute from "./component/protectedroute";
+import { FaqTerminos } from "./pages/faqterminos";
+import { FaqResponsabilidad } from "./pages/faqresponsabilidad";
+import { FaqRegistro } from "./pages/faqregistro";
 
 //create your first component
 const Layout = () => {
@@ -59,7 +61,9 @@ const Layout = () => {
                             <Route element={<ProtectedRoute><VerPublicaciones /></ProtectedRoute>} path="/publicaciones" />
                             <Route element={<ProtectedRoute><SubirImagenes /></ProtectedRoute>} path="subir-imagenes/:servicioId" />
                             <Route element={<ProtectedRoute><ModificaProducto /></ProtectedRoute>} path="modificar-publicacion/:servicioId" />
-                            <Route element={<FaqPage />} path="/faqpage" />
+                            <Route element={<FaqRegistro />} path="/faqregistro" />
+                            <Route element={<FaqResponsabilidad />} path="/faqresponsabilidad" />
+                            <Route element={<FaqTerminos />} path="/faqterminos" />
                             <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
