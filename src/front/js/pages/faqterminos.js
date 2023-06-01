@@ -1,10 +1,17 @@
 
-import React from 'react';
+import atras from "../../img/atras.png";
+import React, { useState, useEffect, useContext } from "react";
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import Carousel from 'react-bootstrap/Carousel';
+import noimage from './/../../img/noimage.png'
+
 
 export function FaqTerminos() {
 
-        return (
-            <div className='container my-3'>
+    return (
+        <div className='container my-3'>
             <div className='row'>
                 <h1>Términos y Condiciones</h1>
 
@@ -24,7 +31,15 @@ export function FaqTerminos() {
                     4. Uso del Sitio: El Sitio es una plataforma informativa que conecta a los usuarios con proveedores de servicios para dispositivos Apple. No somos responsables de la calidad, precisión o disponibilidad de los servicios ofrecidos por los proveedores. Usted acepta utilizar el Sitio bajo su propio riesgo y liberar a Apple Geeks de cualquier responsabilidad derivada de los servicios proporcionados por los proveedores.
                 </p>
             </div>
+
+            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/productos/" style={{ textDecorationLine: "none", color: "black" }}>
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
             </div>
-        );
+        </div>
+    );
 
 }

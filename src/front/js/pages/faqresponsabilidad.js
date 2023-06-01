@@ -1,4 +1,11 @@
-import React from 'react';
+
+import atras from "../../img/atras.png";
+import React, { useState, useEffect, useContext } from "react";
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
+import Carousel from 'react-bootstrap/Carousel';
+import noimage from './/../../img/noimage.png'
 
 export function FaqResponsabilidad() {
 
@@ -18,6 +25,13 @@ export function FaqResponsabilidad() {
                 <p style={{ textAlign: "justify" }}>
                     3. Ley aplicable y jurisdicción: Estos Términos se regirán e interpretarán de acuerdo con las leyes de Chile. Cualquier disputa que surja de estos Términos será sometida a la jurisdicción exclusiva de los tribunales competentes de Chile.
                 </p>
+            </div>
+            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/productos/" style={{ textDecorationLine: "none", color: "black" }}>
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
             </div>
         </div>
     );
