@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { AllRegionesYcomunas } from "./regionesYcomunas";
+import { AllRegionesYcomunas } from "./regionesYcomunas_proveedor";
 
-export const SeleccionRegionComuna = () => {
+export const Direccion_proveedor = () => {
 
     const RegionesYcomunas = AllRegionesYcomunas;
 
@@ -22,7 +22,7 @@ export const SeleccionRegionComuna = () => {
     };
 
     return (
-        <div>
+        <div className="row">
             <div className="col" id="seleccionRegion" style={{ width: '300px' }} >
                 <label htmlFor="regiones">Región:</label>
                 <select id="regiones" className="form-select" value={region} onChange={handleRegionChange}>

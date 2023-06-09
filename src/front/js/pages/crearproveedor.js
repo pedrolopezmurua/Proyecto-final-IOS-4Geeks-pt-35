@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useShowPopup } from '../component/popupx';
 import { ValidaRut } from '../component/validarut';
+import { Direccion_proveedor } from '../component/direccion_proveedor_function'
 
 const CrearProveedor = () => {
 
@@ -38,15 +39,45 @@ const CrearProveedor = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!formValues.rut) {
+            showPopupError('Debes ingresar tu rut')
+            return
+        }
+        if (formValues.rut && !formValues.nombre) {
+            showPopupError('Debes ingresar tu nombre')
+            return
+        }
+        if (formValues.rut && formValues.nombre && !formValues.apellido) {
+            showPopupError('Debes ingresar tu apellido')
+            return
+        }
+        if (formValues.rut && formValues.nombre && formValues.apellido && !formValues.direccion) {
+            showPopupError('Debes ingresar tu dirección')
+            return
+        }
         // Validar que las contraseñas sean iguales
         if (formValues.contrasena !== formValues['confirm-password']) {
             showPopupError('Las contraseñas no coinciden');
             return;
         }
-
         // Validar que la contraseña tenga más de 3 caracteres
         if (formValues.contrasena.length < 4) {
             showPopupError('La contraseña debe tener al menos 4 caracteres');
+            return;
+        }
+        // Validar el nombre
+        if (formValues.nombre.length < 3 || formValues.nombre.length > 100) {
+            showPopupError('El nombre debe tener entre 3 y 100 caracteres');
+            return;
+        }
+        // Validar el apellido
+        if (formValues.apellido.length < 3 || formValues.apellido.length > 100) {
+            showPopupError('El apellido debe tener entre 3 y 100 caracteres');
+            return;
+        }
+        // Validar la dirección
+        if (formValues.direccion.length < 3 || formValues.direccion.length > 200) {
+            showPopupError('La dirección debe tener entre 3 y 200 caracteres');
             return;
         }
 
@@ -106,18 +137,11 @@ const CrearProveedor = () => {
                 <div className="card-header bg-dark-subtle text-black">Datos de Dirección</div>
                 <div className="card-body">
                     <div className="form-group row mx-0">
-                        <div className="col">
-                            <label htmlFor="region">Region:</label>
-                            <input type="text" className="form-control" id="region" style={{ width: '300px' }} minLength={3} maxLength={100} onChange={handleChange} />
+                        <Direccion_proveedor />
+                        <div className="form-group">
+                            <label htmlFor="direccion">Dirección:</label>
+                            <input type="text" className="form-control" id="direccion" style={{ width: '600px' }} minLength={3} maxLength={200} onChange={handleChange} />
                         </div>
-                        <div className="col">
-                            <label htmlFor="comuna">Comuna:</label>
-                            <input type="text" className="form-control" id="comuna" style={{ width: '300px' }} minLength={3} maxLength={100} onChange={handleChange} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="direccion">Dirección:</label>
-                        <input type="text" className="form-control" id="direccion" style={{ width: '600px' }} minLength={3} maxLength={200} onChange={handleChange} />
                     </div>
                 </div>
             </div>
