@@ -35,24 +35,35 @@ export const CrearPublicacion = () => {
     //Validaciones
     if (!categoriaSeleccionada) {
       alert("Debes seleccionar una categoría");
-    }
+    };
     if (categoriaSeleccionada && !coberturaSeleccionada) {
       alert("Debes indicar tu cobertura");
       return;
-    }
-    if (titulo.length < 5 || titulo.length > 50) {
-      alert("El título debe tener entre 5 y 50 caracteres");
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && !titulo) {
+      alert("Debes indicar el título de tu publicación");
       return;
-    }
-
-    if (detalle.length < 20 || detalle.length > 1000) {
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo.length < 5 || titulo.length > 50) {
+      alert("El título debe tener entre 10 y 50 caracteres");
+      return;
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && !detalle) {
+      alert("Debes indicar una descripción detallada para tu publicación");
+      return;
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1000) {
       alert("La descripción debe tener entre 20 y 1000 caracteres");
       return;
-    }
-    if (precio_int < 1000) {
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && !precio) {
+      alert("Debes indicar un precio para tu publicación");
+      return;
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && precio_int < 1000) {
       alert("El precio debe ser de al menos $1000")
       return;
-    }
+    };
     // Crea el objeto de datos a enviar
     const data = {
       titulo: titulo,
@@ -63,7 +74,6 @@ export const CrearPublicacion = () => {
       cobertura: JSON.stringify(selectedComunas),
       estado: true
     };
-
     // Solicitud POST tabla Servicio
     fetch("http://127.0.0.1:3001/api/servicios", {
       method: "POST",
@@ -86,62 +96,77 @@ export const CrearPublicacion = () => {
       .catch((error) => {
         console.error(error);
       });
-
-
-
   };
   const SeleccionaCobertura = () => {
 
     const RegionesYcomunas = AllRegionesYcomunas;
-
 
     const handleRegionChange = (e) => {
       const selectedRegion = e.target.value;
       setRegion(selectedRegion);
       setComuna("");
       setSelectedRegion(selectedRegion);
+      if (selectedRegion === "Todo Chile") {
+      } else {
+        setTodoChileSelected(false);
+      }
     };
     const handleComunaChange = (e) => {
-      const selectedComuna = e.target.value;
-      setComuna(selectedComuna);
+      if (todoChileSelected) {
+        setComuna("")
+      } else {
+        const selectedComuna = e.target.value;
+        setComuna(selectedComuna);
+      }
     };
     const handleAddComuna = () => {
       if (region === "") {
         alert("Debes seleccionar al menos una región");
         return;
       }
-      if (comuna === "") {
+      if (comuna === "" && region !== "Todo Chile") {
         alert("Debes seleccionar al menos una comuna");
         return;
       }
-      if (selectedComunas && selectedRegion && comuna) {
-        const existingRegion = selectedComunas.find(
-          (item) => item.region === selectedRegion
-        );
-        if (existingRegion) {
-          const updatedComunas = [...existingRegion.comunas, comuna]; // Agregar la comuna al array existente
-          const updatedRegion = {
-            ...existingRegion,
-            comunas: updatedComunas,
-          };
-          const updatedSelectedComunas = selectedComunas.map((item) => {
-            if (item.region === selectedRegion) {
-              return updatedRegion;
-            }
-            return item;
-          });
-          setSelectedComunas(updatedSelectedComunas);
-        } else {
+      if (selectedComunas && selectedRegion) {
+        if (region === "Todo Chile") {
           setSelectedComunas([
-            ...selectedComunas,
             {
-              region: selectedRegion,
-              comunas: [comuna], // Crear un nuevo array de comunas con la comuna seleccionada
+              region: "Todo Chile",
+              comunas: [],
             },
           ]);
+        } else {
+          const existingRegion = selectedComunas.find(
+            (item) => item.region === selectedRegion
+          );
+          if (existingRegion) {
+            const updatedComunas = [...existingRegion.comunas, comuna];
+            const updatedRegion = {
+              ...existingRegion,
+              comunas: updatedComunas,
+            };
+            const updatedSelectedComunas = selectedComunas.map((item) => {
+              if (item.region === selectedRegion) {
+                return updatedRegion;
+              }
+              return item;
+            });
+            setSelectedComunas(updatedSelectedComunas);
+          } else {
+            setSelectedComunas([
+              ...selectedComunas,
+              {
+                region: selectedRegion,
+                comunas: [comuna],
+              },
+            ]);
+          }
         }
-        setComuna("")
-        if (region !== "") { setCoberturaSeleccionada(true); }
+        setComuna("");
+        if (region !== "") {
+          setCoberturaSeleccionada(true);
+        }
       }
     };
 
@@ -205,7 +230,7 @@ export const CrearPublicacion = () => {
           <ul>
             {selectedComunas.map((item, index) => (
               <li key={index}>
-                {item.region}, comuna:{" "}
+                {item.region === "Todo Chile" ? "Todo Chile" : `${item.region}, comuna: `}
                 {item.comunas && item.comunas.length > 0
                   ? item.comunas.length === 1
                     ? item.comunas[0]
@@ -247,16 +272,16 @@ export const CrearPublicacion = () => {
               </div>
               <div className="mb-3" id="titulo-publicacion">
                 <label htmlFor="nombre-servicio" className="form-label">Título de la publicación</label>
-                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" maxLength={100} required />
+                <input type="text" className="form-control" id="tituloPublicacion" placeholder="Ej. Mantención de Macbook" maxLength={100} />
               </div>
               <div className="mb-3" id="descripcion-publicacion">
                 <label htmlFor="descripcion" className="form-label">Descripción detallada</label>
-                <textarea className="form-control" id="descripcion" rows="3" maxLength={3000} required></textarea>
+                <textarea className="form-control" id="descripcion" rows="3" maxLength={3000}></textarea>
               </div>
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
+                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>

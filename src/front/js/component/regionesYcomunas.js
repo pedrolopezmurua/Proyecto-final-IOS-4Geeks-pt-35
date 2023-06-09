@@ -1,6 +1,10 @@
 export const AllRegionesYcomunas = {
 
     "regiones": [{
+        "NombreRegion": "Todo Chile",
+        "comunas": []
+    },
+    {
         "NombreRegion": "Región de Arica y Parinacota",
         "comunas": ['Todas', 'Arica', 'Camarones', 'General Lagos', 'Putre']
     },

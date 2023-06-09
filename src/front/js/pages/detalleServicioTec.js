@@ -34,10 +34,18 @@ export const DetallesServicioTec = props => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return (
-                <div key={index}>
-                    <span>{`${region}: ${comunas}. `}</span>
-                </div>);
+            if (region === "Todo Chile") {
+                return (
+                    <span key={index}>Todo Chile</span>
+
+                )
+            } else {
+
+                return (
+                    <div key={index}>
+                        <span>{`${region}: ${comunas}. `}</span>
+                    </div>);
+            }
         });
 
         return (

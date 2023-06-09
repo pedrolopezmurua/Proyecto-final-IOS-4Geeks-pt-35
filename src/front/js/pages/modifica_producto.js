@@ -21,6 +21,7 @@ export const ModificaProducto = () => {
     const [selectedComunas, setSelectedComunas] = useState([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
     const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
+    const [todoChileSelected, setTodoChileSelected] = useState(false);
     const [region, setRegion] = useState("");
     const [comuna, setComuna] = useState("");
     const servicio_id = window.location.pathname.split("/").pop();
@@ -110,6 +111,7 @@ export const ModificaProducto = () => {
                     'success'
                 )
                 actions.getServicios();
+                console.log("JSON cobertura: ", JSON.stringify(selectedComunas))
                 navigate("/publicaciones")
             })
             .catch((error) => {
@@ -161,48 +163,67 @@ export const ModificaProducto = () => {
             setRegion(selectedRegion);
             setComuna("");
             setSelectedRegion(selectedRegion);
+            if (selectedRegion === "Todo Chile") {
+            } else {
+                setTodoChileSelected(false);
+            }
         };
         const handleComunaChange = (e) => {
-            const selectedComuna = e.target.value;
-            setComuna(selectedComuna);
+            if (todoChileSelected) {
+                setComuna("")
+            } else {
+                const selectedComuna = e.target.value;
+                setComuna(selectedComuna);
+            }
         };
         const handleAddComuna = () => {
             if (region === "") {
                 alert("Debes seleccionar al menos una región");
                 return;
             }
-            if (comuna === "") {
+            if (comuna === "" && region !== "Todo Chile") {
                 alert("Debes seleccionar al menos una comuna");
                 return;
             }
-            if (selectedComunas && selectedRegion && comuna) {
-                const existingRegion = selectedComunas.find(
-                    (item) => item.region === selectedRegion
-                );
-                if (existingRegion) {
-                    const updatedComunas = [...existingRegion.comunas, comuna]; // Agregar la comuna al array existente
-                    const updatedRegion = {
-                        ...existingRegion,
-                        comunas: updatedComunas,
-                    };
-                    const updatedSelectedComunas = selectedComunas.map((item) => {
-                        if (item.region === selectedRegion) {
-                            return updatedRegion;
-                        }
-                        return item;
-                    });
-                    setSelectedComunas(updatedSelectedComunas);
-                } else {
+            if (selectedComunas && selectedRegion) {
+                if (region === "Todo Chile") {
                     setSelectedComunas([
-                        ...selectedComunas,
                         {
-                            region: selectedRegion,
-                            comunas: [comuna], // Crear un nuevo array de comunas con la comuna seleccionada
+                            region: "Todo Chile",
+                            comunas: [],
                         },
                     ]);
+                } else {
+                    const existingRegion = selectedComunas.find(
+                        (item) => item.region === selectedRegion
+                    );
+                    if (existingRegion) {
+                        const updatedComunas = [...existingRegion.comunas, comuna];
+                        const updatedRegion = {
+                            ...existingRegion,
+                            comunas: updatedComunas,
+                        };
+                        const updatedSelectedComunas = selectedComunas.map((item) => {
+                            if (item.region === selectedRegion) {
+                                return updatedRegion;
+                            }
+                            return item;
+                        });
+                        setSelectedComunas(updatedSelectedComunas);
+                    } else {
+                        setSelectedComunas([
+                            ...selectedComunas,
+                            {
+                                region: selectedRegion,
+                                comunas: [comuna],
+                            },
+                        ]);
+                    }
                 }
-                setComuna("")
-                if (region !== "") { setCoberturaSeleccionada(true); }
+                setComuna("");
+                if (region !== "") {
+                    setCoberturaSeleccionada(true);
+                }
             }
         };
 
@@ -266,7 +287,7 @@ export const ModificaProducto = () => {
                     <ul>
                         {selectedComunas.map((item, index) => (
                             <li key={index}>
-                                {item.region}, comuna:{" "}
+                                {item.region === "Todo Chile" ? "Todo Chile" : `${item.region}, comuna: `}
                                 {item.comunas && item.comunas.length > 0
                                     ? item.comunas.length === 1
                                         ? item.comunas[0]

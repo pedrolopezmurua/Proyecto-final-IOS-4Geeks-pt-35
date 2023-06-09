@@ -43,10 +43,19 @@ export const VerPublicaciones = () => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return (
-                <div key={index}>
-                    <span>{`${region}: ${comunas}. `}</span>
-                </div>);
+            if (region === "Todo Chile") {
+                return (
+                    <div key={index}>
+                        <span>Todo Chile</span>
+                    </div>
+                )
+            } else {
+
+                return (
+                    <div key={index}>
+                        <span>{`${region}: ${comunas}. `}</span>
+                    </div>);
+            }
         });
 
         return (

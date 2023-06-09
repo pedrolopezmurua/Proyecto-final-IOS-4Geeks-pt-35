@@ -35,10 +35,17 @@ export const DetallesProducto = props => {
             const region = item.region;
             const comunas = item.comunas.join(", ");
 
-            return (
-                <div key={index}>
-                    <span>{`${region}: ${comunas}. `}</span>
-                </div>);
+            if (region === "Todo Chile") {
+                return (
+                    <span key={index}>Todo Chile</span>
+                )
+            } else {
+
+                return (
+                    <div key={index}>
+                        <span>{`${region}: ${comunas}. `}</span>
+                    </div>);
+            }
         });
 
         return (
@@ -110,7 +117,7 @@ export const DetallesProducto = props => {
                                     <li>Red Social: {detalleProducto.proveedor?.red_social}</li>
                                 )}
                                 {detalleProducto.cobertura !== null && (
-                                    <li>Cobertura:{Cobertura(detalleProducto)} </li>
+                                    <li>Cobertura: {Cobertura(detalleProducto)} </li>
                                 )}
                             </ul>
                         </div>
