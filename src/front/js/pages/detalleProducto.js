@@ -110,7 +110,7 @@ export const DetallesProducto = props => {
                         </div>
                         <div className="col">
                             <ul style={{ listStylePosition: "outside" }} >
-                                <li>Nombre: {detalleProducto.proveedor?.nombre} </li>
+                                <li>Nombre: {detalleProducto.proveedor?.nombre} {detalleProducto.proveedor?.apellido}</li>
                                 <li>Correo: {detalleProducto.proveedor?.correo} </li>
                                 <li>Teléfono: {detalleProducto.proveedor?.telefono} </li>
                                 {detalleProducto.red_social !== null && (
