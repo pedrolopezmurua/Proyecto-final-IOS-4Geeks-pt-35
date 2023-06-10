@@ -70,7 +70,7 @@ export const VerPublicaciones = () => {
     return (
         <div className="text-center">
 
-            <h1>Modifica un producto</h1>
+            <h1 className="mt-5">Listado de Publicaciones</h1>
 
             <div className="d-flex justify-content-center p-5" style={{ maxWidth: '1500px', margin: '0 auto' }}>
                 <table className="table table-striped rounded p-5">
@@ -112,6 +112,13 @@ export const VerPublicaciones = () => {
                         )}
                     </tbody>
                 </table>
+            </div>
+            <div className="d-flex justify-content-between align-items-center " style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/perfil" style={{ textDecorationLine: "none", color: "black" }}>
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
             </div>
 
 
