@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import { useShowPopup } from '../component/popupx';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function RecuperaPassword() {
+    const MySwal = withReactContent(Swal);
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -48,6 +51,14 @@ function RecuperaPassword() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!email) {
+            MySwal.fire(
+                'Error',
+                'Debes ingresar tu correo electrónico',
+                'error'
+            );
+            return;
+        }
         sendPasswordResetEmail();
     };
 
@@ -57,7 +68,7 @@ function RecuperaPassword() {
             <form onSubmit={handleSubmit} className="mx-auto col-6">
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Correo electrónico:</label>
-                    <input type="email" className="form-control" id="email" maxLength="100" value={email} onChange={handleEmailChange} required />
+                    <input type="email" className="form-control" id="email" maxLength="100" value={email} onChange={handleEmailChange} />
                 </div>
                 <div className="mb-3 text-center">
                     <button type="submit" className="btn btn-primary" disabled={loading}>
