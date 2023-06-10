@@ -322,10 +322,17 @@ export const CrearPublicacion = () => {
                 <p className="form-label">Selecciona tu cobertura:</p>
                 <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />
               </div>
-              <div className="d-flex justify-content-end me-4">
-
-                <button type="submit" className="btn btn-primary">Guardar</button>
-
+              <div className="row  d-flex align-items-center justify-content-between">
+                <div className="col d-flex justify-content-between align-items-center" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                  <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/perfil" style={{ textDecorationLine: "none", color: "black" }}>
+                      <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col d-flex justify-content-end me-4">
+                  <button type="submit" className="btn btn-dark mt-3">Guardar</button>
+                </div>
               </div>
             </form>
           </div>
@@ -333,13 +340,6 @@ export const CrearPublicacion = () => {
         <hr className="mx-5 my-5" />
 
 
-      </div>
-      <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div className="d-flex align-items-center">
-          <Link className="d-flex align-items-center" to="/perfil" style={{ textDecorationLine: "none", color: "black" }}>
-            <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
-          </Link>
-        </div>
       </div>
 
     </div >

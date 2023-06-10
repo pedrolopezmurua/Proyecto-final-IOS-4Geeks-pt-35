@@ -386,15 +386,23 @@ export const ModificaProducto = () => {
                             <div className="row mt-3" id="seleccion-cobertura">
                                 <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />
                             </div>
-                            <div className="row">
-                                <div className="col d-flex justify-content-start me-4">
-                                    <Link to={`/subir-imagenes/${servicio_id}`} >
-                                        <button type="button" className="btn btn-success">Ver imágenes</button>
-                                    </Link>
+                            <div className="col d-flex justify-content-start me-4">
+                                <Link to={`/subir-imagenes/${servicio_id}`} >
+                                    <button type="button" className="btn btn-dark mt-3">Ver imágenes</button>
+                                </Link>
+                            </div>
+                            <hr className="mx-5 my-4" />
+                            <div className="row mx-5 d-flex align-items-center justify-content-between">
+                                <div className="col d-flex justify-content-between align-items-center" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                                    <div className="d-flex align-items-center">
+                                        <Link className="d-flex align-items-center mt-3" to="/perfil" style={{ textDecorationLine: "none", color: "black" }}>
+                                            <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                                        </Link>
+                                    </div>
                                 </div>
                                 <div className="col d-flex justify-content-end me-4">
-                                    <button type="submit" className="btn btn-primary">Guardar</button>
-                                    <button type="button" onClick={() => eliminarServicio(servicio_id)} className="btn btn-danger">Eliminar</button>
+                                    <button type="submit" className="btn btn-dark mt-3 ">Guardar</button>
+                                    <button type="button" onClick={() => eliminarServicio(servicio_id)} className="btn btn-danger mt-3 ms-1">Eliminar</button>
                                 </div>
                             </div>
                         </form>
@@ -402,14 +410,6 @@ export const ModificaProducto = () => {
                 </div>
                 <hr className="mx-5 my-5" />
 
-
-            </div>
-            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
-                <div className="d-flex align-items-center">
-                    <Link className="d-flex align-items-center" to="/perfil" style={{ textDecorationLine: "none", color: "black" }}>
-                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
-                    </Link>
-                </div>
             </div>
 
         </div >
