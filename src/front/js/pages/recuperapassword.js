@@ -29,7 +29,11 @@ function RecuperaPassword() {
             const data = await response.json();
 
             if (response.ok) {
-                showPopupInfo('Correo electrónico de recuperación de contraseña enviado');
+                MySwal.fire(
+                    'Éxito',
+                    'Correo electrónico de recuperación de contraseña enviado',
+                    'success'
+                )
                 setMessage('Correo electrónico de recuperación de contraseña enviado');
             } else {
                 setMessage(data.message);
