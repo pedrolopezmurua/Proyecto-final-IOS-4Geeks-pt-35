@@ -73,10 +73,10 @@ export const CrearPublicacion = () => {
       );
       return;
     };
-    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1000) {
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1500) {
       MySwal.fire(
         'Error',
-        'La descripción debe tener entre 20 y 1000 caracteres',
+        'La descripción debe tener entre 20 y 1500 caracteres',
         'error'
       );
       return;
