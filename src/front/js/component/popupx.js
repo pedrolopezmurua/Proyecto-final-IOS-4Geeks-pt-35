@@ -45,7 +45,7 @@ export const useShowPopup = () => {
         const handleButtonClick = (isConfirmed) => {
             if (isConfirmed) {
                 // Redirigir al enlace de creación de proveedor
-                navigate('/crear-proveedor');
+                navigate('/recupera-password');
             } else {
                 // Redirigir al Home
                 navigate('/');
@@ -55,10 +55,10 @@ export const useShowPopup = () => {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: mensaje,
+            text: 'Correo o contraseña incorrecta. Revisa tu información o recupera tu contraseña.',
             showCancelButton: true,
             cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Crear Proveedor',
+            confirmButtonText: 'Recuperar contraseña',
             reverseButtons: true,
         }).then((result) => handleButtonClick(result.isConfirmed));
     };
