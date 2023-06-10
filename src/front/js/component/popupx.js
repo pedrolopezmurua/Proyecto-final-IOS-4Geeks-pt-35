@@ -46,8 +46,6 @@ export const useShowPopup = () => {
             if (result.isConfirmed) {
                 // Redirigir al enlace de creación de proveedor
                 navigate('/crear-proveedor');
-            } else if (result.isDenied) {
-                navigate('/recupera-password')
             } else {
                 // Redirigir al Home
                 navigate('/login');
@@ -59,13 +57,11 @@ export const useShowPopup = () => {
             title: 'Error',
             text: 'Correo o contraseña incorrecta.',
             showCancelButton: true,
-            showDenyButton: true,
             cancelButtonText: 'Volver',
-            denyButtonText: 'Recuperar contraseña',
             confirmButtonText: 'Crear nuevo proveedor',
             confirmButtonColor: '#198754',
-            denyButtonColor: '#0d6efd',
             reverseButtons: true,
+            footer: '<a href="http://127.0.0.1:3000/recupera-password">Recupera contraseña</a>'
         }).then((result) => handleButtonClick(result));
     };
 
