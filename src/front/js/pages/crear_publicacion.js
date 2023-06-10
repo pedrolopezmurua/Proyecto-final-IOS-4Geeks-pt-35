@@ -43,15 +43,7 @@ export const CrearPublicacion = () => {
         'error'
       );
     };
-    if (categoriaSeleccionada && !coberturaSeleccionada) {
-      MySwal.fire(
-        'Error',
-        'Debes indicar tu cobertura',
-        'error'
-      );
-      return;
-    };
-    if (categoriaSeleccionada && coberturaSeleccionada && !titulo) {
+    if (categoriaSeleccionada && !titulo) {
       MySwal.fire(
         'Error',
         'Debes indicar el título de tu publicación',
@@ -59,7 +51,7 @@ export const CrearPublicacion = () => {
       );
       return;
     };
-    if (categoriaSeleccionada && coberturaSeleccionada && titulo.length < 5 || titulo.length > 50) {
+    if (categoriaSeleccionada && titulo && titulo.length < 10 || titulo.length > 50) {
       MySwal.fire(
         'Error',
         'El título debe tener entre 10 y 50 caracteres',
@@ -67,10 +59,10 @@ export const CrearPublicacion = () => {
       );
       return;
     };
-    if (categoriaSeleccionada && coberturaSeleccionada && titulo && !detalle) {
+    if (categoriaSeleccionada && titulo && !detalle) {
       MySwal.fire(
         'Error',
-        'Debes indicar una descripción detallada para tu publicación',
+        'Debes indicar una descripción detallada de tu publicación',
         'error'
       );
       return;
@@ -95,6 +87,14 @@ export const CrearPublicacion = () => {
       MySwal.fire(
         'Error',
         'El precio debe ser de al menos $1.000',
+        'error'
+      );
+      return;
+    };
+    if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && !coberturaSeleccionada) {
+      MySwal.fire(
+        'Error',
+        'Debes indicar la cobertura de tu publicación',
         'error'
       );
       return;
