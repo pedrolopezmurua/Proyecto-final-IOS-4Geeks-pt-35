@@ -81,10 +81,10 @@ export const ModificaProducto = () => {
             );
             return;
         };
-        if (categoriaSeleccionada && titulo && titulo.length < 10 || titulo.length > 50) {
+        if (categoriaSeleccionada && titulo.length < 10 || titulo.length > 100) {
             MySwal.fire(
                 'Error',
-                'El título debe tener entre 10 y 50 caracteres',
+                'El título debe tener entre 10 y 100 caracteres',
                 'error'
             );
             return;
@@ -92,12 +92,12 @@ export const ModificaProducto = () => {
         if (categoriaSeleccionada && titulo && !detalle) {
             MySwal.fire(
                 'Error',
-                'Debes indicar una descripción detallada de tu publicación',
+                'Debes indicar el detalle de tu publicación',
                 'error'
             );
             return;
         };
-        if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1500) {
+        if (categoriaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1500) {
             MySwal.fire(
                 'Error',
                 'La descripción debe tener entre 20 y 1500 caracteres',
@@ -105,15 +105,15 @@ export const ModificaProducto = () => {
             );
             return;
         };
-        if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && !precio) {
+        if (categoriaSeleccionada && titulo && !precio) {
             MySwal.fire(
                 'Error',
-                'Debes indicar un precio para tu publicación',
+                'Debes indicar precio de tu publicación',
                 'error'
             );
             return;
         };
-        if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && precio_int < 1000) {
+        if (categoriaSeleccionada && titulo && detalle && precio_int < 1000) {
             MySwal.fire(
                 'Error',
                 'El precio debe ser de al menos $1.000',
@@ -121,7 +121,7 @@ export const ModificaProducto = () => {
             );
             return;
         };
-        if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && !coberturaSeleccionada) {
+        if (categoriaSeleccionada && precio && titulo && detalle && !coberturaSeleccionada) {
             MySwal.fire(
                 'Error',
                 'Debes indicar la cobertura de tu publicación',
@@ -129,6 +129,7 @@ export const ModificaProducto = () => {
             );
             return;
         };
+
         // Crea el objeto de datos a enviar
         const data = {
             titulo: titulo,
