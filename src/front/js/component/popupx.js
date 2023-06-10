@@ -42,25 +42,31 @@ export const useShowPopup = () => {
     };
 
     const showPopupErrorLogin = ({ mensaje }) => {
-        const handleButtonClick = (isConfirmed) => {
-            if (isConfirmed) {
+        const handleButtonClick = (result) => {
+            if (result.isConfirmed) {
                 // Redirigir al enlace de creación de proveedor
-                navigate('/recupera-password');
+                navigate('/crear-proveedor');
+            } else if (result.isDenied) {
+                navigate('/recupera-password')
             } else {
                 // Redirigir al Home
-                navigate('/');
+                navigate('/login');
             }
         };
 
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Correo o contraseña incorrecta. Revisa tu información o recupera tu contraseña.',
+            text: 'Correo o contraseña incorrecta.',
             showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Recuperar contraseña',
+            showDenyButton: true,
+            cancelButtonText: 'Volver',
+            denyButtonText: 'Recuperar contraseña',
+            confirmButtonText: 'Crear nuevo proveedor',
+            confirmButtonColor: '#198754',
+            denyButtonColor: '#0d6efd',
             reverseButtons: true,
-        }).then((result) => handleButtonClick(result.isConfirmed));
+        }).then((result) => handleButtonClick(result));
     };
 
     return {
