@@ -18,6 +18,7 @@ export const CrearPublicacion = () => {
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
   const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
+  const [todoChileSelected, setTodoChileSelected] = useState(false);
   const [region, setRegion] = useState("");
   const [comuna, setComuna] = useState("");
 
@@ -34,34 +35,66 @@ export const CrearPublicacion = () => {
     const proveedor_id = userId;
     //Validaciones
     if (!categoriaSeleccionada) {
-      alert("Debes seleccionar una categoría");
+      MySwal.fire(
+        'Error',
+        'Debes seleccionar una categoría',
+        'error'
+      );
     };
     if (categoriaSeleccionada && !coberturaSeleccionada) {
-      alert("Debes indicar tu cobertura");
+      MySwal.fire(
+        'Error',
+        'Debes indicar tu cobertura',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && !titulo) {
-      alert("Debes indicar el título de tu publicación");
+      MySwal.fire(
+        'Error',
+        'Debes indicar el título de tu publicación',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && titulo.length < 5 || titulo.length > 50) {
-      alert("El título debe tener entre 10 y 50 caracteres");
+      MySwal.fire(
+        'Error',
+        'El título debe tener entre 10 y 50 caracteres',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && titulo && !detalle) {
-      alert("Debes indicar una descripción detallada para tu publicación");
+      MySwal.fire(
+        'Error',
+        'Debes indicar una descripción detallada para tu publicación',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1000) {
-      alert("La descripción debe tener entre 20 y 1000 caracteres");
+      MySwal.fire(
+        'Error',
+        'La descripción debe tener entre 20 y 1000 caracteres',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && !precio) {
-      alert("Debes indicar un precio para tu publicación");
+      MySwal.fire(
+        'Error',
+        'Debes indicar un precio para tu publicación',
+        'error'
+      );
       return;
     };
     if (categoriaSeleccionada && coberturaSeleccionada && titulo && detalle && precio_int < 1000) {
-      alert("El precio debe ser de al menos $1000")
+      MySwal.fire(
+        'Error',
+        'El precio debe ser de al menos $1.000',
+        'error'
+      );
       return;
     };
     // Crea el objeto de datos a enviar
