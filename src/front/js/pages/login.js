@@ -75,7 +75,7 @@ function Login() {
             localStorage.setItem('Token', responseData.token);
 
             logIn(username, responseData.data.id);
-            console.error('Inicio de sesión exitoso: ' + responseData);
+            console.log('Inicio de sesión exitoso');
             MySwal.fire(
                 'Éxito',
                 'Inicio de sesión exitoso',
