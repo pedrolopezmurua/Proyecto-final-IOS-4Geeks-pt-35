@@ -59,6 +59,7 @@ export const SubirImagenes = () => {
                 )
                 actions.getServicios();
                 fetchImages();
+                actions.getImagenes();
             } else {
                 console.error("Error al eliminar la imagen");
             }
