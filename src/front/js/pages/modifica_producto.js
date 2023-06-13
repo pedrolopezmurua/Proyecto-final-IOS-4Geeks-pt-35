@@ -381,7 +381,7 @@ export const ModificaProducto = () => {
                             </div>
                             <div className="col" id="seleccion-valor-servicio">
                                 <label htmlFor="precio" className="form-label" >Precio</label>
-                                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" required />
+                                <input type="number" className="form-control" id="precio" placeholder="40.000" required />
                             </div>
                             <div className="row mt-3" id="seleccion-cobertura">
                                 <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />

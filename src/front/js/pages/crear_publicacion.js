@@ -316,7 +316,7 @@ export const CrearPublicacion = () => {
               <label htmlFor="precio" className="form-label" >Precio</label>
               <div className="input-group mb-3" id="seleccion-valor-servicio">
                 <span className="input-group-text">$</span>
-                <input type="number" className="form-control" id="precio" placeholder="$40.000.-" />
+                <input type="number" className="form-control" id="precio" placeholder="40.000" />
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>
