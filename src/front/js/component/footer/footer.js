@@ -1,14 +1,10 @@
-// ./component/footer.js
-
-import React, { useState } from "react";
-import logo from "../../img/logo.png";
-import { OverlayTrigger, Popover } from "react-bootstrap";
-import { WhatsApp } from './whatsapp';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// ./component/footer/footer.js
+import React from "react";
 import { Link } from "react-router-dom";
+import { WhatsApp } from './whatsapp';
+import logo from "../../../img/logo.png";
 
 const Footer = () => {
-
 	return (
 		<footer className="p-4 mt-5 bg-light text-secondary border-top border-1">
 			<div className="container">
@@ -20,34 +16,30 @@ const Footer = () => {
 							src={logo}
 							alt="Apple Geeks Logo"
 						/>
-						<p>
+						<p className="mt-3">
 							Sumérgete en el universo Apple con nosotros, donde la elegancia y
 							la innovación convergen y será tu conexión directa con los mejores
 							especialistas Apple.
 						</p>
 					</div>
-
 					<div className="col-md-4">
 						<h5 className="border-bottom pb-1 p-3">Legal</h5>
-						<div className="row p-2">
+						<div className="row">
 							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqterminos'>
 								Términos y Condiciones
 							</Link>
 						</div>
-
-						<div className="row p-2">
+						<div className="row">
 							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqregistro'>
 								Registro y Cuenta
 							</Link>
 						</div>
-
-						<div className="row p-2">
+						<div className="row">
 							<Link className="nav-link active" style={{ fontSize: '18px' }} aria-current="page" to='/faqresponsabilidad'>
 								Responsabilidad
 							</Link>
 						</div>
 					</div>
-
 					<div className="col-md-4">
 						<h5 className="border-bottom pb-1 p-3">Contacto</h5>
 						<p>Dirección: Av. Manquehue Sur 350, Oficina 110</p>

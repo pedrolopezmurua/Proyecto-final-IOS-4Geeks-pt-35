@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import dispositivos from "../../img/dispositivos.jpg";
 import "../../styles/home.css";
 import { CardCategoriaSTec } from "../component/cards";

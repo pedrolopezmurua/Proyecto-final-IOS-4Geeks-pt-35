@@ -8,15 +8,13 @@ import { Productos } from "./pages/productos";
 import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
-import { Demo } from "./pages/demo";
-import { Demo2 } from "./pages/demo2";
 import Login from "./pages/login";
 import RecuperaPassword from "./pages/recuperapassword";
 import ResetPassword from "./pages/resetpassword";
 import CrearProveedor from './pages/crearproveedor';
 import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
-import Footer from './component/footer';
+import Footer from './component/footer/footer';
 import { VerPublicaciones } from './pages/ver_publicaciones';
 import { CrearPublicacion } from "./pages/crear_publicacion";
 import { Perfil } from "./pages/perfil";
@@ -26,9 +24,7 @@ import Error404 from "./pages/error404";
 import DevolucionesPage from "./pages/devolucionespage";
 import { ModificaProducto } from './pages/modifica_producto';
 import ProtectedRoute from "./component/protectedroute";
-import { FaqTerminos } from "./pages/faqterminos";
-import { FaqResponsabilidad } from "./pages/faqresponsabilidad";
-import { FaqRegistro } from "./pages/faqregistro";
+import { FaqRegistro, FaqResponsabilidad, FaqTerminos } from './component/footer/FAQ';
 
 //create your first component
 const Layout = () => {
@@ -52,8 +48,6 @@ const Layout = () => {
                             <Route element={<CrearProveedor />} path="/crear-proveedor" />
                             <Route element={<Productos />} path="/productos" />
                             <Route element={<ServicioTecnico />} path="/serviciotecnico" />
-                            <Route path="/demo1" element={<ProtectedRoute><Demo2 /></ProtectedRoute>} />
-                            <Route element={<Demo2 />} path="/demo2" />
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
                             <Route element={<ProtectedRoute><Perfil /></ProtectedRoute>} path="perfil" />
