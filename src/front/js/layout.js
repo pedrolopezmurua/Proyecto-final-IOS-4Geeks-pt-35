@@ -1,20 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
-import { BackendURL } from "./component/backendURL";
+
+import ScrollToTop from "./component/common/scrollToTop";
+import { Navbar } from "./component/navbar/navbar";
+import Footer from './component/footer/footer';
+import { FaqRegistro, FaqResponsabilidad, FaqTerminos } from './component/footer/FAQ';
+
+import Login from "./pages/login/login";
+import ResetPassword from "./pages/login/resetpassword";
+import CrearProveedor from './pages/crearproveedor';
+import RecuperaPassword from "./pages/login/recuperapassword";
+
 
 import { Home } from "./pages/home";
 import { Productos } from "./pages/productos";
 import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
-import Login from "./pages/login";
-import RecuperaPassword from "./pages/recuperapassword";
-import ResetPassword from "./pages/resetpassword";
-import CrearProveedor from './pages/crearproveedor';
 import injectContext from "./store/appContext";
-import { Navbar } from "./component/navbar";
-import Footer from './component/footer/footer';
 import { VerPublicaciones } from './pages/ver_publicaciones';
 import { CrearPublicacion } from "./pages/crear_publicacion";
 import { Perfil } from "./pages/perfil";
@@ -23,16 +26,13 @@ import { SubirImagenes } from "./component/subirImagenes";
 import Error404 from "./pages/error404";
 import DevolucionesPage from "./pages/devolucionespage";
 import { ModificaProducto } from './pages/modifica_producto';
-import ProtectedRoute from "./component/protectedroute";
-import { FaqRegistro, FaqResponsabilidad, FaqTerminos } from './component/footer/FAQ';
+import ProtectedRoute from "./component/common/protectedroute";
 
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
-
-    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>

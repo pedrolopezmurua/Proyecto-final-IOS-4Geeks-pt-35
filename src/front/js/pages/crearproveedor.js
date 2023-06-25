@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useShowPopup } from '../component/popupx';
+import { useShowPopup } from '../component/common/popupx';
 import { ValidaRut } from '../component/validarut';
 import { Direccion_proveedor } from '../component/direccion_proveedor_function'
 
@@ -11,7 +11,6 @@ const CrearProveedor = () => {
     let navigate = useNavigate();
 
     const {
-        showPopupInfo,
         showPopupError,
         showPopupCreated,
     } = useShowPopup();

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useShowPopup } from '../component/popupx';
+import { useShowPopup } from '../../component/common/popupx';
 
 function ResetPassword() {
     const { email } = useParams();
@@ -15,7 +15,7 @@ function ResetPassword() {
     const [error, setError] = useState('');
 
     const {
-        showPopupInfo,
+        showPopupSuccess,
         showPopupError,
     } = useShowPopup();
 
@@ -68,7 +68,7 @@ function ResetPassword() {
                         }
                     })
                     .then((data) => {
-                        showPopupInfo('Contraseña actualizada exitosamente');
+                        showPopupSuccess('Contraseña actualizada exitosamente');
                         console.log('Contraseña actualizada exitosamente');
                         setPasswordUpdated(true);
                         setError('');

@@ -1,21 +1,17 @@
 // ./pages/login.js
-
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../store/authContext'
-import login from "../../img/login.png";
-import { useShowPopup } from '../component/popupx';
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { AuthContext } from '../../store/authContext'
+import login from "../../../img/login.png";
+import { useShowPopup } from '../../component/common/popupx';
 
 function Login() {
+    const navigate = useNavigate();
     const { logIn } = useContext(AuthContext);
-    const MySwal = withReactContent(Swal);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
 
     const handleUsernameChange = (event) => setUsername(event.target.value);
     const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -26,12 +22,7 @@ function Login() {
         return emailRegex.test(email);
     };
 
-    const {
-        showPopupInfo,
-        showPopupError,
-        showPopupErrorLogin
-    } = useShowPopup();
-
+    const { showPopupSuccess, showPopupError, showPopupErrorLogin } = useShowPopup();
 
     const handleLogin = async () => {
         // Validación del formato de correo electrónico
@@ -70,28 +61,14 @@ function Login() {
         // Maneja la respuesta
         if (response.ok) {
             const responseData = await response.json();
-
-            // Almacena el token en el localStorage
-            localStorage.setItem('Token', responseData.token);
-
+            localStorage.setItem('Token', responseData.token);  // Almacena el token en el localStorage
             logIn(username, responseData.data.id);
-            console.log('Inicio de sesión exitoso');
-            MySwal.fire(
-                'Éxito',
-                'Inicio de sesión exitoso',
-                'success'
-            )
+            showPopupSuccess('Inicio de sesión exitoso.')
             navigate('/');
-
         } else {
             console.error('Error al iniciar sesión:', response.statusText);
-            showPopupErrorLogin('No estas registrado. Regístrate como proveedor.');
+            showPopupErrorLogin('Error al iniciar sesión');
         }
-    };
-
-    const handleCancel = () => {
-        setUsername('');
-        setPassword('');
     };
 
     return (

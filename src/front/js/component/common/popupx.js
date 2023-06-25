@@ -1,15 +1,15 @@
-// ./component/popupx.js
+// ./component/common/popupx.js
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 
 export const useShowPopup = () => {
     const navigate = useNavigate();
 
-    const showPopupInfo = (message) => {
+    const showPopupSuccess = (message) => {
         Swal.fire({
-            title: 'Información',
+            title: 'Éxito',
             text: message,
-            icon: 'info',
+            icon: 'success',
             confirmButtonText: 'Aceptar'
         });
     };
@@ -23,10 +23,10 @@ export const useShowPopup = () => {
         });
     };
 
-    const showPopupCreated = (nombre) => {
+    const showPopupCreated = (correo) => {
         Swal.fire({
-            title: 'Registro Creado',
-            text: `El registro '${nombre}' ha sido creado exitosamente.`,
+            title: 'Proveedor Creado',
+            text: `El usuario '${correo}' ha sido creado exitosamente.`,
             icon: 'success',
             confirmButtonText: 'Aceptar'
         });
@@ -41,7 +41,7 @@ export const useShowPopup = () => {
         });
     };
 
-    const showPopupErrorLogin = ({ mensaje }) => {
+    const showPopupErrorLogin = (message) => {
         const handleButtonClick = (result) => {
             if (result.isConfirmed) {
                 // Redirigir al enlace de creación de proveedor
@@ -51,22 +51,21 @@ export const useShowPopup = () => {
                 navigate('/login');
             }
         };
-
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Correo o contraseña incorrecta.',
+            text: message,
             showCancelButton: true,
             cancelButtonText: 'Volver',
             confirmButtonText: 'Crear nuevo proveedor',
             confirmButtonColor: '#198754',
             reverseButtons: true,
-            footer: '<a href="http://127.0.0.1:3000/recupera-password">Recupera contraseña</a>'
+            footer: '<a href="http://127.0.0.1:3000/recupera-password">Recuperar contraseña</a>'
         }).then((result) => handleButtonClick(result));
     };
 
     return {
-        showPopupInfo,
+        showPopupSuccess,
         showPopupError,
         showPopupCreated,
         showPopupUpdated,

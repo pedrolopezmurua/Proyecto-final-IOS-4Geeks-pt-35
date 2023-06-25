@@ -1,14 +1,11 @@
-// ./pages/recuperapassword.js
+// ./pages/login/recuperapassword.js
 
 import React, { useState } from 'react';
-import { useShowPopup } from '../component/popupx';
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
-import atras from "../../img/atras.png";
+import { useShowPopup } from '../../component/common/popupx';
+import atras from "../../../img/atras.png";
 
 function RecuperaPassword() {
-    const MySwal = withReactContent(Swal);
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -16,7 +13,7 @@ function RecuperaPassword() {
     const handleEmailChange = (event) => setEmail(event.target.value);
 
     const {
-        showPopupInfo,
+        showPopupSuccess,
         showPopupError,
     } = useShowPopup();
 
@@ -34,12 +31,8 @@ function RecuperaPassword() {
             const data = await response.json();
 
             if (response.ok) {
-                MySwal.fire(
-                    'Éxito',
-                    'Correo electrónico de recuperación de contraseña enviado',
-                    'success'
-                )
-                setMessage('Correo electrónico de recuperación de contraseña enviado');
+                showPopupSuccess('Correo electrónico de recuperación de contraseña enviado')
+                setMessage('El correo fue enviado correctamente. Revisa tu bandeja de entrada, te llegará un link para restablecer tu contraseña');
             } else {
                 setMessage(data.message);
             }
@@ -54,11 +47,7 @@ function RecuperaPassword() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!email) {
-            MySwal.fire(
-                'Error',
-                'Debes ingresar tu correo electrónico',
-                'error'
-            );
+            showPopupError('Debes ingresar tu correo electrónico')
             return;
         }
         sendPasswordResetEmail();
