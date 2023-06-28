@@ -10,10 +10,7 @@ const CrearProveedor = () => {
 
     let navigate = useNavigate();
 
-    const {
-        showPopupError,
-        showPopupCreated,
-    } = useShowPopup();
+    const { showPopupError, showPopupCreated } = useShowPopup();
 
     const [formValues, setFormValues] = useState({
         rut: '',

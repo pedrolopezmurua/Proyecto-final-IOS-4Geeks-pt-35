@@ -1,21 +1,18 @@
-//./pages/crear_publicacion.js
+//./pages/publicaciones/crear_publicacion.js
 import React, { useContext, useState } from "react";
-import "../../styles/home.css";
-import { AllRegionesYcomunas } from "../component/regionesYcomunas";
-import { AuthContext } from '../store/authContext'
-import { useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import atras from "../../img/atras.png";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from '../../store/authContext'
+import { Context } from "../../store/appContext";
+import { useShowPopup } from '../../component/common/popupx';
+import { AllRegionesYcomunas } from "../../component/regionesYcomunas";
+import atras from "../../../img/atras.png";
 
 export const CrearPublicacion = () => {
-
+  const { showPopupError, showPopupSuccess } = useShowPopup();
+  const navigate = useNavigate();
   const { actions } = useContext(Context);
   const { userId } = useContext(AuthContext);
-  let navigate = useNavigate();
-  const MySwal = withReactContent(Swal);
+
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
@@ -26,7 +23,6 @@ export const CrearPublicacion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Obtiene los valores del formulario
     const categoria_select = document.getElementById("categoria");
     const categoria_id = parseInt(categoria_select.value, 10);
@@ -37,66 +33,34 @@ export const CrearPublicacion = () => {
     const proveedor_id = userId;
     //Validaciones
     if (!categoriaSeleccionada) {
-      MySwal.fire(
-        'Error',
-        'Debes seleccionar una categoría',
-        'error'
-      );
+      showPopupError('Debes seleccionar una categoría');
     };
     if (categoriaSeleccionada && !titulo) {
-      MySwal.fire(
-        'Error',
-        'Debes indicar el título de tu publicación',
-        'error'
-      );
+      showPopupError('Debes indicar el título de tu publicación');
       return;
     };
     if (categoriaSeleccionada && titulo.length < 10 || titulo.length > 100) {
-      MySwal.fire(
-        'Error',
-        'El título debe tener entre 10 y 100 caracteres',
-        'error'
-      );
+      showPopupError('El título debe tener entre 10 y 100 caracteres');
       return;
     };
     if (categoriaSeleccionada && titulo && !detalle) {
-      MySwal.fire(
-        'Error',
-        'Debes indicar el detalle de tu publicación',
-        'error'
-      );
+      showPopupError('Debes indicar el detalle de tu publicación');
       return;
     };
     if (categoriaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1500) {
-      MySwal.fire(
-        'Error',
-        'La descripción debe tener entre 20 y 1500 caracteres',
-        'error'
-      );
+      showPopupError('La descripción debe tener entre 20 y 1500 caracteres');
       return;
     };
     if (categoriaSeleccionada && titulo && !precio) {
-      MySwal.fire(
-        'Error',
-        'Debes indicar precio de tu publicación',
-        'error'
-      );
+      showPopupError('Debes indicar el precio de tu publicación');
       return;
     };
     if (categoriaSeleccionada && titulo && detalle && precio_int < 1000) {
-      MySwal.fire(
-        'Error',
-        'El precio debe ser de al menos $1.000',
-        'error'
-      );
+      showPopupError('El precio debe ser de al menos $1.000');
       return;
     };
     if (categoriaSeleccionada && precio && titulo && detalle && !coberturaSeleccionada) {
-      MySwal.fire(
-        'Error',
-        'Debes indicar la cobertura de tu publicación',
-        'error'
-      );
+      showPopupError('Debes indicar la cobertura de tu publicación');
       return;
     };
     // Crea el objeto de datos a enviar
@@ -120,11 +84,7 @@ export const CrearPublicacion = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        MySwal.fire(
-          'Éxito',
-          'La publicación se creó correctamente',
-          'success'
-        )
+        showPopupSuccess('La publicación se creó correctamente')
         actions.getServicios();
         navigate(`/subir-imagenes/${data.id}`)
       })
@@ -156,11 +116,11 @@ export const CrearPublicacion = () => {
     };
     const handleAddComuna = () => {
       if (region === "") {
-        alert("Debes seleccionar al menos una región");
+        showPopupError("Debes seleccionar al menos una región");
         return;
       }
       if (comuna === "" && region !== "Todo Chile") {
-        alert("Debes seleccionar al menos una comuna");
+        showPopupError("Debes seleccionar al menos una comuna");
         return;
       }
       if (selectedComunas && selectedRegion) {
@@ -346,3 +306,4 @@ export const CrearPublicacion = () => {
   );
 
 };
+//309

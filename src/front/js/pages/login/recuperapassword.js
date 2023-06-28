@@ -12,10 +12,7 @@ function RecuperaPassword() {
 
     const handleEmailChange = (event) => setEmail(event.target.value);
 
-    const {
-        showPopupSuccess,
-        showPopupError,
-    } = useShowPopup();
+    const { showPopupSuccess, showPopupError } = useShowPopup();
 
     const sendPasswordResetEmail = async () => {
         setLoading(true);

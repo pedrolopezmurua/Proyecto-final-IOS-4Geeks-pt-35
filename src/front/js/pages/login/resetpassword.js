@@ -1,8 +1,9 @@
 // ./pages/resetpassword.js
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useShowPopup } from '../../component/common/popupx';
+import atras from "../../../img/atras.png";
 
 function ResetPassword() {
     const { email } = useParams();
@@ -14,10 +15,7 @@ function ResetPassword() {
     const [passwordUpdated, setPasswordUpdated] = useState(false);
     const [error, setError] = useState('');
 
-    const {
-        showPopupSuccess,
-        showPopupError,
-    } = useShowPopup();
+    const { showPopupSuccess, showPopupError } = useShowPopup();
 
     useEffect(() => {
         const checkEmailExists = async () => {
@@ -123,6 +121,13 @@ function ResetPassword() {
                     </form>
                 </div>
             )}
+            <div className="d-flex justify-content-between align-items-center mt-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <div className="d-flex align-items-center">
+                    <Link className="d-flex align-items-center" to="/login" style={{ textDecorationLine: "none", color: "black" }}>
+                        <img src={atras} alt="Atras" /><p className="mb-0 ml-2">Atras</p>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }

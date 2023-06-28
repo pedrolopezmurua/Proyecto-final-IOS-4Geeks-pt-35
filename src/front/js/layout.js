@@ -19,13 +19,13 @@ import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import injectContext from "./store/appContext";
 import { VerPublicaciones } from './pages/ver_publicaciones';
-import { CrearPublicacion } from "./pages/crear_publicacion";
+import { CrearPublicacion } from "./pages/publicaciones/crear_publicacion";
 import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';
-import { SubirImagenes } from "./component/subirImagenes";
+import { SubirImagenes } from "./pages/publicaciones/subirImagenes";
 import Error404 from "./pages/error404";
 import DevolucionesPage from "./pages/devolucionespage";
-import { ModificaProducto } from './pages/modifica_producto';
+import { ModificaProducto } from './pages/publicaciones/modifica_producto';
 import ProtectedRoute from "./component/common/protectedroute";
 
 //create your first component

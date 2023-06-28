@@ -1,13 +1,12 @@
 // ./component/subirImagenes.js
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { Context } from "../../store/appContext";
+import { useShowPopup } from '../../component/common/popupx';
 
 export const SubirImagenes = () => {
+    const { showPopupError, showPopupSuccess } = useShowPopup();
     const { actions } = useContext(Context);
-    const MySwal = withReactContent(Swal);
     const servicio_id = window.location.pathname.split("/").pop();
     const [images, setImages] = useState([]);
 
@@ -30,6 +29,7 @@ export const SubirImagenes = () => {
                 setImages(imagenData);
             } else {
                 console.error("Error al obtener las imágenes");
+                showPopupError('Error al cargar las imágenes');
             }
         } catch (error) {
             console.error(error);
@@ -52,16 +52,13 @@ export const SubirImagenes = () => {
             const response = await fetch(url, opts);
             if (response.ok) {
                 console.log("Imagen eliminada con éxito");
-                MySwal.fire(
-                    'Éxito',
-                    'La imagen se eliminó correctamente',
-                    'success'
-                )
+                showPopupSuccess('La imagen se eliminó correctamente')
                 actions.getServicios();
                 fetchImages();
                 actions.getImagenes();
             } else {
-                console.error("Error al eliminar la imagen");
+                console.error('Error al eliminar la imagen');
+                showPopupError('Error al eliminar la imagen');
             }
         } catch (error) {
             console.error(error);
@@ -100,16 +97,13 @@ export const SubirImagenes = () => {
             };
             const saveResp = await fetch("http://127.0.0.1:3001/api/imagenes_servicio", saveOpts);
             const nuevaImagenServicio = await saveResp.json();
-            MySwal.fire(
-                'Éxito',
-                'La imagen se agregó correctamente',
-                'success'
-            )
+            showPopupSuccess('La imagen se agregó correctamente')
             actions.getServicios();
             actions.getImagenes();
             fetchImages();
         } catch (error) {
             console.error("Error al cargar la imagen: ", error);
+            showPopupError('Error al subir la imagen');
         }
     };
 
@@ -136,7 +130,7 @@ export const SubirImagenes = () => {
                 <div className="row justify-content-center align-items-center" id="contenido-formulario">
                     <div className="col-4 d-flex justify-content-center" id="cuadro-agregar-img-izq">
                         <div className="alert alert-primary text-center m-2 p-3" style={{ maxHeight: "7rem", maxWidth: "auto" }}>
-                            <i class="fa-solid fa-camera"></i>
+                            <i className="fa-solid fa-camera"></i>
                             <p className="m-0">Agregar imágenes</p>
                             <i className="fa-solid fa-arrow-right fa-2xs my-0"></i>
                         </div>

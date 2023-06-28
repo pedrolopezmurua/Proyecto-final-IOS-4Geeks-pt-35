@@ -1,19 +1,21 @@
 //./pages/modifica_producto.js
-import React, { useContext, useState, useEffect, useRef } from "react";
-import "../../styles/home.css";
-import { SeleccionVariasComunas } from '../component/seleccionVariasComunas';
-import { AuthContext } from '../store/authContext';
-import { Context } from "../store/appContext";
+import React, { useContext, useState, useEffect } from "react";
+import "../../../styles/home.css";
+import { AuthContext } from '../../store/authContext';
+import { Context } from "../../store/appContext";
 import { useNavigate, Link } from "react-router-dom";
-import { AllRegionesYcomunas } from "../component/regionesYcomunas";
+import { AllRegionesYcomunas } from "../../component/regionesYcomunas";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import atras from "../../img/atras.png";
+import atras from "../../../img/atras.png";
+import { useShowPopup } from '../../component/common/popupx';
 
 
 
 
 export const ModificaProducto = () => {
+
+    const { showPopupError, showPopupCreated } = useShowPopup();
 
     const { actions } = useContext(Context);
     const { userId } = useContext(AuthContext);
@@ -67,66 +69,34 @@ export const ModificaProducto = () => {
         const proveedor_id = userId;
         //Validaciones
         if (!categoriaSeleccionada) {
-            MySwal.fire(
-                'Error',
-                'Debes seleccionar una categoría',
-                'error'
-            );
+            showPopupError('Debes seleccionar una categoría');
         };
         if (categoriaSeleccionada && !titulo) {
-            MySwal.fire(
-                'Error',
-                'Debes indicar el título de tu publicación',
-                'error'
-            );
+            showPopupError('Debes indicar el título de tu publicación');
             return;
         };
         if (categoriaSeleccionada && titulo.length < 10 || titulo.length > 100) {
-            MySwal.fire(
-                'Error',
-                'El título debe tener entre 10 y 100 caracteres',
-                'error'
-            );
+            showPopupError('El título debe tener entre 10 y 100 caracteres');
             return;
         };
         if (categoriaSeleccionada && titulo && !detalle) {
-            MySwal.fire(
-                'Error',
-                'Debes indicar el detalle de tu publicación',
-                'error'
-            );
+            showPopupError('Debes indicar el detalle de tu publicación');
             return;
         };
         if (categoriaSeleccionada && titulo && detalle.length < 20 || detalle.length > 1500) {
-            MySwal.fire(
-                'Error',
-                'La descripción debe tener entre 20 y 1500 caracteres',
-                'error'
-            );
+            showPopupError('La descripción debe tener entre 20 y 1500 caracteres');
             return;
         };
         if (categoriaSeleccionada && titulo && !precio) {
-            MySwal.fire(
-                'Error',
-                'Debes indicar precio de tu publicación',
-                'error'
-            );
+            showPopupError('Debes indicar el precio de tu publicación');
             return;
         };
         if (categoriaSeleccionada && titulo && detalle && precio_int < 1000) {
-            MySwal.fire(
-                'Error',
-                'El precio debe ser de al menos $1.000',
-                'error'
-            );
+            showPopupError('El precio debe ser de al menos $1.000');
             return;
         };
         if (categoriaSeleccionada && precio && titulo && detalle && !coberturaSeleccionada) {
-            MySwal.fire(
-                'Error',
-                'Debes indicar la cobertura de tu publicación',
-                'error'
-            );
+            showPopupError('Debes indicar la cobertura de tu publicación');
             return;
         };
 
