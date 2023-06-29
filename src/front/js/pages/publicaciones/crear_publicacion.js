@@ -12,7 +12,6 @@ export const CrearPublicacion = () => {
   const navigate = useNavigate();
   const { actions } = useContext(Context);
   const { userId } = useContext(AuthContext);
-
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
@@ -23,6 +22,7 @@ export const CrearPublicacion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     // Obtiene los valores del formulario
     const categoria_select = document.getElementById("categoria");
     const categoria_id = parseInt(categoria_select.value, 10);
