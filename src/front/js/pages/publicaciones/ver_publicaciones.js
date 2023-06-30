@@ -1,9 +1,8 @@
-//./pages/ver_publicaciones.js
-import "../../styles/home.css";
+//./pages/publicaciones/ver_publicaciones.js
 import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from '../store/authContext'
+import { AuthContext } from '../../store/authContext'
 import { Link, useNavigate } from "react-router-dom";
-import atras from "../../img/atras.png";
+import atras from "../../../img/atras.png";
 
 export const VerPublicaciones = () => {
     const { userId } = useContext(AuthContext);

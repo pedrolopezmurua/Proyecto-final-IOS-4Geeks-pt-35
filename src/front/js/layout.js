@@ -18,7 +18,7 @@ import { ServicioTecnico } from "./pages/serviciotecnico";
 import { DetallesProducto } from "./pages/detalleProducto";
 import { DetallesServicioTec } from "./pages/detalleServicioTec";
 import injectContext from "./store/appContext";
-import { VerPublicaciones } from './pages/ver_publicaciones';
+import { VerPublicaciones } from './pages/publicaciones/ver_publicaciones';
 import { CrearPublicacion } from "./pages/publicaciones/crear_publicacion";
 import { Perfil } from "./pages/perfil";
 import AuthContextProvider from './store/authContext';

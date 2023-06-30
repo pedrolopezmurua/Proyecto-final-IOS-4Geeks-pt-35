@@ -1,4 +1,4 @@
-// ./component/subirImagenes.js
+// ./pages/publicaciones/subirImagenes.js
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../store/appContext";
@@ -51,7 +51,6 @@ export const SubirImagenes = () => {
             };
             const response = await fetch(url, opts);
             if (response.ok) {
-                console.log("Imagen eliminada con éxito");
                 showPopupSuccess('La imagen se eliminó correctamente')
                 actions.getServicios();
                 fetchImages();

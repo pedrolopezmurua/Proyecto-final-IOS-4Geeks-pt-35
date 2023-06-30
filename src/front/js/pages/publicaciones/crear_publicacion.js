@@ -4,21 +4,16 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../../store/authContext'
 import { Context } from "../../store/appContext";
 import { useShowPopup } from '../../component/common/popupx';
-import { AllRegionesYcomunas } from "../../component/regionesYcomunas";
+import { useSeleccionaCobertura } from "./useSeleccionaCobertura";
 import atras from "../../../img/atras.png";
 
 export const CrearPublicacion = () => {
   const { showPopupError, showPopupSuccess } = useShowPopup();
+  const { selectedComunas, selectedRegion, region, comuna, RegionesYcomunas, handleRegionChange, handleComunaChange, handleAddComuna, handleRemoveComuna, coberturaSeleccionada } = useSeleccionaCobertura();
   const navigate = useNavigate();
   const { actions } = useContext(Context);
   const { userId } = useContext(AuthContext);
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [selectedComunas, setSelectedComunas] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(false);
-  const [coberturaSeleccionada, setCoberturaSeleccionada] = useState(false);
-  const [todoChileSelected, setTodoChileSelected] = useState(false);
-  const [region, setRegion] = useState("");
-  const [comuna, setComuna] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +29,7 @@ export const CrearPublicacion = () => {
     //Validaciones
     if (!categoriaSeleccionada) {
       showPopupError('Debes seleccionar una categoría');
+      return;
     };
     if (categoriaSeleccionada && !titulo) {
       showPopupError('Debes indicar el título de tu publicación');
@@ -92,155 +88,6 @@ export const CrearPublicacion = () => {
         console.error(error);
       });
   };
-  const SeleccionaCobertura = () => {
-
-    const RegionesYcomunas = AllRegionesYcomunas;
-
-    const handleRegionChange = (e) => {
-      const selectedRegion = e.target.value;
-      setRegion(selectedRegion);
-      setComuna("");
-      setSelectedRegion(selectedRegion);
-      if (selectedRegion === "Todo Chile") {
-      } else {
-        setTodoChileSelected(false);
-      }
-    };
-    const handleComunaChange = (e) => {
-      if (todoChileSelected) {
-        setComuna("")
-      } else {
-        const selectedComuna = e.target.value;
-        setComuna(selectedComuna);
-      }
-    };
-    const handleAddComuna = () => {
-      if (region === "") {
-        showPopupError("Debes seleccionar al menos una región");
-        return;
-      }
-      if (comuna === "" && region !== "Todo Chile") {
-        showPopupError("Debes seleccionar al menos una comuna");
-        return;
-      }
-      if (selectedComunas && selectedRegion) {
-        if (region === "Todo Chile") {
-          setSelectedComunas([
-            {
-              region: "Todo Chile",
-              comunas: [],
-            },
-          ]);
-        } else {
-          const existingRegion = selectedComunas.find(
-            (item) => item.region === selectedRegion
-          );
-          if (existingRegion) {
-            const updatedComunas = [...existingRegion.comunas, comuna];
-            const updatedRegion = {
-              ...existingRegion,
-              comunas: updatedComunas,
-            };
-            const updatedSelectedComunas = selectedComunas.map((item) => {
-              if (item.region === selectedRegion) {
-                return updatedRegion;
-              }
-              return item;
-            });
-            setSelectedComunas(updatedSelectedComunas);
-          } else {
-            setSelectedComunas([
-              ...selectedComunas,
-              {
-                region: selectedRegion,
-                comunas: [comuna],
-              },
-            ]);
-          }
-        }
-        setComuna("");
-        if (region !== "") {
-          setCoberturaSeleccionada(true);
-        }
-      }
-    };
-
-    const handleRemoveComuna = (index) => {
-      const updatedSelectedComunas = selectedComunas.filter((item, i) => i !== index); // Filtra los elementos de selectedComunas y crea un nuevo array sin el elemento en el índice proporcionado
-      setSelectedComunas(updatedSelectedComunas); // Actualiza el estado selectedComunas con el nuevo array sin el elemento eliminado
-      if (updatedSelectedComunas.length === 0) {
-        setCoberturaSeleccionada(false);
-      }
-    };
-
-
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-5" id="seleccionRegion" style={{ width: '300px' }} >
-            <label htmlFor="regiones">Región:</label>
-            <select
-              id="regiones"
-              className="form-select mt-1"
-              value={region}
-              onChange={handleRegionChange}
-            >
-              <option value="">Seleccione una región</option>
-              {RegionesYcomunas.regiones.map((region, index) => (
-                <option key={index} value={region.NombreRegion}>{region.NombreRegion}</option>
-              ))}
-            </select>
-          </div>
-          <div className="col-5" id="seleccionComuna" style={{ width: '300px' }} >
-            <label htmlFor="comunas">Comuna:</label>
-            <select
-              id="comunas"
-              className="form-select mt-1"
-              value={comuna}
-              onChange={handleComunaChange}
-            >
-              <option value="">Seleccione una comuna</option>
-              {RegionesYcomunas.regiones.map((region) => {
-                if (region.NombreRegion === selectedRegion) {
-                  return region.comunas.map((comuna, index) => (
-                    <option key={index} value={comuna}>{comuna}</option>
-                  ));
-                }
-                return null;
-              })}
-            </select>
-          </div>
-        </div>
-        <div className="col-3 d-flex mt-1">
-          <button
-            type="button"
-            className="btn btn-outline-primary btn-sm"
-            onClick={handleAddComuna}
-            style={{ width: "75%", fontSize: "75%" }}
-          >
-            Agregar comuna</button>
-        </div>
-        <div>
-          <p className="form-label mt-3">Comunas seleccionadas:</p>
-          <ul>
-            {selectedComunas.map((item, index) => (
-              <li key={index}>
-                {item.region === "Todo Chile" ? "Todo Chile" : `${item.region}, comuna: `}
-                {item.comunas && item.comunas.length > 0
-                  ? item.comunas.length === 1
-                    ? item.comunas[0]
-                    : item.comunas.join(", ")
-                  : ""}
-                <button onClick={() => handleRemoveComuna(index)} type="button" className="btn-close" aria-label="Remove"></button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </div>
-    );
-  }
-
 
   return (
     <div className="container my-3">
@@ -280,7 +127,68 @@ export const CrearPublicacion = () => {
               </div>
               <div className="row mt-3" id="seleccion-cobertura">
                 <p className="form-label">Selecciona tu cobertura:</p>
-                <SeleccionaCobertura selectedComunas={selectedComunas} setSelectedComunas={setSelectedComunas} />
+                <div className="container">
+                  <div className="row">
+                    <div className="col-5" id="seleccionRegion" style={{ width: '300px' }} >
+                      <label htmlFor="regiones">Región:</label>
+                      <select
+                        id="regiones"
+                        className="form-select mt-1"
+                        value={region}
+                        onChange={handleRegionChange}
+                      >
+                        <option value="">Seleccione una región</option>
+                        {RegionesYcomunas.regiones.map((region, index) => (
+                          <option key={index} value={region.NombreRegion}>{region.NombreRegion}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-5" id="seleccionComuna" style={{ width: '300px' }} >
+                      <label htmlFor="comunas">Comuna:</label>
+                      <select
+                        id="comunas"
+                        className="form-select mt-1"
+                        value={comuna}
+                        onChange={handleComunaChange}
+                      >
+                        <option value="">Seleccione una comuna</option>
+                        {RegionesYcomunas.regiones.map((region) => {
+                          if (region.NombreRegion === selectedRegion) {
+                            return region.comunas.map((comuna, index) => (
+                              <option key={index} value={comuna}>{comuna}</option>
+                            ));
+                          }
+                          return null;
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-3 d-flex mt-1">
+                    <button
+                      type="button"
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={handleAddComuna}
+                      style={{ width: "75%", fontSize: "75%" }}
+                    >
+                      Agregar comuna</button>
+                  </div>
+                  <div>
+                    <p className="form-label mt-3">Comunas seleccionadas:</p>
+                    <ul>
+                      {selectedComunas.map((item, index) => (
+                        <li key={index}>
+                          {item.region === "Todo Chile" ? "Todo Chile" : `${item.region}, comuna: `}
+                          {item.comunas && item.comunas.length > 0
+                            ? item.comunas.length === 1
+                              ? item.comunas[0]
+                              : item.comunas.join(", ")
+                            : ""}
+                          <button onClick={() => handleRemoveComuna(index)} type="button" className="btn-close" aria-label="Remove"></button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div className="row  d-flex align-items-center justify-content-between">
                 <div className="col d-flex justify-content-between align-items-center" style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -298,12 +206,8 @@ export const CrearPublicacion = () => {
           </div>
         </div>
         <hr className="mx-5 my-5" />
-
-
       </div>
-
     </div >
   );
-
 };
 //309
