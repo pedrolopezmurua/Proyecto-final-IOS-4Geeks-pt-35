@@ -1,6 +1,6 @@
 // ./component/common/popupx.js
-import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export const useShowPopup = () => {
     const navigate = useNavigate();

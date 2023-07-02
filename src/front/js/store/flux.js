@@ -1,4 +1,5 @@
-const getState = ({ getStore, getActions, setStore }) => {
+// ./store/flux.js
+const getState = ({ setStore }) => {
 	return {
 		store: {
 			productos: {},

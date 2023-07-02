@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../../store/authContext'
 import { Context } from "../../store/appContext";
 import { useShowPopup } from '../../component/common/popupx';
-import { useSeleccionaCobertura } from "./useSeleccionaCobertura";
+import { useSeleccionaCobertura } from "../../component/publicaciones/useSeleccionaCobertura";
 import atras from "../../../img/atras.png";
 
 export const CrearPublicacion = () => {
@@ -17,7 +17,6 @@ export const CrearPublicacion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // Obtiene los valores del formulario
     const categoria_select = document.getElementById("categoria");
     const categoria_id = parseInt(categoria_select.value, 10);
@@ -210,4 +209,3 @@ export const CrearPublicacion = () => {
     </div >
   );
 };
-//309

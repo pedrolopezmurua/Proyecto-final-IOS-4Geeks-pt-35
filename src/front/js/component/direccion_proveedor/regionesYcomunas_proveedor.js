@@ -1,3 +1,4 @@
+// ./component/direccion_proveedor/regionesYcomunas_proveedor.js
 export const AllRegionesYcomunas = {
 
     "regiones": [{

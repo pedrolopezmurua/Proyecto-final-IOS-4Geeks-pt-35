@@ -1,5 +1,4 @@
-// ./pages/error404.js
-
+// ./pages/404/error404.js
 import React from 'react';
 
 const Error404 = () => {

@@ -1,5 +1,4 @@
 // ./pages/login/recuperapassword.js
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useShowPopup } from '../../component/common/popupx';

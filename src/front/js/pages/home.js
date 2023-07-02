@@ -1,18 +1,13 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import dispositivos from "../../img/dispositivos.jpg";
-import "../../styles/home.css";
-import { CardCategoriaSTec } from "../component/cards";
-import { CardCategoriaProductos } from "../component/cards";
+//./pages/home.js
+import React from "react";
+import Carousel from 'react-bootstrap/Carousel';
+import { CardCategoriaSTec, CardCategoriaProductos } from "../component/cards";
 import Carousel1 from "../../img/Carousel1.png";
 import Carousel2 from "../../img/Carousel2.png";
 import Carousel3 from "../../img/Carousel3.png";
 import Carousel4 from "../../img/Carousel4.png";
-import Carousel from 'react-bootstrap/Carousel';
-import ReactDOM, { createRoot } from "react-dom";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="text center" >

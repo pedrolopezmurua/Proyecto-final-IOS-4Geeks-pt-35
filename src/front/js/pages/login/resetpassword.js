@@ -1,5 +1,4 @@
-// ./pages/resetpassword.js
-
+// ./pages/login/resetpassword.js
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useShowPopup } from '../../component/common/popupx';

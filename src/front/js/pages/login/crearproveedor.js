@@ -1,10 +1,9 @@
-// ./pages/crearproveedor.js
-
+// ./pages/login/crearproveedor.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useShowPopup } from '../component/common/popupx';
-import { ValidaRut } from '../component/validarut';
-import { Direccion_proveedor } from '../component/direccion_proveedor_function'
+import { useShowPopup } from '../../component/common/popupx';
+import { ValidaRut } from '../../component/valida_rut/validarut';
+import { Direccion_proveedor } from '../../component/direccion_proveedor/direccion_proveedor_function'
 
 const CrearProveedor = () => {
 
@@ -36,42 +35,41 @@ const CrearProveedor = () => {
         event.preventDefault();
 
         if (!formValues.rut) {
-            showPopupError('Debes ingresar tu rut')
-            return
-        }
-        if (formValues.rut && !formValues.nombre) {
-            showPopupError('Debes ingresar tu nombre')
-            return
-        }
-        if (formValues.rut && formValues.nombre && !formValues.apellido) {
-            showPopupError('Debes ingresar tu apellido')
-            return
-        }
-        if (formValues.rut && formValues.nombre && formValues.apellido && !formValues.direccion) {
-            showPopupError('Debes ingresar tu dirección')
-            return
-        }
-        // Validar que las contraseñas sean iguales
-        if (formValues.contrasena !== formValues['confirm-password']) {
-            showPopupError('Las contraseñas no coinciden');
+            showPopupError('Debes ingresar tu rut');
             return;
         }
-        // Validar que la contraseña tenga más de 3 caracteres
+        if (formValues.rut && !formValues.nombre) {
+            showPopupError('Debes ingresar tu nombre');
+            return;
+        }
+        if (formValues.rut && formValues.nombre && !formValues.apellido) {
+            showPopupError('Debes ingresar tu apellido');
+            return;
+        }
+        if (formValues.rut && formValues.nombre && formValues.apellido && !formValues.direccion) {
+            showPopupError('Debes ingresar tu dirección');
+            return;
+        }
+        if (formValues.rut && formValues.nombre && formValues.apellido && formValues.direccion && formValues.telefono === '+569 ') {
+            showPopupError('Debes ingresar tu teléfono');
+            return;
+        }
+        if (formValues.contrasena !== formValues['confirm-password']) {
+            showPopupError('Las contraseñas no coinciden');;
+            return;
+        }
         if (formValues.contrasena.length < 4) {
             showPopupError('La contraseña debe tener al menos 4 caracteres');
             return;
         }
-        // Validar el nombre
         if (formValues.nombre.length < 3 || formValues.nombre.length > 100) {
             showPopupError('El nombre debe tener entre 3 y 100 caracteres');
             return;
         }
-        // Validar el apellido
         if (formValues.apellido.length < 3 || formValues.apellido.length > 100) {
             showPopupError('El apellido debe tener entre 3 y 100 caracteres');
             return;
         }
-        // Validar la dirección
         if (formValues.direccion.length < 3 || formValues.direccion.length > 200) {
             showPopupError('La dirección debe tener entre 3 y 200 caracteres');
             return;
@@ -90,6 +88,8 @@ const CrearProveedor = () => {
                 console.log('Datos enviados correctamente');
                 showPopupCreated(formValues.correo);
                 navigate('/');  // Redirige a la página de inicio
+            } else if (response.status === 500) {
+                showPopupError('El usuario ya se encuentra registrado');
             } else {
                 showPopupError('Error al enviar los datos: ' + response.statusText)
                 console.error('Error al enviar los datos: ', response.statusText);

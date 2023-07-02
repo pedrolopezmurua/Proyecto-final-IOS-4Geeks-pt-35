@@ -1,7 +1,7 @@
-//./pages/publicaciones/useSeleccionaCobertura.js
+//./components/publicaciones/useSeleccionaCobertura.js
 import { useState } from "react";
-import { useShowPopup } from "../../component/common/popupx";
-import { AllRegionesYcomunas } from "../../component/regionesYcomunas";
+import { useShowPopup } from "../common/popupx";
+import { AllRegionesYcomunas } from "./regionesYcomunas";
 
 export const useSeleccionaCobertura = () => {
     const RegionesYcomunas = AllRegionesYcomunas;

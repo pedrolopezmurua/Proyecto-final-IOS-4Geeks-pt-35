@@ -1,32 +1,34 @@
+//./layout.js
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import injectContext from "./store/appContext";
 import ScrollToTop from "./component/common/scrollToTop";
+import AuthContextProvider from './store/authContext';
+import ProtectedRoute from "./component/common/protectedroute";
+
+import Error404 from "./pages/404/error404";
+import { Home } from "./pages/home";
 import { Navbar } from "./component/navbar/navbar";
 import Footer from './component/footer/footer';
 import { FaqRegistro, FaqResponsabilidad, FaqTerminos } from './component/footer/FAQ';
 
 import Login from "./pages/login/login";
 import ResetPassword from "./pages/login/resetpassword";
-import CrearProveedor from './pages/crearproveedor';
+import CrearProveedor from './pages/login/crearproveedor';
 import RecuperaPassword from "./pages/login/recuperapassword";
 
 
-import { Home } from "./pages/home";
-import { Productos } from "./pages/productos";
-import { ServicioTecnico } from "./pages/serviciotecnico";
-import { DetallesProducto } from "./pages/detalleProducto";
-import { DetallesServicioTec } from "./pages/detalleServicioTec";
-import injectContext from "./store/appContext";
+import { Productos } from "./pages/ver_producto/productos";
+import { ServicioTecnico } from "./pages/ver_servicio_tecnico/serviciotecnico";
+import { DetallesProducto } from "./pages/ver_producto/detalleProducto";
+import { DetallesServicioTec } from "./pages/ver_servicio_tecnico/detalleServicioTec";
+
+import { Perfil } from "./pages/publicaciones/perfil";
 import { VerPublicaciones } from './pages/publicaciones/ver_publicaciones';
 import { CrearPublicacion } from "./pages/publicaciones/crear_publicacion";
-import { Perfil } from "./pages/perfil";
-import AuthContextProvider from './store/authContext';
 import { SubirImagenes } from "./pages/publicaciones/subirImagenes";
-import Error404 from "./pages/error404";
-import DevolucionesPage from "./pages/devolucionespage";
 import { ModificaProducto } from './pages/publicaciones/modifica_producto';
-import ProtectedRoute from "./component/common/protectedroute";
 
 //create your first component
 const Layout = () => {
@@ -51,14 +53,13 @@ const Layout = () => {
                             <Route element={<DetallesProducto />} path="/productos/detalle/:id" />
                             <Route element={<DetallesServicioTec />} path="/serviciotecnico/detalle/:id" />
                             <Route element={<ProtectedRoute><Perfil /></ProtectedRoute>} path="perfil" />
-                            <Route element={<ProtectedRoute><CrearPublicacion /></ProtectedRoute>} path="/crear-publicacion" />
                             <Route element={<ProtectedRoute><VerPublicaciones /></ProtectedRoute>} path="/publicaciones" />
+                            <Route element={<ProtectedRoute><CrearPublicacion /></ProtectedRoute>} path="/crear-publicacion" />
                             <Route element={<ProtectedRoute><SubirImagenes /></ProtectedRoute>} path="subir-imagenes/:servicioId" />
                             <Route element={<ProtectedRoute><ModificaProducto /></ProtectedRoute>} path="modificar-publicacion/:servicioId" />
                             <Route element={<FaqRegistro />} path="/faqregistro" />
                             <Route element={<FaqResponsabilidad />} path="/faqresponsabilidad" />
                             <Route element={<FaqTerminos />} path="/faqterminos" />
-                            <Route element={<DevolucionesPage />} path="/devolucionespage" />
                             <Route element={<Error404 />} path="*" />
                         </Routes>
                         <Footer />

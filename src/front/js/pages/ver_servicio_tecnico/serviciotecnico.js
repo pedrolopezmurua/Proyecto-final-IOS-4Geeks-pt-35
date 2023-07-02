@@ -1,12 +1,10 @@
+//./pages/ver_servicio_tecnico/serviciotecnico.js
 import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import product from "../../img/product.jpg";
-import "../../styles/home.css";
-import { CardCategoriaSTec } from "../component/cards";
-import { CardCategoriaVentas } from "../component/cards";
-import { CardServiciosTecnicos } from "../component/cards";
 import { Link } from "react-router-dom";
-import atras from "../../img/atras.png";
+import { Context } from "../../store/appContext";
+import { CardServiciosTecnicos } from "../../component/cards";
+import product from "../../../img/product.jpg";
+import atras from "../../../img/atras.png";
 
 export const ServicioTecnico = () => {
     const { store, actions } = useContext(Context);

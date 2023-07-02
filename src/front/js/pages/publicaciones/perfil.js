@@ -1,7 +1,7 @@
-import "../../styles/home.css";
+//./pages/publicaciones/perfil.js
 import React from "react";
 import { Link } from "react-router-dom";
-import atras from "../../img/atras.png";
+import atras from "../../../img/atras.png";
 
 export const Perfil = () => {
 

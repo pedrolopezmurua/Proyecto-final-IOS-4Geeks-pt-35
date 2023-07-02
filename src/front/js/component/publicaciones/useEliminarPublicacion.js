@@ -1,8 +1,8 @@
-//./pages/publicaciones/useEliminarPublicacion.js
+// ./component/publicaciones/useEliminarPublicacion.js
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import { useShowPopup } from "../../component/common/popupx";
+import { useShowPopup } from "../common/popupx";
 
 export const useEliminarPublicacion = () => {
     const navigate = useNavigate();

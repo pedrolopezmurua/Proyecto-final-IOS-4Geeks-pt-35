@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import ventas from ".//../../img/ventas.webp"
-import sTec from ".//../../img/sTec.jpg"
-import productoimg from ".//../../img/producto.jpeg"
 import { Context } from "../store/appContext";
+import ventas from "./../../img/ventas.webp"
+import sTec from "./../../img/sTec.jpg"
 import noimage from ".//../../img/noimage.png"
 
 export const CardCategoriaSTec = () => {
@@ -33,8 +32,6 @@ export const CardCategoriaProductos = () => {
         </div>
     );
 };
-
-
 
 export const CardProductos = () => {
     const { store, actions } = useContext(Context);
@@ -79,7 +76,6 @@ export const CardProductos = () => {
     );
 };
 
-
 export const CardServiciosTecnicos = () => {
     const { store, actions } = useContext(Context);
 
@@ -119,6 +115,3 @@ export const CardServiciosTecnicos = () => {
         </div>
     );
 };
-
-
-

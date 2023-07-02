@@ -1,3 +1,4 @@
+// ./component/publicaciones/regionesYcomunas.js
 export const AllRegionesYcomunas = {
 
     "regiones": [{

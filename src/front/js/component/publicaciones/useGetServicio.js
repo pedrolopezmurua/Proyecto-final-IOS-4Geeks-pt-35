@@ -1,3 +1,4 @@
+// ./component/publicaciones/useGetServicio.js
 import { useState, useEffect } from "react";
 
 export const useGetServicio = (url) => {

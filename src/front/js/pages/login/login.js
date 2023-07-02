@@ -1,9 +1,9 @@
-// ./pages/login.js
+// ./pages/login/login.js
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../store/authContext'
-import login from "../../../img/login.png";
 import { useShowPopup } from '../../component/common/popupx';
+import login from "../../../img/login.png";
 
 function Login() {
     const navigate = useNavigate();

@@ -4,9 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../../store/authContext';
 import { Context } from "../../store/appContext";
 import { useShowPopup } from '../../component/common/popupx';
-import { useSeleccionaCobertura } from "./useSeleccionaCobertura";
-import { useEliminarPublicacion } from "./useEliminarPublicacion";
-import { useGetServicio } from "./useGetServicio";
+import { useSeleccionaCobertura } from "../../component/publicaciones/useSeleccionaCobertura";
+import { useEliminarPublicacion } from "../../component/publicaciones/useEliminarPublicacion";
+import { useGetServicio } from "../../component/publicaciones/useGetServicio";
 import atras from "../../../img/atras.png";
 
 export const ModificaProducto = () => {

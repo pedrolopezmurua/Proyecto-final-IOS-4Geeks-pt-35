@@ -1,5 +1,4 @@
-// ./component/validarut.js
-
+// ./component/valida_rut/validarut.js
 import React from 'react';
 import { Formik } from 'formik';
 import { checkRut, prettifyRut, formatRut } from "react-rut-formatter";

@@ -1,4 +1,4 @@
-//./pages/FAQ.js
+// ./component/footer/FAQ.js
 import React from "react";
 import { Link } from "react-router-dom";
 import atras from "../../../img/atras.png";

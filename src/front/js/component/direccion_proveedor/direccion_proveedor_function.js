@@ -1,3 +1,4 @@
+// ./component/direccion_proveedor/direccion_proveedor_function.js
 import React, { useState } from "react";
 import { AllRegionesYcomunas } from "./regionesYcomunas_proveedor";
 

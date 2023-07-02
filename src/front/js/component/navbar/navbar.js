@@ -1,7 +1,6 @@
-// ./component/navbar.js
+// ./component/navbar/navbar.js
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { AuthContext } from '../../store/authContext';
 import { useShowPopup } from '../common/popupx';
 import logo from "../../../img/logo.png";

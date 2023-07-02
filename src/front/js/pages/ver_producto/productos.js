@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../store/appContext";
-import dispositivos from "../../img/dispositivos.jpg";
-import "../../styles/home.css";
-import { CardProductos } from "../component/cards";
+//./pages/ver_producto/productos.js
+import React from "react";
 import { Link } from "react-router-dom";
-import atras from "../../img/atras.png";
+import { CardProductos } from "../../component/cards";
+import dispositivos from "../../../img/dispositivos.jpg";
+import atras from "../../../img/atras.png";
 
 export const Productos = () => {
-    const { store, actions } = useContext(Context);
 
     return (
         <div className="text-center">
