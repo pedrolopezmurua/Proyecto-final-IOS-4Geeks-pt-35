@@ -26,9 +26,9 @@ BENEFICIO
 puede realizar un fork,  clonar o descargar el repositorio 
 
 para ejecutar el proyecto instale npm
-npm i
-pip install
-pipenv install
+-npm i
+-pip install
+-pipenv install
 
 ## Ejecución
 
