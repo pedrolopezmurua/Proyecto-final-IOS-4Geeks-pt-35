@@ -2,70 +2,67 @@
 
 Build web applications using React.js for the front end and python/flask for your backend API.
 
-- Documentation can be found here: https://start.4geeksacademy.com/starters/react-flask
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to heroku [in just a few steps here](https://start.4geeksacademy.com/backend/deploy-heroku-posgres).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
 
-### 1) Installation:
+# <AppleGeeks>
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+## Descripción
 
-It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
 
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
+En el mercado actual, la falta de un espacio dedicado a los servicios para productos Apple genera dificultades tanto para los proveedores como para los usuarios.
 
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
+Los proveedores de servicios luchan por diferenciarse en un mercado saturado, mientras que los usuarios se sienten abrumados por la abundancia de opciones y la falta de información confiable y comparativa.
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+Presentación de la plataforma: 
+"Nuestra solución es una plataforma en línea dedicada exclusivamente a la publicación y promoción de servicios relacionados con la gama de productos de Apple."
 
-> Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
+BENEFICIO
+"Esta plataforma proporciona a los proveedores un canal eficiente para alcanzar su público objetivo y promocionar su oferta de manera efectiva. Los usuarios de productos de Apple pueden encontrar y elegir entre una amplia variedad de servicios de calidad con solo un par de clics."
 
-### Backend Populate Table Users
 
-To insert test users in the database execute the following command:
+## Instalación
 
-```sh
-$ flask insert-test-users 5
-```
+¿Cuáles son los pasos necesarios para instalar su proyecto? Proporcione una descripción paso a paso de cómo poner en funcionamiento el entorno de desarrollo.
 
-And you will see the following message:
+puede realizar un fork,  clonar o descargar el repositorio 
 
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
+para ejecutar el proyecto instale npm
+npm i
+pip install
+pipenv install
 
-To update with all yours tables you can edit the file app.py and go to the line 80 to insert the code to populate others tables
+## Ejecución
 
-### Front-End Manual Installation:
+pipenv run start
+npm run start
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+## Crédito
 
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
+Los colaboradores de este proyecto son:
 
-## Publish your website!
+https://github.com/MagdalenaPizarroO/
+https://github.com/CatalinaScheleff/
+https://github.com/JorgeAymar/
+https://github.com/pedrolopezmurua/
 
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
 
-### Contributors
+## Licencia de Uso del Software
 
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
+Este software es proporcionado bajo una licencia de uso diseñada para garantizar que los desarrolladores iniciales sean debidamente acreditados por su trabajo. Te pedimos que, al usar este software, te comprometas a hacer referencia a los desarrolladores originales en cualquier uso o distribución que realices del mismo.
+
+Cómo Acreditar a los Desarrolladores Originales
+Cuando uses o distribuyas este software, debes incluir una declaración que identifique a los desarrolladores iniciales y el proyecto original. Esta declaración puede ser algo tan simple como:
+
+"Este proyecto utiliza el software desarrollado por [https://github.com/MagdalenaPizarroO/, https://github.com/CatalinaScheleff/, https://github.com/JorgeAymar/, https://github.com/pedrolopezmurua/] en el proyecto AppleGeeks."
+
+Asegúrate de mantener esta atribución incluso si modificas o amplías el software.
+
+Por qué es Importante Compartir
+Al compartir el crédito con los desarrolladores iniciales, estás contribuyendo a un ecosistema de software de código abierto que valora y reconoce el trabajo de sus contribuyentes. Esta práctica fomenta la colaboración, mejora la reputación de los desarrolladores y promueve la creación de software de alta calidad.
+
+Aviso Legal
+Este software se proporciona "tal cual", sin garantía de ningún tipo, expresa o implícita, incluyendo pero no limitándose a las garantías de comerciabilidad, idoneidad para un propósito particular y no infracción. En ningún caso los autores o titulares de los derechos de autor serán responsables de cualquier reclamación, daños u otras responsabilidades, ya sea en una acción de contrato, agravio o de otro tipo, que surja de, fuera de, o en conexión con el software o el uso u otros tratos en el software.
+
+Si tienes alguna pregunta o comentario sobre esta licencia, por favor ponte en contacto con alguno de los colaboradores de este proyecto y te podremos colaborar.
+(https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
 
 You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
