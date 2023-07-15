@@ -32,17 +32,17 @@ para ejecutar el proyecto instale npm
 
 ## Ejecución
 
-pipenv run start
-npm run start
+-pipenv run start
+-npm run start
 
 ## Crédito
 
 Los colaboradores de este proyecto son:
 
-https://github.com/MagdalenaPizarroO/
-https://github.com/CatalinaScheleff/
-https://github.com/JorgeAymar/
-https://github.com/pedrolopezmurua/
+-https://github.com/MagdalenaPizarroO/
+-https://github.com/CatalinaScheleff/
+-https://github.com/JorgeAymar/
+-https://github.com/pedrolopezmurua/
 
 
 ## Licencia de Uso del Software
